@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../../BE"
+		},
+		{
+			"path": "../../../../../NodeJS/Booking"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}

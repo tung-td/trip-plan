@@ -1,0 +1,22 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../CAPS1_FE"
+		},
+		{
+			"path": "../../../../../NodeJS/Booking"
+		},
+		{
+			"path": "../../../../../Sucodev_Project_Training/VUEJS_Learn"
+		},
+		{
+			"path": "C:/Users/Admin/Downloads/web-editor-v2-master"
+		},
+		{
+			"path": "../../../.."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "web-editor-v2-master"
+	}
+}

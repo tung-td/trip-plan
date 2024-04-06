@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.custom-scrollbar-style::-webkit-scrollbar-thumb {
+  background-color: #4299e1;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(56 55 55);
+  border-radius: 6px;
+}
+
+.react-multi-carousel-list {
+  overflow: unset !important;
+  margin: unset !important;
+}
+
+.react-multi-carousel-track > li {
+  width: unset !important;
+}
