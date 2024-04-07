@@ -78,10 +78,10 @@ export const Home = () => {
         <FeedBackSection />
       </section>
 
-      {/* FAQ Section */}
+      {/* FAQ Section
       <section className="faq-container">
         <FAQSection />
-      </section>
+      </section> */}
 
       {/* Footer Section */}
       <section className="info-container">

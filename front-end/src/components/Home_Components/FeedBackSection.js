@@ -21,12 +21,18 @@ const FeedBackSection = () => {
       carouselState: { currentSlide },
     } = rest;
     return (
-      <div className="custom-button-group">
-        <button className="Hi" onClick={() => previous()}>
-          <FaArrowLeft /> sadasdasds
+      <div className="custom-button-group absolute right-[166px] top-[40px]">
+        <button
+          className="mr-[10px] rounded-[12px] bg-[#172432] p-[20px] text-white"
+          onClick={() => previous()}
+        >
+          <FaArrowLeft />
         </button>
-        <button className="Hi" onClick={() => next()}>
-          <FaArrowRight /> sadasdasds
+        <button
+          className="ml-[10px] rounded-[12px] bg-[#FF7757] p-[20px] text-white"
+          onClick={() => next()}
+        >
+          <FaArrowRight />
         </button>
       </div>
     );
@@ -53,10 +59,10 @@ const FeedBackSection = () => {
   };
 
   return (
-    <div className="mt-[70px] pl-[166px] pr-[166px]">
+    <div className="relative mb-[95px] mt-[70px] pl-[166px] pr-[166px]">
       <h1 className="flex flex-col text-[40px] text-black">
         Traveler’s Experiences
-        <div className="h-[3px] w-[250px] bg-[#FF7757]"></div>
+        <div className="mt-[10px] h-[3px] w-[250px] bg-[#FF7757]"></div>
       </h1>
 
       <p className="mb-[100px] mt-[20px] flex text-[#767E86]">
@@ -65,8 +71,10 @@ const FeedBackSection = () => {
 
       <Carousel
         responsive={responsive}
+        arrows={false}
+        renderButtonGroupOutside={true}
         customButtonGroup={<CustomButtonGroup />}
-        className="container mx-auto pb-6"
+        className="container relative mx-auto pb-6"
       >
         {feedbackCards}
       </Carousel>

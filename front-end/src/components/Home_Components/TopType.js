@@ -16,7 +16,7 @@ const TopType = () => {
     <div className="mt-[70px] pl-[166px] pr-[166px]">
       <h1 className="flex flex-col items-end justify-end text-[40px] text-black">
         Top Accommodation Types
-        <div className="h-[3px] w-[365px] bg-[#FF7757]"></div>
+        <div className="mt-[10px] h-[3px] w-[365px] bg-[#FF7757]"></div>
       </h1>
 
       <div className="mt-8 flex flex-wrap justify-between">

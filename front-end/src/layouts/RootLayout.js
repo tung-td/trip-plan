@@ -1,5 +1,5 @@
 import { Toaster } from "react-hot-toast";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "../pages/Header";
 import { setDataLocation } from "../redux/locationSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,6 +8,8 @@ import { useEffect } from "react";
 const RootLayout = () => {
   const API = process.env.REACT_APP_SERVER_DOMAIN;
   const dispatch = useDispatch();
+  const location = useLocation();
+
   useEffect(() => {
     (async () => {
       const res = await fetch(`${API}locations/`);
@@ -16,11 +18,12 @@ const RootLayout = () => {
     })();
   }, []);
 
+  const showHeader = location.pathname !== "/login";
+
   return (
     <div className="root-layout">
       <Toaster />
-      <Header />
-
+      {showHeader && <Header />}
       {/* Outlet sẽ hiển thị nội dung của route được kích hoạt trong ParentComponent. 
             Bất cứ khi nào bạn truy cập một đường dẫn được chỉ định trong Route, 
             Outlet sẽ hiển thị nội dung của route đó. */}
