@@ -3,16 +3,16 @@ import LeftForm from '../components/User_Profile_Component/LeftForm';
 const UserProfile = () => {
   return (
     <div className="h-auto flex flex-row bg-[#edeef1] ">
-    <div className="w-[40%]">
+      <div className="w-[40%]">
         <LeftForm />
 
-    </div>
+      </div>
 
-    <div className="w-[60%]">
+      <div className="w-[100%]">
         <RightForm />
+      </div>
     </div>
-</div>
-);
-  }
+  );
+}
 
 export default UserProfile
