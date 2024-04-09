@@ -8,24 +8,25 @@ import { AiOutlineUser } from "react-icons/ai";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { LiaAddressCard } from "react-icons/lia";
 import { AiOutlinePhone } from "react-icons/ai";
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FcPlus } from 'react-icons/fc'
 import toast from 'react-hot-toast'
 import axios from 'axios';
-
+import upDateRedux from '../../redux/userSlice.js'
 import 'react-toastify/dist/ReactToastify.css';
+
 const UserProfileEditInfo = (props) => {
+    const dispatch = useDispatch()
     const userInfo = useSelector(state => state.user);
-    const [userName, setUserName] = useState(userInfo.user)
-    const [firstName, setFirstName] = useState(userInfo.first_name)
-    const [lastName, setLastName] = useState(userInfo.last_name)
-    const [email, setEmail] = useState(userInfo.email)
-    const [address, setAddress] = useState(userInfo.address)
-    const [phone, setPhone] = useState(userInfo.phone)
+    const [userName, setUserName] = useState(userInfo.user || '')
+    const [firstName, setFirstName] = useState(userInfo.first_name || '')
+    const [lastName, setLastName] = useState(userInfo.last_name || '')
+    const [email, setEmail] = useState(userInfo.email || '')
+    const [address, setAddress] = useState(userInfo.address || '')
+    const [phone, setPhone] = useState(userInfo.phone || '')
     const [previewImage, setPreviewImage] = useState("");
     const [image, setImgae] = useState("");
     const [isAccordionOpen, setIsAccordionOpen] = useState(false);
-
     const UpdateAPI = process.env.REACT_APP_SERVER_DOMAIN
     //console.log("API: ", UpdateAPI)
 
@@ -41,31 +42,47 @@ const UserProfileEditInfo = (props) => {
 
     const handleSubmitUpdate = async () => {
         const token = localStorage.getItem('accessToken')
-        console.log("Token la: ", token)
+
         const data = new FormData();
-        data.append('first_name', firstName);
-        data.append('last_name', lastName);
-        data.append('email', email);
-        data.append('username', userName);
-        data.append('avatar', "");
-        data.append('address', address);
         data.append('phone', phone);
+        data.append('email', email);
+        data.append('first_name', firstName);
+        data.append('username', userName);
+        if (image) {
+            data.append('avatar', image)
+        }
+        data.append('last_name', lastName);
+        data.append('address', address);
         try {
             const dataUpdate = await axios.put(
-                `${UpdateAPI}updateprofile/`,
+                `${UpdateAPI}/updateprofile/`,
                 data,
                 {
                     headers: {
-                        'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
                     },
                 }
-            )
+            );
+            console.log("DATA UPDATE: ", dataUpdate.data);
+
+            // Gọi toast thông báo thành công
+            toast.success("Update Successfully");
+
+            // Dispatch action với dữ liệu nhận được từ response
+            if (dataUpdate.data && dataUpdate.data.data) {
+                // Dữ liệu người dùng được cập nhật được gửi đi như là payload
+                dispatch(upDateRedux(dataUpdate.data.data));
+                console.log("DATA RES LA: ", dataUpdate.data.data);
+            } else {
+                // Handle khi không có dữ liệu
+                console.log("Response không chứa 'data' object hoặc 'data' object rỗng");
+            }
+            // Sau khi xử lý xong, reload lại trang
+            // window.location.reload();
         } catch (error) {
             console.log("API Update User FAILED: ", error)
-            toast.fail("Failed to Update")
+            toast.error("Failed to Update")
         }
-        toast.success("Done Successfully!")
     }
 
     useEffect(() => {
@@ -78,7 +95,7 @@ const UserProfileEditInfo = (props) => {
             <div className="container lg:max-w-7xl mx-auto py-3 mb-2">
                 <Accordion>
                     <Accordion.Item eventKey="0">
-                        <Accordion.Header onClick={() => setIsAccordionOpen(!isAccordionOpen)}> Update My Infomation</Accordion.Header>
+                        <Accordion.Header onClick={() => setIsAccordionOpen(!isAccordionOpen)}>Update My Infomation</Accordion.Header>
                         <Accordion.Body>
                             <InputGroup className="mb-3">
                                 <InputGroup.Text className='fw-bold text-gray-800 w-40'> <AiOutlineUser className='mr-2' />User's Name</InputGroup.Text>
