@@ -10,18 +10,17 @@ import { AiOutlineUser } from "react-icons/ai";
 import { AiOutlineInfoCircle } from "react-icons/ai";
 import { LiaAddressCard } from "react-icons/lia";
 import { AiOutlinePhone } from "react-icons/ai";
+import { useSelector } from 'react-redux';
 
 const UserProfileCard = (props) => {
-    const [fitstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [email, setEmail] = useState("")
-    const [avatar, setAvatar] = useState("")
-    const [address, setAddress] = useState("")
-    const [phone, setPhone] = useState("")
+    const userInfo = useSelector(state => state.user);
+    console.log("Data của user info là ", userInfo)
+
     const [isPreviewAvatarImage, setIsPreviewAvatarImage] = useState(false)
 
     return (
         <>
+
             {/* Pill Personal Information */}
             <div className="container lg:max-w-7xl mx-auto py-3">
                 <div className="lg:grid lg:grid-cols-9 lg:gap-4 lg:p-3">
@@ -62,6 +61,7 @@ const UserProfileCard = (props) => {
                                 placeholder="User's full name"
                                 aria-label="UserFullName"
                                 aria-describedby="basic-addon1"
+                                value={`${userInfo.user}`}
                                 disabled
                             />
                         </InputGroup>
@@ -71,6 +71,7 @@ const UserProfileCard = (props) => {
                                 placeholder="User's full name"
                                 aria-label="UserFullName"
                                 aria-describedby="basic-addon1"
+                                value={`${userInfo.first_name} ${userInfo.last_name}`}
                                 disabled
                             />
                         </InputGroup>
@@ -83,6 +84,7 @@ const UserProfileCard = (props) => {
                                             placeholder="User's First name"
                                             aria-label="UserFirstName"
                                             aria-describedby="basic-addon1"
+                                            value={`${userInfo.first_name}`}
                                             disabled
                                         />
                                     </InputGroup>
@@ -97,6 +99,7 @@ const UserProfileCard = (props) => {
                                             placeholder="User's Last name"
                                             aria-label="UserLastName"
                                             aria-describedby="basic-addon1"
+                                            value={`${userInfo.last_name}`}
                                             disabled
                                         />
                                     </InputGroup>
@@ -109,13 +112,14 @@ const UserProfileCard = (props) => {
                                 placeholder="User's full name"
                                 aria-label="UserFullName"
                                 aria-describedby="basic-addon1"
+                                value={`${userInfo.email}`}
                                 disabled
                             />
                         </InputGroup>
                         <InputGroup className="mb-3">
                             <InputGroup.Text className='fw-bold text-primary w-40'><LiaAddressCard className='mr-2' />Address</InputGroup.Text>
                             <Form.Control
-                                placeholder="User's full name"
+                                placeholder="User's Address"
                                 aria-label="UserFullName"
                                 aria-describedby="basic-addon1"
                                 disabled
@@ -124,12 +128,14 @@ const UserProfileCard = (props) => {
                         <InputGroup className="mb-3">
                             <InputGroup.Text className='fw-bold text-primary w-40'><AiOutlinePhone className='mr-2' />Phone</InputGroup.Text>
                             <Form.Control
-                                placeholder="User's full name"
+                                placeholder="User's Phone Number"
                                 aria-label="UserFullName"
                                 aria-describedby="basic-addon1"
                                 disabled
                             />
                         </InputGroup>
+
+
                     </div>
                 </div>
             </div>

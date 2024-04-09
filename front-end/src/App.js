@@ -10,6 +10,8 @@ import FavoriteLocations from "./pages/FavoriteLocations/FavoriteLocations";
 import MyTrip from "./pages/MyTrip";
 import SingleMytrip from "./components/My_Trip_Component/My_Trip_Detail/SingleMytrip";
 import AboutUs from "./pages/AboutUs";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 /*App là nơi chứa cách hoạt động của các Router 
 nơi điều khiển các component sẽ render khi gặp tên đường link tương ứng
 */
@@ -21,14 +23,15 @@ const router = createBrowserRouter(
       <Route index element={<Home />}></Route>
       <Route path="signup" element={<SignUp />}></Route>
       <Route path="login" element={<Login />}></Route>
-      <Route path="userprofile" element={<UserProfile/>}></Route>
-      <Route path="tripcreate" element={<TripCreate/>}></Route>
-      <Route path="detail/:filterby" element={<LocationDetail/>}></Route>
-      <Route path="favorite" element={<FavoriteLocations/>}></Route>
-      <Route path="mytrip" element={<MyTrip/>}></Route>
-      <Route path="mytripdetail/:filterby" element={<SingleMytrip/>}></Route>
-      <Route path="aboutus" element={<AboutUs/>}></Route>
+      <Route path="userprofile" element={<UserProfile />}></Route>
+      <Route path="tripcreate" element={<TripCreate />}></Route>
+      <Route path="detail/:filterby" element={<LocationDetail />}></Route>
+      <Route path="favorite" element={<FavoriteLocations />}></Route>
+      <Route path="mytrip" element={<MyTrip />}></Route>
+      <Route path="mytripdetail/:filterby" element={<SingleMytrip />}></Route>
+      <Route path="aboutus" element={<AboutUs />}></Route>
     </Route>
+
   )
 )
 
@@ -36,6 +39,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <RouterProvider router={router} />
+
   );
 }
 
