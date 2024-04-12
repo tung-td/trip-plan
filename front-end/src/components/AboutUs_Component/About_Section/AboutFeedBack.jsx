@@ -24,7 +24,7 @@ const AboutFeedback = () => (
                 </div>
                 <div>
                     <h4 className="font-bold sm:text-[32px] text-[26px] sm:leading-[40.32px] leading-[36.32px] text-slate-900">
-                        Team 24
+                        Team 35
                     </h4>
                     <p className="mt-[8px] font-normal sm:text-[18px] text-[12px] sm:leading-[22.68px] leading-[16.68px] text-slate-900">
                         Team member developer
@@ -32,7 +32,7 @@ const AboutFeedback = () => (
                 </div>
 
                 <p className="mt-[24px] font-normal sm:text-[20px] text-[18px] sm:leading-[35.6px] leading-[39.6px] text-slate-900">
-                    “With the development of today's technology, trip advisor is very
+                    “With the development of today's technology, Optimized Destination is very
                     useful for today's vacation plan, by using
                     Trip Advisor you can travel to places with ease”
                 </p>

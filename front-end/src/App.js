@@ -12,6 +12,7 @@ import SingleMytrip from "./components/My_Trip_Component/My_Trip_Detail/SingleMy
 import AboutUs from "./pages/AboutUs";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ContactUs from "./pages/ContactUs";
 /*App là nơi chứa cách hoạt động của các Router 
 nơi điều khiển các component sẽ render khi gặp tên đường link tương ứng
 */
@@ -30,6 +31,7 @@ const router = createBrowserRouter(
       <Route path="mytrip" element={<MyTrip />}></Route>
       <Route path="mytripdetail/:filterby" element={<SingleMytrip />}></Route>
       <Route path="aboutus" element={<AboutUs />}></Route>
+      <Route path="contactus" element={<ContactUs />}></Route>
     </Route>
 
   )

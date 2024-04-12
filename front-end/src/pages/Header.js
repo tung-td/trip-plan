@@ -36,18 +36,19 @@ const Header = () => {
                 <div className="max-w-7xl mx-auto flex justify-between" >
                     <NavLink to='/'>
                         {/* Ảnh Logo Trip Advisor */}
-                        <div className="flex items-center md:space-x-2 space-x-3">
-                            <img src={logo} alt="Trip Advisor Logo" className="w-8 h-8 md:w-12 md:h-12 text-5xl" />
+                        <div className="flex items-center md:space-x-2 space-x-3 no-underline">
+                            <img src={logo} alt="Trip Advisor Logo" className="w-8 h-8 md:w-12 md:h-12 text-5xl no-underline" />
                             {/* <SiTripadvisor className="text-5xl" /> */}
-                            <span className="text-xl md:text-2xl font-bold">Travel Advisor</span>
+                            <span className="text-xl md:text-2xl font-bold no-underline">Travel Advisor</span>
                         </div>
                     </NavLink>
 
                     {/* Các tiêu đề SeePost Discover About us */}
                     <div className="hidden md:flex space-x-2 items-center font-semibold">
-                        <NavLink to='/' className="transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">Home</NavLink>
-                        <NavLink to='/aboutus' className="transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">About us</NavLink>
-                        <NavLink to='/mytrip' className="transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">My Trips</NavLink>
+                        <NavLink to='/' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">Home</NavLink>
+                        <NavLink to='/aboutus' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">About us</NavLink>
+                        <NavLink to='/mytrip' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">My Trips</NavLink>
+                        <NavLink to='/contactus' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">Contact Us</NavLink>
                     </div>
 
                     {/* Các Buttons */}
@@ -102,7 +103,8 @@ const Header = () => {
                 </div>
 
                 {/* Mobile Menu */}
-                {isMobileMenuOpen &&
+                {
+                    isMobileMenuOpen &&
                     <div className="md:hidden flex flex-col mt-3 space-y-2 ">
                         <button className="p-2 text-left font-semibold hover:bg-slate-200 rounded-md border-l-4 border-slate-200 hover:shadow-md hover:transition duration-100 ease-in-out">
                             <NavLink to='login'>Login</NavLink>
@@ -113,8 +115,8 @@ const Header = () => {
                     </div>
                 }
 
-            </nav>
-        </header>
+            </nav >
+        </header >
     )
 }
 

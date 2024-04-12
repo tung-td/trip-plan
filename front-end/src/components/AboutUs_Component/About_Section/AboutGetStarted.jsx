@@ -28,7 +28,7 @@ const About_GetStarted = () => {
                 <motion.div
                     variants={fadeIn('left', 'tween', 0.2, 1)}
                     className="flex-[0.75] flex justify-center flex-col mt-0 sm:mt-10 ">
-                    <TypingText title="| How Travel Advisor works" />
+                    <TypingText title="| How Optimized Destination works" />
                     <TitleText title={<>Get started with just a few clicks</>} />
                     <div className='mt-[30px] flex flex-col max-w-[370px] gap-[24px]'>
                         {startingFeatures.map((item, index) => (

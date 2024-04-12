@@ -20,8 +20,8 @@ const About_WhatsNew = () => {
                 <motion.div
                     variants={fadeIn('right', 'tween', 0.2, 1)}
                     className="flex-[0.75] flex justify-center flex-col">
-                    <TypingText title="| How Travel Advisor works" />
-                    <TitleText title={<>What's new about Travel Advisor</>} />
+                    <TypingText title="| How Optimized Destination works" />
+                    <TitleText title={<>What's new about Optimized Destination</>} />
                     <div className='mt-[48px] flex flex-wrap justify-between gap-[24px]'>
                         {newFeatures.map((item, index) => (
                             <NewFeature
