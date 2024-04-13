@@ -1,26 +1,31 @@
 import React, { useRef } from 'react'
 import emailjs from '@emailjs/browser';
-
+import toast from 'react-hot-toast';
+import { useForm } from 'react-hook-form'
 const ContactUs = () => {
     const form = useRef();
+
+    const reactHookFrom = useForm()
+    const { register } = reactHookFrom
 
     const sendEmail = (e) => {
         console.log("Form Ref Value: ", form)
         e.preventDefault();
 
         emailjs
-            .sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form.current, {
-                publicKey: 'YOUR_PUBLIC_KEY',
+            .sendForm('service_lfgjx27', 'template_t7w50yr', form.current, {
+                publicKey: 'ndfyhVQDcPjdlHZk1',
             })
             .then(
                 () => {
-                    console.log('SUCCESS!');
+                    toast.success("Send Message Success")
                 },
                 (error) => {
-                    console.log('FAILED...', error.text);
+                    toast.success("Send Message Failed", error.text)
                 },
             );
     };
+
     return (
         <>
             <section class="bg-blue-50 pb-3" id="contact">
@@ -107,14 +112,14 @@ const ContactUs = () => {
                                     <div class="mb-6">
                                         <div class="mx-0 mb-1 sm:mb-4">
                                             <div class="mx-0 mb-1 sm:mb-4">
-                                                <label for="name" class="pb-1 text-xs uppercase tracking-wider"></label><input type="text" id="name" autocomplete="given-name" placeholder="Your name" class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0" name="name" />
+                                                <label for="name" class="pb-1 text-xs uppercase tracking-wider"></label><input type="text" name="to_name" autocomplete="given-name" placeholder="Your name" class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-700" />
                                             </div>
                                             <div class="mx-0 mb-1 sm:mb-4">
-                                                <label for="email" class="pb-1 text-xs uppercase tracking-wider"></label><input type="email" id="email" autocomplete="email" placeholder="Your email address" class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0" name="email" />
+                                                <label for="email" class="pb-1 text-xs uppercase tracking-wider"></label><input type="email" name="from_name" autocomplete="email" placeholder="Your email address" class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-700" />
                                             </div>
                                         </div>
                                         <div class="mx-0 mb-1 sm:mb-4">
-                                            <label for="textarea" class="pb-1 text-xs uppercase tracking-wider"></label><textarea id="textarea" name="textarea" cols="30" rows="5" placeholder="Write your message..." class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md dark:text-gray-300 sm:mb-0"></textarea>
+                                            <label for="textarea" class="pb-1 text-xs uppercase tracking-wider"></label><textarea id="textarea" name="message" cols="30" rows="5" placeholder="Write your message..." class="mb-2 w-full rounded-md border border-gray-400 py-2 pl-2 pr-4 shadow-md text-gray-700"></textarea>
                                         </div>
                                     </div>
                                     <div class="text-center">
