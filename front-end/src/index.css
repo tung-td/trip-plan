@@ -3,7 +3,7 @@
 @tailwind utilities;
 body {
   margin: 0;
-  font-family: "Poppins", sans-serif;
+  font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -36,4 +36,8 @@ code {
 
 .react-multi-carousel-track > li {
   width: unset !important;
+}
+
+.active-link {
+  border-bottom: 5px solid #ff7757;
 }
