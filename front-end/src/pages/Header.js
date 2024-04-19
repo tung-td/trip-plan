@@ -165,12 +165,12 @@ const Header = () => {
                       </NavLink>
 
                       {/* Các tiêu đề SeePost Discover About us */}
-                      <div className="hidden md:flex space-x-2 items-center font-semibold">
+                      {/* <div className="hidden md:flex space-x-2 items-center font-semibold">
                         <NavLink to='/' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">Home</NavLink>
                         <NavLink to='/aboutus' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">About us</NavLink>
                         <NavLink to='/mytrip' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">My Trips</NavLink>
                         <NavLink to='/contactus' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">Contact Us</NavLink>
-                      </div>
+                      </div> */}
 
                       <NavLink className="flex justify-between" to="/">
                         <li className="mb-[16px] flex items-center">
@@ -232,20 +232,20 @@ const Header = () => {
 };
 
 export default Header;
-{/* Mobile Menu */ }
-{
-  isMobileMenuOpen &&
-    <div className="md:hidden flex flex-col mt-3 space-y-2 ">
-      <button className="p-2 text-left font-semibold hover:bg-slate-200 rounded-md border-l-4 border-slate-200 hover:shadow-md hover:transition duration-100 ease-in-out">
-        <NavLink to='login'>Login</NavLink>
-      </button>
-      <button className="p-2 text-left font-semibold hover:bg-slate-200 rounded-md border-l-4 border-slate-200 hover:shadow-md hover:transition duration-100 ease-in-out">
-        <NavLink to='signup'>Sign Up</NavLink>
-      </button>
-    </div>
-}
+// {/* Mobile Menu */ }
+// {
+//   isMobileMenuOpen &&
+//     <div className="md:hidden flex flex-col mt-3 space-y-2 ">
+//       <button className="p-2 text-left font-semibold hover:bg-slate-200 rounded-md border-l-4 border-slate-200 hover:shadow-md hover:transition duration-100 ease-in-out">
+//         <NavLink to='login'>Login</NavLink>
+//       </button>
+//       <button className="p-2 text-left font-semibold hover:bg-slate-200 rounded-md border-l-4 border-slate-200 hover:shadow-md hover:transition duration-100 ease-in-out">
+//         <NavLink to='signup'>Sign Up</NavLink>
+//       </button>
+//     </div>
+// }
 
-            </nav >
-        </header >
-    )
-}
+//             </nav >
+//         </header >
+//     )
+// }
