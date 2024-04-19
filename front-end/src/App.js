@@ -13,6 +13,7 @@ import AboutUs from "./pages/AboutUs";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ContactUs from "./pages/ContactUs";
+import MessengerCustomerChat from 'react-messenger-customer-chat';
 /*App là nơi chứa cách hoạt động của các Router 
 nơi điều khiển các component sẽ render khi gặp tên đường link tương ứng
 */
@@ -37,11 +38,15 @@ const router = createBrowserRouter(
   )
 )
 
-
 function App() {
   return (
-    <RouterProvider router={router} />
-
+    <>
+      <RouterProvider router={router} />
+      <MessengerCustomerChat
+        pageId="100020569179614"
+        appId="<1236615610645592>"
+      />
+    </>
   );
 }
 

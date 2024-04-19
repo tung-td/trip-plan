@@ -1,123 +1,251 @@
-import React from 'react'
-import { NavLink } from "react-router-dom";
-import { GiHamburgerMenu } from 'react-icons/gi'
-import { useState } from "react";
-import logo from '../assets/img/Logo.png'
-import avt from '../assets/img/avt.jpg'
+import React, { useEffect, useState, useRef } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import logo from "../assets/img/Logo.png";
+import avt from "../assets/img/avt.jpg";
 import { useSelector, useDispatch } from "react-redux";
-import { logoutRedux } from '../redux/userSlice';
-import toast from 'react-hot-toast';
+import { logoutRedux } from "../redux/userSlice";
+import toast from "react-hot-toast";
+import {
+  FaBed,
+  FaPlane,
+  FaHeart,
+  FaUser,
+  FaWallet,
+  FaChevronRight,
+} from "react-icons/fa";
+import { FaGear } from "react-icons/fa6";
+import { MdOutlineSupportAgent } from "react-icons/md";
+import { IoLogOut } from "react-icons/io5";
 
 const Header = () => {
-    const dispatch = useDispatch()
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const dispatch = useDispatch();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeLink, setActiveLink] = useState(location.pathname);
+  const [showMenu, setShowMenu] = useState(false);
+  const ref = useRef(null);
 
-    const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
+  const handleNavLinkClick = (path) => {
+    setActiveLink(path);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleShowMenu = () => {
+    setShowMenu((prev) => !prev);
+  };
+
+  const handleLogout = () => {
+    dispatch(logoutRedux());
+    toast.success("Logout successfully");
+  };
+
+  const userData = useSelector((state) => state.user);
+
+  const handleClickOutside = (event) => {
+    if (showMenu && ref.current && !ref.current.contains(event.target)) {
+      setShowMenu(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
     };
+  }, [showMenu]);
 
-    const [showMenu, setShowMenu] = useState(false)
+  return (
+    <header>
+      <nav className="h-[87px] w-full bg-white px-[166px]">
+        <div
+          className="mx-auto flex h-[87px] w-full items-center justify-between"
+          ref={ref}
+        >
+          <div className="flex w-1/3 items-center font-semibold">
+            <NavLink
+              to="/"
+              className={`mr-[32px] flex bg-transparent font-bold text-black ${activeLink === "/" ? "active-link" : ""} flex items-center leading-[84px]`}
+              onClick={() => handleNavLinkClick("/")}
+            >
+              <FaBed className="mr-[10px] text-[19px]" /> Finds Stays
+            </NavLink>
+            <NavLink
+              to="/tripcreate"
+              className={`mr-[32px] flex bg-transparent font-bold text-black ${activeLink === "/mytrip" ? "active-link" : ""} flex items-center leading-[84px]`}
+              onClick={() => handleNavLinkClick("/mytrip")}
+            >
+              <FaPlane className="mr-[10px] text-[19px]" /> My Trips
+            </NavLink>
+          </div>
 
-    const handleShowMenu = () => {
-        setShowMenu(prev => !prev)
-    }
+          <NavLink to="/" className="flex w-1/3 justify-center">
+            {/* Ảnh Logo Trip Advisor */}
+            <div className="flex items-center">
+              <img
+                src={logo}
+                alt="Trip Advisor Logo"
+                className="h-5 h-8 w-5 w-8 text-[20px]"
+              />
+              {/* <SiTripadvisor className="text-5xl" /> */}
+              <span className="text-2xl text-xl font-bold">Travel Advisor</span>
+            </div>
+          </NavLink>
 
-    const handleLogout = () => {
-        dispatch(logoutRedux())
-        toast.success("Logout succesfully")
-    }
-
-    const userData = useSelector((state) => state.user)
-
-
-    return (
-        <header>
-            <nav className="bg-white p-3 border-b-2">
-                <div className="max-w-7xl mx-auto flex justify-between" >
-                    <NavLink to='/'>
-                        {/* Ảnh Logo Trip Advisor */}
-                        <div className="flex items-center md:space-x-2 space-x-3 no-underline">
-                            <img src={logo} alt="Trip Advisor Logo" className="w-8 h-8 md:w-12 md:h-12 text-5xl no-underline" />
-                            {/* <SiTripadvisor className="text-5xl" /> */}
-                            <span className="text-xl md:text-2xl font-bold no-underline">Travel Advisor</span>
+          <div className="flex w-1/3 items-center justify-end">
+            <div className="flex items-center text-[16px] font-bold">
+              <FaHeart className="mr-[5px]" /> Favourites
+            </div>
+            <div className="ml-[16px] mr-[30px] text-[16px] font-bold">|</div>
+            {userData.email ? (
+              <div
+                className="relative flex cursor-pointer items-center"
+                onClick={handleShowMenu}
+              >
+                <img
+                  src={avt}
+                  alt="avt"
+                  className="h-[45px] w-[45px] rounded-full"
+                />
+                <span className="ml-[5px] text-[16px] font-bold capitalize">
+                  {userData.user}
+                </span>
+                {showMenu && (
+                  <div className="absolute right-[30px] top-[50px] z-50 flex w-[329px] flex-col rounded-[8px] bg-white p-[32px] shadow-lg">
+                    <ul className=" w-full text-base font-normal ">
+                      <div className="relative flex cursor-pointer items-center">
+                        <img
+                          src={avt}
+                          alt="avt"
+                          className="mr-[16px] h-[64px] w-[64px] rounded-full"
+                        />
+                        <div className="flex flex-col">
+                          <p className="ml-[5px] text-[16px] font-bold capitalize">
+                            {userData.user}
+                          </p>
+                          <div className="ml-[7px] flex items-center">
+                            <div className="h-[10px] w-[10px] rounded-full bg-green-500">
+                              .
+                            </div>
+                            <p className="ml-[5px] text-[16px] capitalize">
+                              Online
+                            </p>
+                          </div>
                         </div>
-                    </NavLink>
+                      </div>
 
-                    {/* Các tiêu đề SeePost Discover About us */}
-                    <div className="hidden md:flex space-x-2 items-center font-semibold">
+                      <div className="my-[24px] h-[0.5px] w-full bg-[#666] opacity-25"></div>
+
+                      <NavLink
+                        className="flex justify-between"
+                        to="userprofile"
+                      >
+                        <li className="mb-[16px] flex items-center">
+                          <FaUser className="mr-[8px] h-[18px] w-[18px]" /> My
+                          account
+                        </li>
+                        <FaChevronRight />
+                      </NavLink>
+                      <NavLink className="flex justify-between" to="/">
+                        <li className="mb-[16px] flex items-center">
+                          <FaWallet className="mr-[8px] h-[18px] w-[18px]" />{" "}
+                          Payment
+                        </li>
+                        <FaChevronRight />
+                      </NavLink>
+                      <NavLink className="flex justify-between" to="/">
+                        <li className="mb-[16px] flex items-center">
+                          <FaGear className="mr-[8px] h-[18px] w-[18px]" />{" "}
+                          Settings
+                        </li>
+                        <FaChevronRight />
+                      </NavLink>
+
+                      {/* Các tiêu đề SeePost Discover About us */}
+                      <div className="hidden md:flex space-x-2 items-center font-semibold">
                         <NavLink to='/' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">Home</NavLink>
                         <NavLink to='/aboutus' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">About us</NavLink>
                         <NavLink to='/mytrip' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">My Trips</NavLink>
                         <NavLink to='/contactus' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">Contact Us</NavLink>
-                    </div>
+                      </div>
 
-                    {/* Các Buttons */}
-                    {
-                        userData.email ?
-                            (
-                                <div className="hidden md:flex space-x-5 items-center cursor-pointer relative">
-                                    <span className=" text-lg font-normal text-slate-900">{userData.user}</span>
-                                    <div className="border border-slate-900 rounded-full overflow-hidden" onClick={handleShowMenu}>
-                                        <img src={avt} alt="avt" className=" w-2/3 h-2/3 md:w-12 md:h-12" />
-                                    </div>
-                                    {
-                                        showMenu && (
-                                            <div className="absolute top-16 right-2 bg-white rounded-xl py-3 px-5">
-                                                <ul className=" text-base font-normal w-full ">
-                                                    <NavLink to='userprofile'>
-                                                        <li className=" hover:text-blue-600">View Profile</li>
-                                                    </NavLink>
+                      <NavLink className="flex justify-between" to="/">
+                        <li className="mb-[16px] flex items-center">
+                          <MdOutlineSupportAgent className="mr-[8px] h-[23px] w-[23px]" />{" "}
+                          Support
+                        </li>
+                        <FaChevronRight />
+                      </NavLink>
 
-                                                    <li className="hover:text-red-600" onClick={handleLogout}>Log out</li>
-                                                </ul>
-                                            </div>
-                                        )
-                                    }
-                                </div>
-                            ) :
-                            (
-                                <div className="hidden md:flex space-x-5 items-center">
-                                    <button className="text-black font-bold text-lg hover:text-blue-500">
-                                        <NavLink to='login'>Login</NavLink>
-                                    </button>
-                                    <NavLink to='signup'>
-                                        <button className="bg-[#0f172a] hover:bg-[#2529d7] text-white font-bold py-2 px-4 border-b-4 border-[#000000] hover:border-[#10127e] rounded ">
-                                            Sign up
-                                        </button>
-                                    </NavLink>
-                                </div>
-                            )
-                    }
-                    {/*  */}
+                      <li
+                        className="flex items-center hover:text-red-600"
+                        onClick={handleLogout}
+                      >
+                        <IoLogOut className="mr-[8px] h-[23px] w-[23px]" />
+                        Log out
+                      </li>
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div className="flex items-center">
+                <NavLink to="login">
+                  <button className="mr-[10px] flex items-center rounded-[8px] border border-solid border-[#000] px-[23px] py-[6px] text-lg hover:opacity-70">
+                    Log in
+                  </button>
+                </NavLink>
+                <NavLink to="signup">
+                  <button className="mr-[10px] flex items-center rounded-[8px] border border-solid border-[#000] bg-black px-[23px] py-[6px] text-lg text-white hover:opacity-70">
+                    Sign up
+                  </button>
+                </NavLink>
+              </div>
+            )}
+          </div>
 
+          {/* ##### GIAO DIỆN MOBILE Ở ĐÂY ##### */}
+          {/* <div className="flex items-center ">
+            <button onClick={toggleMobileMenu}>
+              <GiHamburgerMenu className="text-2xl" />
+            </button>
+          </div> */}
+        </div>
 
+        {/* Mobile Menu */}
+        {/* {isMobileMenuOpen && (
+          <div className="mt-3 flex flex-col space-y-2 ">
+            <button className="rounded-md border-l-4 border-slate-200 p-2 text-left font-semibold duration-100 ease-in-out hover:bg-slate-200 hover:shadow-md hover:transition">
+              <NavLink to="login">Login</NavLink>
+            </button>
+            <button className="rounded-md border-l-4 border-slate-200 p-2 text-left font-semibold duration-100 ease-in-out hover:bg-slate-200 hover:shadow-md hover:transition">
+              <NavLink to="signup">Sign Up</NavLink>
+            </button>
+          </div>
+        )} */}
+      </nav>
+    </header>
+  );
+};
 
-
-                    {/* ##### GIAO DIỆN MOBILE Ở ĐÂY ##### */}
-                    <div className="md:hidden flex items-center ">
-                        <button onClick={toggleMobileMenu}>
-                            <GiHamburgerMenu className="text-2xl" />
-                        </button>
-                    </div>
-
-                </div>
-
-                {/* Mobile Menu */}
-                {
-                    isMobileMenuOpen &&
-                    <div className="md:hidden flex flex-col mt-3 space-y-2 ">
-                        <button className="p-2 text-left font-semibold hover:bg-slate-200 rounded-md border-l-4 border-slate-200 hover:shadow-md hover:transition duration-100 ease-in-out">
-                            <NavLink to='login'>Login</NavLink>
-                        </button>
-                        <button className="p-2 text-left font-semibold hover:bg-slate-200 rounded-md border-l-4 border-slate-200 hover:shadow-md hover:transition duration-100 ease-in-out">
-                            <NavLink to='signup'>Sign Up</NavLink>
-                        </button>
-                    </div>
-                }
+export default Header;
+{/* Mobile Menu */ }
+{
+  isMobileMenuOpen &&
+    <div className="md:hidden flex flex-col mt-3 space-y-2 ">
+      <button className="p-2 text-left font-semibold hover:bg-slate-200 rounded-md border-l-4 border-slate-200 hover:shadow-md hover:transition duration-100 ease-in-out">
+        <NavLink to='login'>Login</NavLink>
+      </button>
+      <button className="p-2 text-left font-semibold hover:bg-slate-200 rounded-md border-l-4 border-slate-200 hover:shadow-md hover:transition duration-100 ease-in-out">
+        <NavLink to='signup'>Sign Up</NavLink>
+      </button>
+    </div>
+}
 
             </nav >
         </header >
     )
 }
-
-export default Header

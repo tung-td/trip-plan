@@ -8,7 +8,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const HomeCarousel = () => {
   const locationData = useSelector((state) => state.location.locationList);
-
+  console.log("DATA LOACATION: ", locationData)
   const CustomButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
     const {
       carouselState: { currentSlide },

@@ -12,7 +12,7 @@ module.exports = {
       fontFamily: {
         playfair: ["Playfair Display", "serif"],
         poppins: ["Poppins", "sans-serif"],
-
+        Montserrat: ["Montserrat", "sans-serif"],
       },
     },
   },

@@ -18,7 +18,8 @@ const RootLayout = () => {
     })();
   }, []);
 
-  const showHeader = location.pathname !== "/login";
+  const showHeader =
+    location.pathname !== "/login" && location.pathname !== "/signup";
 
   return (
     <div className="root-layout">
