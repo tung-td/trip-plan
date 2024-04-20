@@ -1,23 +1,14 @@
+import React from 'react'
+import UserProfileCard from './UserProfileCard'
+import UserProfileEditInfo from './UserProfileEditInfo'
 
-
-import LeftForm from "./LeftForm/LeftForm";
-import RightForm from "./RightForm/RightForm";
-
-
-// flex items-center w-full
 const UserProfile = () => {
     return (
-        <div className="h-auto flex flex-row bg-[#edeef1] ">
-            <div className="w-[40%]">
-                <LeftForm />
+        <>
+            <UserProfileCard></UserProfileCard>
+            <UserProfileEditInfo></UserProfileEditInfo>
+        </>
+    )
+}
 
-            </div>
-
-            <div className="w-[60%]">
-                <RightForm />
-            </div>
-        </div>
-    );
-};
-
-export default UserProfile;
+export default UserProfile

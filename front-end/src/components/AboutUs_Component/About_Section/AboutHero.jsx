@@ -18,10 +18,10 @@ function About_Hero() {
                 {/* Container Content */}
                 <div className='flex justify-center items-center z-10 space-x-5'>
                     <motion.h1 variants={textVariant(1.1)} className={styles.heroHeading}>
-                        Travel
+                        Optimized
                     </motion.h1>
                     <motion.h1 variants={textVariant(1.2)} className={styles.heroHeading}>
-                        Advisor
+                        Destination
                     </motion.h1>
                 </div>
 

@@ -5,7 +5,9 @@ import App from "./App";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "../src/redux/index";
+import "react-awesome-lightbox/build/style.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //File này giữ nguyên
 const root = ReactDOM.createRoot(document.getElementById("root"));

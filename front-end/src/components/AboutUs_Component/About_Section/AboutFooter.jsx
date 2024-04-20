@@ -18,7 +18,7 @@ const AboutFooter = () => {
             <div className={`${styles.innerWidth} mx-auto flex flex-col gap-8`}>
                 <div className="flex items-center justify-between flex-wrap gap-5">
                     <h4 className="font-bold md:text-[64px] text-[44px] text-black">
-                        Enter the Travel Adisor
+                        Enter the Optimized Destination
                     </h4>
                     <motion.button
                         type="button"
@@ -31,13 +31,12 @@ const AboutFooter = () => {
                             alt="headset"
                             className="w-[24px] h-[24px] object-contain"
                         />
-                        <span  onClick={() => 
-                            {
-                                navigate('/') 
-                                window.scrollTo({top:0,behavior: 'smooth'})
-                            }
-                                } className="font-normal text-[16px] text-white">
-                            Enter Travel Adisor
+                        <span onClick={() => {
+                            navigate('/')
+                            window.scrollTo({ top: 0, behavior: 'smooth' })
+                        }
+                        } className="font-normal text-[16px] text-white">
+                            Enter Optimized Destination
                         </span>
                     </motion.button>
                 </div>
@@ -47,10 +46,10 @@ const AboutFooter = () => {
 
                     <div className="flex items-center justify-between flex-wrap gap-4">
                         <h4 className="font-extrabold text-[24px] text-black">
-                            TRAVEL ADVISOR
+                            OPTIMIZED DESTINATION
                         </h4>
                         <p className="font-normal text-[14px] text-black opacity-50">
-                            Copyright © 2023 - 2024 Travel Adisor. All rights reserved.
+                            Copyright © 2023 - 2024 Optimized Destination. All rights reserved.
                         </p>
 
                         <div className="flex gap-4">
