@@ -9,6 +9,10 @@ body {
   overflow-x: hidden;
 }
 
+a {
+  text-decoration: unset !important;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
