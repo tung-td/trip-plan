@@ -4,6 +4,7 @@ import logo from "../assets/img/Logo.png";
 import avt from "../assets/img/avt.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutRedux } from "../redux/userSlice";
+import { MdAdminPanelSettings } from "react-icons/md";
 import toast from "react-hot-toast";
 import {
   FaBed,
@@ -20,6 +21,7 @@ import { IoLogOut } from "react-icons/io5";
 const Header = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState(location.pathname);
   const [showMenu, setShowMenu] = useState(false);
@@ -80,6 +82,18 @@ const Header = () => {
             >
               <FaPlane className="mr-[10px] text-[19px]" /> My Trips
             </NavLink>
+
+
+            {userData.isAdmin === "ADMIN" && (
+              <NavLink
+                className={`mr-[32px] flex bg-transparent font-bold text-black ${activeLink === "/adminDB" ? "active-link" : ""} flex items-center leading-[84px]`}
+                to="/admin-dashboard"
+                onClick={() => handleNavLinkClick("/adminDB")}
+              >
+                <MdAdminPanelSettings className="mr-[10px] text-[19px]" /> Admin DashBoard
+              </NavLink>
+            )}
+
           </div>
 
           <NavLink to="/" className="flex w-1/3 justify-center">
@@ -91,9 +105,10 @@ const Header = () => {
                 className="h-5 h-8 w-5 w-8 text-[20px]"
               />
               {/* <SiTripadvisor className="text-5xl" /> */}
-              <span className="text-2xl text-xl font-bold">Travel Advisor</span>
+              <span className="text-2xl text-xl font-bold">Optimized Destination</span>
             </div>
           </NavLink>
+
 
           <div className="flex w-1/3 items-center justify-end">
             <div className="flex items-center text-[16px] font-bold">

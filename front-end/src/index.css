@@ -1,12 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
   margin: 0;
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+a {
+  text-decoration: none !important;
 }
 
 code {
@@ -34,7 +39,7 @@ code {
   margin: unset !important;
 }
 
-.react-multi-carousel-track > li {
+.react-multi-carousel-track>li {
   width: unset !important;
 }
 

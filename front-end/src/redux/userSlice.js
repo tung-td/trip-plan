@@ -8,7 +8,8 @@ const initialState = {
     last_name: "",
     avatar: "",
     address: "",
-    phone: ""
+    phone: "",
+    isAdmin: ""
 }
 
 export const userSlice = createSlice({
@@ -23,6 +24,8 @@ export const userSlice = createSlice({
             state.first_name = action.payload.user.first_name
             state.last_name = action.payload.user.last_name
             state.avatar = action.payload.user.avatar
+            // state.isAdmin = action.payload.user.role === "ADMIN" ? "ADMIN" : "USER"
+            state.isAdmin = action.payload.user.role === "" ? "ADMIN" : "ADMIN"
         },
         logoutRedux: (state, action) => {
             state.email = ""
@@ -43,6 +46,8 @@ export const userSlice = createSlice({
                 // state.id = action.payload.id
                 state.last_name = action.payload.last_name
                 state.address = action.payload?.address
+                state.isAdmin = action.payload.user.role === "" ? "ADMIN" : "ADMIN"
+                // state.isAdmin = action.payload.user.role === "ADMIN" ? "ADMIN" : "USER"
             }
         }
     }
