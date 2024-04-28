@@ -1,15 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
-const Step4 = ({ onActivitiesChange }) => {
+const Step4 = ({ activities, onActivitiesChange }) => {
   const [selectedOptions, setSelectedOptions] = useState([]);
-
-  const handleOptionClick = (option) => {
-    if (selectedOptions.includes(option)) {
-      setSelectedOptions(selectedOptions.filter((item) => item !== option));
-    } else {
-      setSelectedOptions([...selectedOptions, option]);
-    }
-  };
+  const [otherOption, setOtherOption] = useState("");
 
   const options = [
     "Must-see Attractions",
@@ -25,39 +18,82 @@ const Step4 = ({ onActivitiesChange }) => {
     "Outdoors",
   ];
 
-  const handleOtherOptionChange = (event) => {
-    setSelectedOptions([event.target.value]);
+  const handleOptionClick = (option) => {
+    if (selectedOptions.includes(option)) {
+      setSelectedOptions(selectedOptions.filter((item) => item !== option));
+    } else {
+      setSelectedOptions([...selectedOptions, option]);
+    }
   };
+
+  const handleOtherOptionChange = (event) => {
+    const inputValue = event.target.value;
+    const maxLength = 50;
+    if (inputValue.length <= maxLength) {
+      setOtherOption(inputValue);
+    }
+  };
+
+  // Truyền selectedOptions và otherOption vào onActivitiesChange khi có sự thay đổi
+  const handleActivitiesChangeRef = useRef(onActivitiesChange);
+
+  useEffect(() => {
+    handleActivitiesChangeRef.current = onActivitiesChange;
+  }, [onActivitiesChange]);
+
+  useEffect(() => {
+    const combinedOptions = [...selectedOptions];
+    if (otherOption) {
+      combinedOptions.push(otherOption);
+    }
+    handleActivitiesChangeRef.current(combinedOptions);
+  }, [selectedOptions, otherOption]);
+
+  useEffect(() => {
+    console.log("selectedOptions:", selectedOptions);
+    console.log("otherOption:", otherOption);
+  }, [selectedOptions, otherOption]);
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
-      <div className="flex w-full justify-center p-[35px] text-[28px] font-bold">
-        What activities are you interested in?
-      </div>
-      <div className="flex">
-        {options.map((option, index) => (
-          <div
-            key={index}
-            className={`m-2 flex cursor-pointer items-center rounded-full border p-[7px] ${
-              selectedOptions.includes(option)
-                ? "border-black"
-                : "border-gray-300"
-            }`}
-            onClick={() => handleOptionClick(option)}
-          >
-            {option}
-          </div>
-        ))}
-      </div>
-      <div className="mt-4">
-        <label htmlFor="other-option">Others:</label>
-        <input
-          id="other-option"
-          type="text"
-          className="ml-2 rounded-md border px-2 py-1"
-          value={selectedOptions.length === 1 ? selectedOptions[0] : ""}
-          onChange={handleOtherOptionChange}
-        />
+      <div className="flex w-full flex-col justify-start px-[600px] pt-[70px]">
+        <p className="text-[28px] font-bold">
+          What activities are you interested in?
+        </p>
+        <p className="text-[16px] font-[400] text-[#757575]">
+          Choose as many as you’d like.
+        </p>
+        <div className="flex flex-wrap">
+          {options.map((option, index) => (
+            <div
+              key={index}
+              className={`m-2 flex cursor-pointer items-center rounded-full border p-[7px] text-[14px] font-[600] ${
+                selectedOptions.includes(option)
+                  ? "border-black"
+                  : "border-gray-300"
+              }`}
+              onClick={() => handleOptionClick(option)}
+            >
+              {option}
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 flex flex-col">
+          <label htmlFor="other-option" className="flex font-[600]">
+            Others{" "}
+            <p className="mx-[5px] font-[400] text-[#757575]">(optional)</p>
+          </label>
+          <input
+            id="other-option"
+            placeholder="Type here"
+            type="text"
+            className="ml-2 rounded-md border px-[20px] py-[15px]"
+            value={otherOption}
+            onChange={handleOtherOptionChange}
+            maxLength={50}
+          />
+          <p>{otherOption ? otherOption.length : 0}/50</p>
+        </div>
       </div>
     </div>
   );
