@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Step1 from "../components/CreateAI_Component/Step1";
 import Step2 from "../components/CreateAI_Component/Step2";
 import Step3 from "../components/CreateAI_Component/Step3";
 import Step4 from "../components/CreateAI_Component/Step4";
+
+import ReactLoading from "react-loading";
 
 const AiTripCreate = () => {
   const [step, setStep] = useState(1);
@@ -13,8 +16,7 @@ const AiTripCreate = () => {
   const [travelers, setTravelers] = useState("Solo");
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [tripPlan, setTripPlan] = useState(null);
-  const [fullResData, setFullResData] = useState(null);
+  const navigate = useNavigate();
 
   const nextStep = () => {
     setStep(step + 1);
@@ -57,13 +59,30 @@ const AiTripCreate = () => {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ prompt: promptText }),
+      body: JSON.stringify({
+        prompt: promptText,
+        destination: destination,
+        startDate: startDate,
+        endDate: endDate,
+        dayLength: dayLength,
+        travelers: travelers,
+        activities: activities,
+      }),
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
-        setFullResData(data);
-        setTripPlan(data.data.tripPlan);
+        navigate("/tripresultAI", {
+          state: {
+            tripData: data,
+            destination: destination,
+            startDate: startDate,
+            endDate: endDate,
+            dayLength: dayLength,
+            travelers: travelers,
+            activities: activities,
+            promptText: promptText,
+          },
+        });
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -72,6 +91,12 @@ const AiTripCreate = () => {
         setLoading(false);
       });
   };
+
+  const LoadingAI = () => (
+    <div className="fixed left-0 top-0 z-50 flex h-screen w-screen items-center justify-center bg-black bg-opacity-50">
+      <ReactLoading type="cubes" color="#fff" height={100} width={100} />
+    </div>
+  );
 
   const renderStep = () => {
     switch (step) {
@@ -111,9 +136,6 @@ const AiTripCreate = () => {
     }
   };
 
-  console.log("ahsdjaslkjdkas");
-  console.log(fullResData);
-
   return (
     <div className="flex flex-col items-center">
       <div className="flex w-full justify-center border-b p-[35px]">
@@ -148,31 +170,7 @@ const AiTripCreate = () => {
         )}
       </div>
 
-      {loading && (
-        <div className="skeleton-container">
-          <p>Loading...</p>
-        </div>
-      )}
-      {!loading && tripPlan && (
-        <div className="trip-plan-container px-[100px] py-[50px]">
-          <h1>{fullResData.data.introduction}</h1>
-          {tripPlan.map((dayPlan, index) => (
-            <div key={index}>
-              <h3>{dayPlan.day}</h3>
-              <p>{dayPlan.description}</p>
-              <ul>
-                {dayPlan.locations.map((location, index) => (
-                  <li key={index}>
-                    <h4>{location.locationName}</h4>
-                    <p>{location.locationDescription}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-          <h2>{fullResData.data.conclusion}</h2>
-        </div>
-      )}
+      {loading && LoadingAI()}
     </div>
   );
 };

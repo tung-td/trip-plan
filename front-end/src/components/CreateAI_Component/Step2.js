@@ -28,7 +28,7 @@ const Step2 = ({
     if (!start || !end) return 0;
     const dayLengthInMs = Math.abs(end - start);
     const dayLength = Math.ceil(dayLengthInMs / (1000 * 60 * 60 * 24));
-    return dayLength;
+    return dayLength + 1;
   };
 
   const today = new Date();

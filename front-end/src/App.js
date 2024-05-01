@@ -20,6 +20,7 @@ import "react-toastify/dist/ReactToastify.css";
 import ContactUs from "./pages/ContactUs";
 import MessengerCustomerChat from "react-messenger-customer-chat";
 import AiTripCreate from "./pages/AiTripCreate";
+import AITripResult from "./pages/AITripResult";
 /*App là nơi chứa cách hoạt động của các Router 
 nơi điều khiển các component sẽ render khi gặp tên đường link tương ứng
 */
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
       <Route path="aboutus" element={<AboutUs />}></Route>
       <Route path="contactus" element={<ContactUs />}></Route>
       <Route path="tripcreateAI" element={<AiTripCreate />}></Route>
+      <Route path="tripresultAI" element={<AITripResult />}></Route>
     </Route>,
   ),
 );
