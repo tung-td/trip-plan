@@ -6,8 +6,9 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const FeedBackSection = () => {
   // Nhờ Dat làm thêm API phần review của users thay cho local
-  const feedbackCards = CarouselData.map((item) => (
+  const feedbackCards = CarouselData.map((item, index) => (
     <FeedBackCard
+      key={`index-${index + 1}`}
       name={item.userName}
       url={item.imageUrl}
       feedback={item.feedback}

@@ -44,6 +44,7 @@ export const Login = () => {
 
       if (dataRes.message) {
         toast.success(dataRes.message);
+        console.log("DATA CUA USER SAU KHI LOGIN LÀ :", userData)
         toast(`Welcome back! ${dataRes.user.username}`, {
           icon: "👏",
           style: {

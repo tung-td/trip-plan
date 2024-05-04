@@ -55,9 +55,10 @@ const HomeCarousel = () => {
     overflow: "unset !important",
   };
 
-  const tripCards = locationData.map((item) => (
+  const tripCards = locationData.map((item, index) => (
     <NavLink to={`/detail/${item.id}`}>
       <TripCard
+        key={`index-${index + 1}`}
         id={item.id}
         name={item.name}
         url={item.image}

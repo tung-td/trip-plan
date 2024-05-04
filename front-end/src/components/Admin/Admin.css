@@ -1,0 +1,26 @@
+.admin-container {
+    display: flex;
+}
+
+.admin-container .admin-sidebar .pro-sidebar {
+    height: 100vh !important;
+}
+
+.admin-container .admin-content {
+    width: 100%;
+}
+
+.admin-container .admin-header {
+    height: 40px;
+    background-color: #222632;
+    padding: 10px;
+}
+
+.admin-container .admin-main {
+    height: calc(100vh - 50px);
+}
+
+.admin-container .user-pagination {
+    display: flex;
+    justify-content: center;
+}

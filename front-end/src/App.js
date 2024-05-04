@@ -18,8 +18,12 @@ import AboutUs from "./pages/AboutUs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ContactUs from "./pages/ContactUs";
-import MessengerCustomerChat from "react-messenger-customer-chat";
-import AiTripCreate from "./pages/AiTripCreate";
+import MessengerCustomerChat from 'react-messenger-customer-chat';
+import Admin from "./components/Admin/Admin";
+import AdminDashBoardTemplate from "./components/Admin/DashBoardContent/AdminDashBoardTemplate";
+import AdminManageLocations from "./components/Admin/DashBoardContent/AdminManageLocations";
+import AdminManageLocationDetail from "./components/Admin/DashBoardContent/AdminManageLocationDetail/AdminManageLocationDetail";
+import 'react-perfect-scrollbar/dist/css/styles.css';
 /*App là nơi chứa cách hoạt động của các Router 
 nơi điều khiển các component sẽ render khi gặp tên đường link tương ứng
 */
@@ -39,10 +43,15 @@ const router = createBrowserRouter(
       <Route path="mytripdetail/:filterby" element={<SingleMytrip />}></Route>
       <Route path="aboutus" element={<AboutUs />}></Route>
       <Route path="contactus" element={<ContactUs />}></Route>
-      <Route path="tripcreateAI" element={<AiTripCreate />}></Route>
-    </Route>,
-  ),
-);
+      <Route path="admin-dashboard/" element={<Admin />}>
+        <Route index path="admin-DB" element={<AdminDashBoardTemplate />} />
+        <Route index path="manage-locations" element={<AdminManageLocations />} />
+        <Route index path="manage-location/:filterby" element={<AdminManageLocationDetail />} />
+      </Route>
+    </Route>
+
+  )
+)
 
 function App() {
   return (
