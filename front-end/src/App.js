@@ -18,16 +18,12 @@ import AboutUs from "./pages/AboutUs";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ContactUs from "./pages/ContactUs";
-<<<<<<< HEAD
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import Admin from "./components/Admin/Admin";
 import AdminDashBoardTemplate from "./components/Admin/DashBoardContent/AdminDashBoardTemplate";
 import 'react-perfect-scrollbar/dist/css/styles.css';
-=======
-import MessengerCustomerChat from "react-messenger-customer-chat";
 import AiTripCreate from "./pages/AiTripCreate";
 import AITripResult from "./pages/AITripResult";
->>>>>>> e1efeeb0acf6532637945be007eec3b75982d454
 /*App là nơi chứa cách hoạt động của các Router 
 nơi điều khiển các component sẽ render khi gặp tên đường link tương ứng
 */
@@ -47,21 +43,14 @@ const router = createBrowserRouter(
       <Route path="mytripdetail/:filterby" element={<SingleMytrip />}></Route>
       <Route path="aboutus" element={<AboutUs />}></Route>
       <Route path="contactus" element={<ContactUs />}></Route>
-<<<<<<< HEAD
       <Route path="admin-dashboard/" element={<Admin />}>
         <Route index path="admin-DB" element={<AdminDashBoardTemplate />} />
       </Route>
-    </Route>
-
+      <Route path="tripcreateAI" element={< AiTripCreate />}></ Route>
+      <Route path="tripresultAI" element={<AITripResult />}></Route>
+    </Route >
   )
 )
-=======
-      <Route path="tripcreateAI" element={<AiTripCreate />}></Route>
-      <Route path="tripresultAI" element={<AITripResult />}></Route>
-    </Route>,
-  ),
-);
->>>>>>> e1efeeb0acf6532637945be007eec3b75982d454
 
 function App() {
   return (
