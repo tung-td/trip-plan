@@ -19,7 +19,10 @@ const RootLayout = () => {
   }, []);
 
   const showHeader =
-    location.pathname !== "/login" && location.pathname !== "/signup";
+    location.pathname !== "/login" &&
+    location.pathname !== "/signup" &&
+    location.pathname !== "/tripresultAI" &&
+    location.pathname !== "/tripcreateAI";
 
   return (
     <div className="root-layout">

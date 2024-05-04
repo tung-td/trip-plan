@@ -11,7 +11,12 @@ body {
 }
 
 a {
+<<<<<<< HEAD
   text-decoration: none !important;
+=======
+  text-decoration: unset !important;
+  color: #000 !important;
+>>>>>>> e1efeeb0acf6532637945be007eec3b75982d454
 }
 
 code {
