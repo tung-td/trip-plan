@@ -413,7 +413,7 @@ const Map = () => {
     setShowDistance(false);
   };
   return (
-    <div className="relative h-screen">
+    <div className="relative h-[78vh]">
       <div ref={mapContainer} className="h-[78vh] w-full">
         {routeInfo && (
           <>
