@@ -11,6 +11,16 @@ import { IoMdShare } from "react-icons/io";
 import { CiAirportSign1 } from "react-icons/ci";
 import { IoHappyOutline } from "react-icons/io5";
 import { RiCustomerService2Line, RiServiceLine } from "react-icons/ri";
+import { FaLeaf } from "react-icons/fa";
+import { IoIosFitness } from "react-icons/io";
+import { RiCupFill } from "react-icons/ri";
+import { IoWine } from "react-icons/io5";
+import {
+  MdOutlineRoomService,
+  MdOutlinePool,
+  MdOutlineRestaurant,
+} from "react-icons/md";
+import Map from "../components/Trip_Create_Component/TripCreateCard/Map";
 
 const LocationDetail = () => {
   const dispatch = useDispatch();
@@ -19,18 +29,7 @@ const LocationDetail = () => {
   const user_id = useSelector((state) => state.user.id);
   const activeStatus = useSelector((state) => state.tripCreate.active);
   const day = useSelector((state) => state.tripCreate.day);
-
-  const [loginRequiredActive, setLoginRequiredActive] = useState(false);
-  const [scrollTopButtonActive, setScrollTopButton] = useState(false);
-  const [choicesActive, setChoicesActive] = useState(false);
-
-  const activeLoginRequired = () => {
-    setLoginRequiredActive((prev) => !prev);
-  };
-
-  const handleActiveChoices = () => {
-    setChoicesActive((prev) => !prev);
-  };
+  const [allReview, setAllReview] = useState([]);
 
   const { filterby } = useParams();
   const locationDetail = useSelector((state) => state.location.locationList);
@@ -42,341 +41,17 @@ const LocationDetail = () => {
   console.log("location");
   console.log(locationDisplay);
 
-  const total =
-    locationDisplay.positive +
-    locationDisplay.negative +
-    locationDisplay.neutral;
-
-  //Category
-  const hotelCategory = locationDetail.filter(
-    (location) => location.category.name === "Hotel",
-  );
-  const hotel_id = hotelCategory.map((item) => item.id);
-  const restaurantCategory = locationDetail.filter(
-    (location) => location.category.name === "Restaurant",
-  );
-  const restaurant_id = restaurantCategory.map((item) => item.id);
-
-  const pieDataSet = [
-    ((locationDisplay.positive / total) * 100).toFixed(2),
-    ((locationDisplay.negative / total) * 100).toFixed(2),
-    ((locationDisplay.neutral / total) * 100).toFixed(2),
-  ];
-
-  const barDataSet = [
-    locationDisplay.convenient,
-    locationDisplay.service,
-    locationDisplay.yummy && locationDisplay.yummy,
-  ];
-
-  const barLabels = ["Convenient", "Service", locationDisplay.yummy && "Yummy"];
-
-  const compareBarLables =
-    locationDisplay.category.name === "Hotel"
-      ? hotelCategory.map((item) => item.name)
-      : restaurantCategory.map((item) => item.name);
-
-  // Compare to other location
-  const tags = ["Positive", "Convenient", "Service", "Yummy"];
-  if (locationDisplay.category.name === "Hotel") {
-    tags.pop();
-  }
-  const [compareLabel, setCompareLabel] = useState("Positive");
-  const positiveCompare =
-    locationDisplay.category.name === "Hotel"
-      ? hotelCategory.map((item) =>
-          (
-            (item.positive / (item.positive + item.negative + item.neutral)) *
-            100
-          ).toFixed(2),
-        )
-      : restaurantCategory.map((item) =>
-          (
-            (item.positive / (item.positive + item.negative + item.neutral)) *
-            100
-          ).toFixed(2),
-        );
-  const positivePoint = ((locationDisplay.positive / total) * 100).toFixed(2);
-  const [compareBarDataSet, setCompareBarDataSet] = useState([
-    ...positiveCompare,
-  ]);
-  const [comparePoint, setComparePoint] = useState(positivePoint);
-  const sortedPositivePoint =
-    locationDisplay.category.name === "Hotel"
-      ? hotelCategory
-          .map((item) =>
-            (
-              (item.positive / (item.positive + item.negative + item.neutral)) *
-              100
-            ).toFixed(2),
-          )
-          .sort((a, b) => b - a)
-      : restaurantCategory
-          .map((item) =>
-            (
-              (item.positive / (item.positive + item.negative + item.neutral)) *
-              100
-            ).toFixed(2),
-          )
-          .sort((a, b) => b - a);
-  const ranking = sortedPositivePoint.findIndex(
-    (value) => value === positivePoint,
-  );
-  const [rank, setRank] = useState(ranking);
-
-  const handleSetCompareLabel = async (label) => {
-    setCompareLabel(label);
-    setChoicesActive((prev) => !prev);
-  };
-
   useEffect(() => {
-    if (compareLabel === "Service") {
-      //Service points
-      const serviceCompare =
-        locationDisplay.category.name === "Hotel"
-          ? hotelCategory.map((item) =>
-              ((item.service / item.positive) * 100).toFixed(2),
-            )
-          : restaurantCategory.map((item) =>
-              ((item.service / item.positive) * 100).toFixed(2),
-            );
-      const servicePoint = (
-        (locationDisplay.service / locationDisplay.positive) *
-        100
-      ).toFixed(2);
-      //Ranking point
-      const sortedServicePoint =
-        locationDisplay.category.name === "Hotel"
-          ? hotelCategory
-              .map((item) => ((item.service / item.positive) * 100).toFixed(2))
-              .sort((a, b) => b - a)
-          : restaurantCategory
-              .map((item) => ((item.service / item.positive) * 100).toFixed(2))
-              .sort((a, b) => b - a);
-      const rank = sortedServicePoint.findIndex(
-        (value) => value === servicePoint,
-      );
-      setComparePoint(servicePoint);
-      setRank(rank);
-      setCompareBarDataSet([...serviceCompare]);
-    }
-    //convenient points
-    else if (compareLabel === "Convenient") {
-      const convenientCompare =
-        locationDisplay.category.name === "Hotel"
-          ? hotelCategory.map((item) =>
-              ((item.convenient / item.positive) * 100).toFixed(2),
-            )
-          : restaurantCategory.map((item) =>
-              ((item.convenient / item.positive) * 100).toFixed(2),
-            );
-      const convenientPoint = (
-        (locationDisplay.convenient / locationDisplay.positive) *
-        100
-      ).toFixed(2);
-      //Ranking point
-      const sortedConvenientPoint =
-        locationDisplay.category.name === "Hotel"
-          ? hotelCategory
-              .map((item) =>
-                ((item.convenient / item.positive) * 100).toFixed(2),
-              )
-              .sort((a, b) => b - a)
-          : restaurantCategory
-              .map((item) =>
-                ((item.convenient / item.positive) * 100).toFixed(2),
-              )
-              .sort((a, b) => b - a);
-      const rank = sortedConvenientPoint.findIndex(
-        (value) => value === convenientPoint,
-      );
-      setComparePoint(convenientPoint);
-      setRank(rank);
-      setCompareBarDataSet([...convenientCompare]);
-    }
-    //yummy points
-    else if (compareLabel === "Yummy") {
-      const yummyCompare = restaurantCategory.map((item) =>
-        ((item.yummy / item.positive) * 100).toFixed(2),
-      );
-      const yummyPoint = (
-        (locationDisplay.yummy / locationDisplay.positive) *
-        100
-      ).toFixed(2);
-      //Ranking point
-      const sortedYummyPoint = restaurantCategory
-        .map((item) => ((item.yummy / item.positive) * 100).toFixed(2))
-        .sort((a, b) => b - a);
-      const rank = sortedYummyPoint.findIndex((value) => value === yummyPoint);
-      setComparePoint(yummyPoint);
-      setRank(rank);
-      setCompareBarDataSet([...yummyCompare]);
-    }
-    //positive points
-    else if (compareLabel === "Positive") {
-      setCompareBarDataSet([...positiveCompare]);
-      setComparePoint(positivePoint);
-      setRank(ranking);
-    }
-  }, [compareLabel, comparePoint, positivePoint, ranking]);
-
-  //
-  const airportDistanceDataSet = hotelCategory.map(
-    (item) => item.airport_distance,
-  );
-
-  const sortedAirportDistance = hotelCategory
-    .map((item) => item.airport_distance)
-    .sort((a, b) => a - b);
-  const airportDistanceRank = sortedAirportDistance.findIndex(
-    (value) => value === locationDisplay.airport_distance,
-  );
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (document.documentElement.scrollTop > 800) {
-        setScrollTopButton(true);
-      } else {
-        setScrollTopButton(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    fetch(`http://localhost:8000/getcomment/${parseInt(filterby)}`)
+      .then((response) => response.json())
+      .then((result) => setAllReview(result.data))
+      .catch((error) => console.error(error));
   }, []);
 
-  const handelAddData = () => {
-    const newData = {
-      id: locationDisplay.id,
-      name: locationDisplay.name,
-      address: locationDisplay.address,
-      url: locationDisplay.url,
-      latitude: locationDisplay.latitude,
-      longitude: locationDisplay.longitude,
-      category: locationDisplay.category.name,
-      day: day,
-    };
-    dispatch(setLocationItem(newData));
-    dispatch(getLocationArray(day));
-    navigate("/tripcreate");
-  };
-
-  const pieData = {
-    labels: ["Positive", "Negative", "Neutral"],
-    datasets: [
-      {
-        data: pieDataSet,
-        backgroundColor: [
-          "rgb(238, 108, 77, 1)",
-          "rgb(23, 161, 205, 1)",
-          "rgba(255, 191, 0, 1)",
-        ],
-        borderColor: [
-          "rgba(255, 255, 255, 1)",
-          "rgba(255, 255, 255, 1)",
-          "rgba(255, 255, 255, 1)",
-        ],
-      },
-    ],
-  };
-
-  const pieOptions = {
-    plugins: {
-      datalabels: {
-        display: true,
-      },
-    },
-  };
-
-  const barData = {
-    labels: barLabels,
-    datasets: [
-      {
-        label: locationDisplay.name,
-        data: barDataSet,
-        backgroundColor: "rgb(238, 108, 77, 1)",
-      },
-    ],
-  };
-
-  const barOptions = {
-    scales: {
-      y: {
-        beginAtZero: true,
-        max: locationDisplay.positive,
-      },
-    },
-  };
-
-  const compareBarData = {
-    labels: compareBarLables,
-    datasets: [
-      {
-        label: compareLabel,
-        data: compareBarDataSet,
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-        hoverBackgroundColor: "#EC932F",
-      },
-    ],
-  };
-
-  const compareBarOptions = {
-    plugins: {
-      datalabels: {
-        display: true,
-        color: "#36A2EB",
-        align: "end",
-        anchor: "end",
-        font: { size: "8" },
-      },
-    },
-    scales: {
-      y: {
-        beginAtZero: true,
-        max: 100,
-      },
-    },
-    onclick: function (event, elements) {
-      if (elements.length > 0) {
-        const barIndex = elements[0]._index;
-        console.log("Clicked on bar", barIndex);
-      }
-    },
-  };
-
-  const airportDistanceBarData = {
-    labels: compareBarLables,
-    datasets: [
-      {
-        label: "airport distance",
-        data: airportDistanceDataSet,
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-        hoverBackgroundColor: "#EC932F",
-      },
-    ],
-  };
-
-  const airportDistanceBarOptions = {
-    scales: {
-      y: {
-        beginAtZero: true,
-        max: 10,
-      },
-    },
-  };
+  console.log(allReview);
 
   return (
-    <div className="mx-8 mt-8 px-[104px]">
+    <div className="mx-8 mt-8 px-[150px]">
       {/* {loginRequiredActive && <LoginRequired active={activeLoginRequired} />} */}
 
       {/* Title */}
@@ -507,6 +182,86 @@ const LocationDetail = () => {
           <div>{locationDisplay.service} service</div>
         </div>
       </div>
+
+      <div className="my-[64px] h-[1px] w-full bg-[#ccc]"></div>
+      {/* Amenities */}
+      <div className="mb-[32px] text-[20px] font-[640]">Amenities</div>
+      <div className="flex w-1/2 justify-between">
+        <div className="flex flex-col">
+          <div className="flex font-[500]">
+            <FaLeaf className="mb-[24px] mr-[5px] text-[20px]" />
+            Spa and wellness center
+          </div>
+          <div className="flex font-[500]">
+            <IoIosFitness className="mb-[24px] mr-[5px] text-[20px]" />
+            Fitness center
+          </div>
+          <div className="flex font-[500]">
+            <RiCupFill className="mb-[24px] mr-[5px] text-[20px]" />
+            Tea/coffee machine
+          </div>
+          <div className="flex font-[500]">
+            <IoWine className="mb-[24px] mr-[5px] text-[20px]" />
+            Bar/Lounge
+          </div>
+        </div>
+        <div className="flex flex-col">
+          <div className="flex font-[500]">
+            <MdOutlineRoomService className="mb-[24px] mr-[5px] text-[20px]" />
+            Room service
+          </div>
+          <div className="flex font-[500]">
+            <MdOutlinePool className="mb-[24px] mr-[5px] text-[20px]" />
+            Outdoor pool
+          </div>
+          <div className="flex font-[500]">
+            <MdOutlineRestaurant className="mb-[24px] mr-[5px] text-[20px]" />
+            Restaurant
+          </div>
+          <div className="flex font-[500] text-[#FF7757]">+24 more</div>
+        </div>
+      </div>
+
+      <div className="my-[64px] h-[1px] w-full bg-[#ccc]"></div>
+      {/* map */}
+      <div>
+        <div className="mb-[32px] flex justify-between">
+          <div className="flex text-[20px] font-[640]">
+            <div>Location/Map</div>
+            <div className="ml-[15px] flex items-center text-[16px]">
+              <span className="mr-[5px]">
+                <FaLocationDot />
+              </span>
+              {locationDisplay.address}
+            </div>
+          </div>
+          <div className="rounded bg-[#FF7757] px-[16px] py-[8px] text-white hover:opacity-70">
+            View on google maps
+          </div>
+        </div>
+        <div>
+          <Map />
+        </div>
+      </div>
+
+      <div className="mb-[64px] mt-[-100px] h-[1px] w-full bg-[#ccc]"></div>
+      {/* review */}
+      <div className="mb-[32px] flex justify-between">
+        <div className="flex text-[20px] font-[640]">
+          <div>Reviews</div>
+        </div>
+        <div className="rounded bg-[#FF7757] px-[16px] py-[8px] text-white hover:opacity-70">
+          Give your review
+        </div>
+      </div>
+      <div className="flex">
+        <div className="mr-[8px] text-[50px] font-bold">4.2</div>
+        <div className="flex flex-col justify-around py-[12px]">
+          <div className="text-[20px] font-[600]">Very good</div>
+          <div className="text-[14px] font-[400]">371 verified reviews</div>
+        </div>
+      </div>
+      <div className="my-[24px] h-[1px] w-full bg-[#ccc]"></div>
     </div>
   );
 };

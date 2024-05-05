@@ -13,6 +13,8 @@ import { RxPencil2 } from "react-icons/rx";
 
 const AITripResult = () => {
   const location = useLocation();
+  console.log("sadasdas");
+  console.log(location);
   const navigate = useNavigate();
   const tripData = location?.state;
 
