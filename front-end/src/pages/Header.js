@@ -5,6 +5,7 @@ import avt from "../assets/img/avt.jpg";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutRedux } from "../redux/userSlice";
 import { MdAdminPanelSettings } from "react-icons/md";
+import { RiVipDiamondFill } from "react-icons/ri";
 import toast from "react-hot-toast";
 import {
   FaBed,
@@ -159,15 +160,15 @@ const Header = () => {
                         to="userprofile"
                       >
                         <li className="mb-[16px] flex items-center">
-                          <FaUser className="mr-[8px] h-[18px] w-[18px]" /> My
-                          account
+                          <FaUser className="mr-[8px] h-[18px] w-[18px]" />
+                          My account
                         </li>
                         <FaChevronRight />
                       </NavLink>
-                      <NavLink className="flex justify-between" to="/">
+                      <NavLink className="flex justify-between" to="/UpgradePremium">
                         <li className="mb-[16px] flex items-center">
-                          <FaWallet className="mr-[8px] h-[18px] w-[18px]" />{" "}
-                          Payment
+                          <RiVipDiamondFill className="mr-[8px] h-[18px] w-[18px]" />{" "}
+                          Go Premium
                         </li>
                         <FaChevronRight />
                       </NavLink>
@@ -187,7 +188,7 @@ const Header = () => {
                         <NavLink to='/contactus' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">Contact Us</NavLink>
                       </div> */}
 
-                      <NavLink className="flex justify-between" to="/">
+                      <NavLink className="flex justify-between" to="/contactus">
                         <li className="mb-[16px] flex items-center">
                           <MdOutlineSupportAgent className="mr-[8px] h-[23px] w-[23px]" />{" "}
                           Support

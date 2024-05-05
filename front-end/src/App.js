@@ -24,6 +24,8 @@ import AdminDashBoardTemplate from "./components/Admin/DashBoardContent/AdminDas
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import AiTripCreate from "./pages/AiTripCreate";
 import AITripResult from "./pages/AITripResult";
+import SubscriptionPlan from "./pages/SubscriptionPlan";
+
 /*App là nơi chứa cách hoạt động của các Router 
 nơi điều khiển các component sẽ render khi gặp tên đường link tương ứng
 */
@@ -48,6 +50,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path="tripcreateAI" element={< AiTripCreate />}></ Route>
       <Route path="tripresultAI" element={<AITripResult />}></Route>
+      <Route path="UpgradePremium" element={< SubscriptionPlan />}></ Route>
     </Route >
   )
 )
