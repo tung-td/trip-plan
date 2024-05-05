@@ -59,7 +59,7 @@ const Header = () => {
   }, [showMenu]);
 
   return (
-    <header>
+    <header className="shadow-sm">
       <nav className="h-[87px] w-full bg-white px-[166px]">
         <div
           className="mx-auto flex h-[87px] w-full items-center justify-between"
@@ -79,6 +79,13 @@ const Header = () => {
               onClick={() => handleNavLinkClick("/mytrip")}
             >
               <FaPlane className="mr-[10px] text-[19px]" /> My Trips
+            </NavLink>
+            <NavLink
+              to="/tripcreateAI"
+              className={`mr-[32px] flex bg-transparent font-bold text-black ${activeLink === "/tripcreateAI" ? "active-link" : ""} flex items-center leading-[84px]`}
+              onClick={() => handleNavLinkClick("/tripcreateAI")}
+            >
+              <FaPlane className="mr-[10px] text-[19px]" /> Build Trip AI
             </NavLink>
           </div>
 
@@ -115,7 +122,7 @@ const Header = () => {
                 </span>
                 {showMenu && (
                   <div className="absolute right-[30px] top-[50px] z-50 flex w-[329px] flex-col rounded-[8px] bg-white p-[32px] shadow-lg">
-                    <ul className=" w-full text-base font-normal ">
+                    <ul className="w-full p-[0px] text-base font-normal">
                       <div className="relative flex cursor-pointer items-center">
                         <img
                           src={avt}
@@ -123,14 +130,14 @@ const Header = () => {
                           className="mr-[16px] h-[64px] w-[64px] rounded-full"
                         />
                         <div className="flex flex-col">
-                          <p className="ml-[5px] text-[16px] font-bold capitalize">
+                          <p className="mb-[5px] ml-[5px] text-[16px] font-bold capitalize">
                             {userData.user}
                           </p>
                           <div className="ml-[7px] flex items-center">
                             <div className="h-[10px] w-[10px] rounded-full bg-green-500">
                               .
                             </div>
-                            <p className="ml-[5px] text-[16px] capitalize">
+                            <p className="mb-[4px] ml-[5px] text-[16px] capitalize">
                               Online
                             </p>
                           </div>
@@ -147,21 +154,21 @@ const Header = () => {
                           <FaUser className="mr-[8px] h-[18px] w-[18px]" /> My
                           account
                         </li>
-                        <FaChevronRight />
+                        <FaChevronRight className="mt-[5px]" />
                       </NavLink>
                       <NavLink className="flex justify-between" to="/">
                         <li className="mb-[16px] flex items-center">
                           <FaWallet className="mr-[8px] h-[18px] w-[18px]" />{" "}
                           Payment
                         </li>
-                        <FaChevronRight />
+                        <FaChevronRight className="mt-[5px]" />
                       </NavLink>
                       <NavLink className="flex justify-between" to="/">
                         <li className="mb-[16px] flex items-center">
                           <FaGear className="mr-[8px] h-[18px] w-[18px]" />{" "}
                           Settings
                         </li>
-                        <FaChevronRight />
+                        <FaChevronRight className="mt-[5px]" />
                       </NavLink>
 
                       {/* Các tiêu đề SeePost Discover About us */}
@@ -177,7 +184,7 @@ const Header = () => {
                           <MdOutlineSupportAgent className="mr-[8px] h-[23px] w-[23px]" />{" "}
                           Support
                         </li>
-                        <FaChevronRight />
+                        <FaChevronRight className="mt-[5px]" />
                       </NavLink>
 
                       <li

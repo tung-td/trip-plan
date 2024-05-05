@@ -50,8 +50,7 @@ const AiTripCreate = () => {
     setActivities(selectedActivities);
   };
 
-  const promptText = `Lập kế hoạch du lịch ${destination} từ ${startDate} đến ${endDate} là ${dayLength} ngày cho ${travelers} người, ${activities.join(", ")}. **Yêu cầu:** * ${startDate} - ${endDate} * ${travelers} * Chủ đề: ${activities}, danh lam thắng cảnh * Địa điểm: ${destination} **Mong muốn:** * Lịch trình chi tiết ${startDate} - ${endDate}: Ngày x: Giới thiệu địa điểm buổi sáng: * Buổi sáng: Tham quan, hoạt động vui chơi, nhà hàng. * Buổi chiều: Tham quan, hoạt động vui chơi, nhà hàng. * Buổi tối: Hoạt động vui chơi, nhà hàng`;
-
+  const promptText = `Lập kế hoạch du lịch ${destination} ${dayLength} ngày từ ${startDate} đến ${endDate} cho ${travelers} người, ${activities.join(", ")}. Yêu cầu: *  ${dayLength} ngày * ${travelers} người * Chủ đề: ${activities.join(", ")} * Địa điểm: ${destination}`;
   const handleSubmit = () => {
     setLoading(true);
     fetch("http://localhost:4000/googleAi/generateGemini", {

@@ -97,7 +97,7 @@ const AITripResult = () => {
                             </div>
                             <div className="mb-[40px] mt-[6px] w-full border-b pb-[10px]">
                               <h4
-                                className="mb-[12px] flex items-center text-[18px] font-[640] hover:underline"
+                                className="mb-[12px] flex items-center text-[18px] font-[640] hover:cursor-pointer hover:underline"
                                 onClick={() => toggleDescription(index)}
                               >
                                 <div className="mr-[7px]">
