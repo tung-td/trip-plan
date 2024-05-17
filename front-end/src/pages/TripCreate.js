@@ -53,12 +53,16 @@ const TripCreate = () => {
     if (data) {
       const token = localStorage.getItem("accessToken");
       try {
-        const response = await axios.post(`${tripCreateAPI}tripcreate/`, data, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+        const response = await axios.post(
+          `${tripCreateAPI}trip/create/`,
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
+        );
 
         const dataRes = response.data;
 

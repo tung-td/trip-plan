@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "chartjs-plugin-datalabels";
-
 import { useParams, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { setLocationItem, getLocationArray } from "../redux/tripSlice";
 
 import { FaStar, FaLeaf, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 import { FaLocationDot, FaRegHeart } from "react-icons/fa6";
@@ -24,6 +22,8 @@ import Map from "../components/Trip_Create_Component/TripCreateCard/Map";
 import avatar from "../assets/img/avt.jpg";
 import Footer from "../components/Home_Components/Footer";
 
+import ReviewForm from "../components/Location_Detail_Component/ReviewForm";
+
 const LocationDetail = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,6 +32,7 @@ const LocationDetail = () => {
   const activeStatus = useSelector((state) => state.tripCreate.active);
   const day = useSelector((state) => state.tripCreate.day);
   const [allReview, setAllReview] = useState([]);
+  const [showReviewForm, setShowReviewForm] = useState(false);
 
   const { filterby } = useParams();
   const locationDetail = useSelector((state) => state.location.locationList);
@@ -40,15 +41,43 @@ const LocationDetail = () => {
     (location) => location.id === parseInt(filterby),
   )[0];
 
-  console.log("location");
-  console.log(locationDisplay);
-
   useEffect(() => {
-    fetch(`http://localhost:8000/getcomment/${parseInt(filterby)}`)
+    fetch(`http://localhost:8000/comment/location/${parseInt(filterby)}`)
       .then((response) => response.json())
-      .then((result) => setAllReview(result.data))
+      .then((result) => {
+        console.log("comment", result);
+        setAllReview(result.data);
+      })
       .catch((error) => console.error(error));
-  }, []);
+  }, [filterby]);
+
+  const handleReviewSubmit = (review) => {
+    const raw = JSON.stringify({
+      user_id: review.userID,
+      location_id: review.locationID,
+      rating: review.ratingRV,
+      text: review.text,
+      date: review.date,
+    });
+
+    fetch("http://localhost:8000/comment/createcomment/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "X-CSRFToken":
+          "Ue2Ic3ErTRiN2MzcjXdhVpO8AVx4XDfCPcMgVz87WRfvHAge2wsx7Wa5uw7ZXJ3g",
+      },
+      body: raw,
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        // Cập nhật danh sách review nếu cần thiết
+        setAllReview((prevReviews) => [...prevReviews, result.data]);
+      })
+      .catch((error) => console.error("Error:", error));
+  };
 
   const stars = (index) => {
     const star = [];
@@ -90,8 +119,6 @@ const LocationDetail = () => {
 
     return star;
   };
-
-  console.log(allReview);
 
   return (
     <div className="">
@@ -292,9 +319,12 @@ const LocationDetail = () => {
           <div className="flex text-[20px] font-[640]">
             <div>Reviews</div>
           </div>
-          <div className="cursor-pointer rounded bg-[#FF7757] px-[16px] py-[8px] text-white hover:opacity-70">
+          <button
+            className="rounded bg-[#FF7757] px-[20px] py-[8px] text-white hover:opacity-70"
+            onClick={() => setShowReviewForm(true)}
+          >
             Give your review
-          </div>
+          </button>
         </div>
         <div className="flex">
           <div className="mr-[8px] text-[50px] font-bold">4.2</div>
@@ -303,6 +333,8 @@ const LocationDetail = () => {
             <div className="text-[14px] font-[400]">371 verified reviews</div>
           </div>
         </div>
+
+        {/* Show Review */}
         {allReview.map((review) => (
           <div key={review.id} className=" relative">
             <div className="my-[24px] h-[1px] w-full bg-[#ccc]"></div>
@@ -315,7 +347,7 @@ const LocationDetail = () => {
               <div className="flex flex-col">
                 <div className="mb-[8px] flex">
                   <div className="flex items-center text-[17px] font-[600]">
-                    {stars(review.id)}
+                    {stars(review.id - 1)}
                   </div>
                   <div className="mx-[8px] text-[14px] font-[400]">|</div>
                   <div className="text-[14px] font-[400] capitalize">
@@ -329,6 +361,17 @@ const LocationDetail = () => {
           </div>
         ))}
         <div className="my-[24px] mb-[60px] h-[1px] w-full bg-[#ccc]"></div>
+
+        {/* Show form submit review */}
+        {showReviewForm && (
+          <ReviewForm
+            onSubmit={handleReviewSubmit}
+            onClose={() => setShowReviewForm(false)}
+            userID={user_id}
+            day={day}
+            locationID={parseInt(filterby)}
+          />
+        )}
       </div>
 
       {/* footer */}

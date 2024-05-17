@@ -50,6 +50,13 @@ const AiTripCreate = () => {
     setActivities(selectedActivities);
   };
 
+  function formatDateToYYYYMMDD(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
   const promptText = `Lập kế hoạch du lịch ${destination} ${dayLength} ngày từ ${startDate} đến ${endDate} cho ${travelers} người, ${activities.join(", ")}. Yêu cầu: *  ${dayLength} ngày * ${travelers} người * Chủ đề: ${activities.join(", ")} * Địa điểm: ${destination}`;
   const handleSubmit = () => {
     setLoading(true);
@@ -61,8 +68,8 @@ const AiTripCreate = () => {
       body: JSON.stringify({
         prompt: promptText,
         destination: destination,
-        startDate: startDate,
-        endDate: endDate,
+        startDate: formatDateToYYYYMMDD(startDate),
+        endDate: formatDateToYYYYMMDD(endDate),
         dayLength: dayLength,
         travelers: travelers,
         activities: activities,
@@ -70,18 +77,23 @@ const AiTripCreate = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        navigate("/tripresultAI", {
-          state: {
-            tripData: data,
-            destination: destination,
-            startDate: startDate,
-            endDate: endDate,
-            dayLength: dayLength,
-            travelers: travelers,
-            activities: activities,
-            promptText: promptText,
-          },
-        });
+        console.log("hsajdjksjdas", data);
+        if (data.statusCode == 500) {
+          alert("Please submit again");
+        } else {
+          navigate("/tripresultAI", {
+            state: {
+              tripData: data,
+              destination: destination,
+              startDate: formatDateToYYYYMMDD(startDate),
+              endDate: formatDateToYYYYMMDD(endDate),
+              dayLength: dayLength,
+              travelers: travelers,
+              activities: activities,
+              promptText: promptText,
+            },
+          });
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
