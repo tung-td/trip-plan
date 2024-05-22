@@ -85,7 +85,7 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
                         // suffix={<span className="badge red">new</span>}
                         >
                             Manage Locations
-                            <Link to="#" />
+                            <Link to="/admin-dashboard/manage-locations" />
                         </MenuItem>
                     </Menu>
 

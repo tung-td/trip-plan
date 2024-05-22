@@ -11,8 +11,8 @@ body {
 }
 
 a {
-  text-decoration: unset !important;
   color: #000 !important;
+  text-decoration: none !important;
 }
 
 code {

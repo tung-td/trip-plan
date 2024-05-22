@@ -21,6 +21,8 @@ import ContactUs from "./pages/ContactUs";
 import MessengerCustomerChat from 'react-messenger-customer-chat';
 import Admin from "./components/Admin/Admin";
 import AdminDashBoardTemplate from "./components/Admin/DashBoardContent/AdminDashBoardTemplate";
+import AdminManageLocations from "./components/Admin/DashBoardContent/AdminManageLocations";
+import AdminManageLocationDetail from "./components/Admin/DashBoardContent/AdminManageLocationDetail/AdminManageLocationDetail";
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import AiTripCreate from "./pages/AiTripCreate";
 import AITripResult from "./pages/AITripResult";
@@ -47,6 +49,8 @@ const router = createBrowserRouter(
       <Route path="contactus" element={<ContactUs />}></Route>
       <Route path="admin-dashboard/" element={<Admin />}>
         <Route index path="admin-DB" element={<AdminDashBoardTemplate />} />
+        <Route index path="manage-locations" element={<AdminManageLocations />} />
+        <Route index path="manage-location/:filterby" element={<AdminManageLocationDetail />} />
       </Route>
       <Route path="tripcreateAI" element={< AiTripCreate />}></ Route>
       <Route path="tripresultAI" element={<AITripResult />}></Route>
