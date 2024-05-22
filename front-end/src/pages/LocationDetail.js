@@ -304,9 +304,13 @@ const LocationDetail = () => {
                 {locationDisplay.address}
               </div>
             </div>
-            <div className="rounded bg-[#FF7757] px-[16px] py-[8px] text-white hover:opacity-70">
+            <a
+              className="rounded bg-[#FF7757] px-[16px] py-[8px] text-white hover:opacity-70"
+              href="https://www.google.com/maps"
+              target="_blank"
+            >
               View on google maps
-            </div>
+            </a>
           </div>
           <div className="mb-[168px]">
             <Map />

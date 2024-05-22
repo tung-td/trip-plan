@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { logoutRedux } from "../redux/userSlice";
 import toast from "react-hot-toast";
 import {
+  FaStar,
   FaBed,
   FaPlane,
   FaHeart,
@@ -16,6 +17,9 @@ import {
 import { FaGear } from "react-icons/fa6";
 import { MdOutlineSupportAgent } from "react-icons/md";
 import { IoLogOut } from "react-icons/io5";
+import { SlNote } from "react-icons/sl";
+import { FaBook } from "react-icons/fa";
+import { IoBookmarksSharp } from "react-icons/io5";
 
 const Header = () => {
   const location = useLocation();
@@ -68,21 +72,21 @@ const Header = () => {
           <div className="flex w-1/3 items-center font-semibold">
             <NavLink
               to="/"
-              className={`mr-[32px] flex bg-transparent font-bold text-black ${activeLink === "/" ? "active-link" : ""} flex items-center leading-[84px]`}
+              className={`mr-[32px] flex border-b-[5px] border-[transparent] bg-transparent font-bold text-black ${activeLink === "/" ? "active-link" : ""} flex items-center leading-[84px]`}
               onClick={() => handleNavLinkClick("/")}
             >
               <FaBed className="mr-[10px] text-[19px]" /> Finds Stays
             </NavLink>
             <NavLink
               to="/tripcreate"
-              className={`mr-[32px] flex bg-transparent font-bold text-black ${activeLink === "/mytrip" ? "active-link" : ""} flex items-center leading-[84px]`}
+              className={`mr-[32px] flex border-b-[5px] border-[transparent] bg-transparent font-bold text-black ${activeLink === "/mytrip" ? "active-link" : ""} flex items-center leading-[84px]`}
               onClick={() => handleNavLinkClick("/mytrip")}
             >
-              <FaPlane className="mr-[10px] text-[19px]" /> My Trips
+              <FaStar className="mr-[10px] text-[19px]" /> My Trips
             </NavLink>
             <NavLink
               to="/tripcreateAI"
-              className={`mr-[32px] flex bg-transparent font-bold text-black ${activeLink === "/tripcreateAI" ? "active-link" : ""} flex items-center leading-[84px]`}
+              className={`mr-[32px] flex border-b-[5px] border-[transparent] bg-transparent font-bold text-black ${activeLink === "/tripcreateAI" ? "active-link" : ""} flex items-center leading-[84px]`}
               onClick={() => handleNavLinkClick("/tripcreateAI")}
             >
               <FaPlane className="mr-[10px] text-[19px]" /> Build Trip AI
@@ -178,14 +182,6 @@ const Header = () => {
                         <NavLink to='/mytrip' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">My Trips</NavLink>
                         <NavLink to='/contactus' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">Contact Us</NavLink>
                       </div> */}
-
-                      <NavLink className="flex justify-between" to="/">
-                        <li className="mb-[16px] flex items-center">
-                          <MdOutlineSupportAgent className="mr-[8px] h-[23px] w-[23px]" />{" "}
-                          Support
-                        </li>
-                        <FaChevronRight className="mt-[5px]" />
-                      </NavLink>
 
                       <li
                         className="flex items-center hover:text-red-600"

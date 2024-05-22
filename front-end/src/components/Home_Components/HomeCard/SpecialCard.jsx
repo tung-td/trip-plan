@@ -36,7 +36,7 @@ const SpecialCard = (props) => {
         <p className="text-[19px] font-bold opacity-50">International Hotels</p>
         <h5 className="text-[25px] font-bold">{props.name}</h5>
         <p className="text-[16px] opacity-70">
-          Make the most of this deal on your first booking with trxvl.
+          Make the most of this deal on your first booking with travel.
         </p>
         <button className="rounded-[38px] bg-[#FF7757] px-[28px] py-[15px] font-bold text-white">
           Book now

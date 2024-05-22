@@ -9,6 +9,8 @@ import sight from "../../../assets/Map/sight.png";
 import Loading from "../../Loading_Component/Loading";
 import axios from "axios";
 import { storeTempLocations } from "../../../redux/tripSlice";
+import { MdSwapVerticalCircle } from "react-icons/md";
+import { FaClockRotateLeft } from "react-icons/fa6";
 
 import {
   updatedLocationOrder,
@@ -36,7 +38,6 @@ const Map = () => {
 
   const locationList = useSelector((state) => state.tripCreate.markerList);
   const itemIndex = useSelector((state) => state.tripCreate.index);
-  console.log("im here");
 
   useEffect(() => {
     // Initialize map only once
@@ -413,8 +414,8 @@ const Map = () => {
     setShowDistance(false);
   };
   return (
-    <div className="relative h-[78vh]">
-      <div ref={mapContainer} className="h-[78vh] w-full">
+    <div className="relative h-[94vh]">
+      <div ref={mapContainer} className="h-[94vh] w-full">
         {routeInfo && (
           <>
             {showDistance && (
@@ -497,16 +498,16 @@ const Map = () => {
       </div>
       {locationList.length > 1 &&
         (showCalculateDistance ? (
-          <div className="absolute bottom-8 left-0 z-50 flex w-full items-center justify-between">
+          <div className="absolute right-[10px] top-[15px] z-50 flex">
             <button
-              className=" w-full border bg-green-600 px-4 py-4 font-semibold text-white hover:bg-green-700"
+              className="rounded-full bg-white p-[10px] text-[25px] font-semibold text-black hover:opacity-90"
               onClick={handleGetDirection}
             >
-              Calculate Distance
+              <FaClockRotateLeft />
             </button>
           </div>
         ) : (
-          <div className="absolute bottom-8 left-0 z-50 flex w-full items-center justify-between">
+          <div className="absolute bottom-1 z-50 flex w-[100%]">
             <button className="jumping-button" onClick={handleOptimizing}>
               Optimizing
             </button>

@@ -140,7 +140,7 @@ const AITripResult = () => {
               </>
             )}
           </div>
-          <div className="sticky top-20 h-[78vh] w-[40%] py-[30px]">
+          <div className="sticky top-0 h-[78vh] w-[50%] py-[30px]">
             <Map />
           </div>
         </div>

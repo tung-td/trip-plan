@@ -6,6 +6,7 @@ import Step3 from "../components/CreateAI_Component/Step3";
 import Step4 from "../components/CreateAI_Component/Step4";
 
 import ReactLoading from "react-loading";
+import { IoCloseOutline } from "react-icons/io5";
 
 const AiTripCreate = () => {
   const [step, setStep] = useState(1);
@@ -151,6 +152,15 @@ const AiTripCreate = () => {
     <div className="flex flex-col items-center">
       <div className="flex w-full justify-center border-b p-[35px]">
         Powered by AI
+      </div>
+
+      <div
+        className="absolute right-[30px] top-[30px] text-[30px] hover:cursor-pointer"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        <IoCloseOutline />
       </div>
 
       {renderStep()}
