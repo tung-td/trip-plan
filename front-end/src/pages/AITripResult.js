@@ -13,6 +13,8 @@ import { RxPencil2 } from "react-icons/rx";
 
 const AITripResult = () => {
   const location = useLocation();
+  console.log("sadasdas");
+  console.log(location);
   const navigate = useNavigate();
   const tripData = location?.state;
 
@@ -97,7 +99,7 @@ const AITripResult = () => {
                             </div>
                             <div className="mb-[40px] mt-[6px] w-full border-b pb-[10px]">
                               <h4
-                                className="mb-[12px] flex items-center text-[18px] font-[640] hover:underline"
+                                className="mb-[12px] flex items-center text-[18px] font-[640] hover:cursor-pointer hover:underline"
                                 onClick={() => toggleDescription(index)}
                               >
                                 <div className="mr-[7px]">
@@ -138,7 +140,7 @@ const AITripResult = () => {
               </>
             )}
           </div>
-          <div className="sticky top-20 h-[78vh] w-[40%] py-[30px]">
+          <div className="sticky top-0 h-[78vh] w-[50%] py-[30px]">
             <Map />
           </div>
         </div>

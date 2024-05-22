@@ -6,6 +6,7 @@ import Step3 from "../components/CreateAI_Component/Step3";
 import Step4 from "../components/CreateAI_Component/Step4";
 
 import ReactLoading from "react-loading";
+import { IoCloseOutline } from "react-icons/io5";
 
 const AiTripCreate = () => {
   const [step, setStep] = useState(1);
@@ -50,8 +51,14 @@ const AiTripCreate = () => {
     setActivities(selectedActivities);
   };
 
-  const promptText = `Lập kế hoạch du lịch ${destination} từ ${startDate} đến ${endDate} là ${dayLength} ngày cho ${travelers} người, ${activities.join(", ")}. **Yêu cầu:** * ${startDate} - ${endDate} * ${travelers} * Chủ đề: ${activities}, danh lam thắng cảnh * Địa điểm: ${destination} **Mong muốn:** * Lịch trình chi tiết ${startDate} - ${endDate}: Ngày x: Giới thiệu địa điểm buổi sáng: * Buổi sáng: Tham quan, hoạt động vui chơi, nhà hàng. * Buổi chiều: Tham quan, hoạt động vui chơi, nhà hàng. * Buổi tối: Hoạt động vui chơi, nhà hàng`;
+  function formatDateToYYYYMMDD(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
 
+  const promptText = `Lập kế hoạch du lịch ${destination} ${dayLength} ngày từ ${startDate} đến ${endDate} cho ${travelers} người, ${activities.join(", ")}. Yêu cầu: *  ${dayLength} ngày * ${travelers} người * Chủ đề: ${activities.join(", ")} * Địa điểm: ${destination}`;
   const handleSubmit = () => {
     setLoading(true);
     fetch("http://localhost:4000/googleAi/generateGemini", {
@@ -62,8 +69,8 @@ const AiTripCreate = () => {
       body: JSON.stringify({
         prompt: promptText,
         destination: destination,
-        startDate: startDate,
-        endDate: endDate,
+        startDate: formatDateToYYYYMMDD(startDate),
+        endDate: formatDateToYYYYMMDD(endDate),
         dayLength: dayLength,
         travelers: travelers,
         activities: activities,
@@ -71,18 +78,23 @@ const AiTripCreate = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        navigate("/tripresultAI", {
-          state: {
-            tripData: data,
-            destination: destination,
-            startDate: startDate,
-            endDate: endDate,
-            dayLength: dayLength,
-            travelers: travelers,
-            activities: activities,
-            promptText: promptText,
-          },
-        });
+        console.log("hsajdjksjdas", data);
+        if (data.statusCode == 500) {
+          alert("Please submit again");
+        } else {
+          navigate("/tripresultAI", {
+            state: {
+              tripData: data,
+              destination: destination,
+              startDate: formatDateToYYYYMMDD(startDate),
+              endDate: formatDateToYYYYMMDD(endDate),
+              dayLength: dayLength,
+              travelers: travelers,
+              activities: activities,
+              promptText: promptText,
+            },
+          });
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -140,6 +152,15 @@ const AiTripCreate = () => {
     <div className="flex flex-col items-center">
       <div className="flex w-full justify-center border-b p-[35px]">
         Powered by AI
+      </div>
+
+      <div
+        className="absolute right-[30px] top-[30px] text-[30px] hover:cursor-pointer"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        <IoCloseOutline />
       </div>
 
       {renderStep()}

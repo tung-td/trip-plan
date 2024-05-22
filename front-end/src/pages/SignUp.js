@@ -35,7 +35,7 @@ export const SignUp = () => {
     const { first_name, last_name, email, password, confirmPassword } = data;
     if (first_name && last_name && email && password && confirmPassword) {
       if (password === confirmPassword) {
-        const fetchData = await fetch(`${API}signup/`, {
+        const fetchData = await fetch(`${API}/user/signup/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -105,7 +105,7 @@ export const SignUp = () => {
                   placeholder="Name"
                   value={data.first_name}
                   onChange={handleOnchange}
-                  className="mb-5 mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
+                  className="mb-[1.5rem] mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
                 />
               </div>
               <div className="ml-5 flex-1">
@@ -117,7 +117,7 @@ export const SignUp = () => {
                   placeholder="Name"
                   value={data.last_name}
                   onChange={handleOnchange}
-                  className="mb-5 mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
+                  className="mb-[1.5rem] mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
                 />
               </div>
             </div>
@@ -130,7 +130,7 @@ export const SignUp = () => {
               value={data.username}
               onChange={handleOnchange}
               placeholder="User name"
-              className="mb-5 mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
+              className="mb-[1.5rem] mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
             />
             {/* Email */}
             <label className=" font-medium text-slate-700">Email</label>
@@ -141,7 +141,7 @@ export const SignUp = () => {
               value={data.email}
               onChange={handleOnchange}
               placeholder="Email"
-              className="mb-5 mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
+              className="mb-[1.5rem] mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
             />
             {/* Password */}
             <label className=" font-medium text-slate-700">Password</label>
@@ -153,7 +153,7 @@ export const SignUp = () => {
                 value={data.password}
                 onChange={handleOnchange}
                 placeholder="Password"
-                className="mb-5 mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
+                className="mb-[1.5rem] mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
               />
               <span
                 className="absolute right-[35px] top-[22px] flex cursor-pointer text-[25px]"
@@ -175,7 +175,7 @@ export const SignUp = () => {
                 value={data.confirmPassword}
                 onChange={handleOnchange}
                 placeholder="Password"
-                className="mb-5 mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
+                className="mb-[1.5rem] mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
               />
               <span
                 className="absolute right-[35px] top-[22px] flex cursor-pointer text-[25px]"

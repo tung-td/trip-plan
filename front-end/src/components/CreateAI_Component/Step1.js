@@ -33,16 +33,19 @@ const Step1 = ({ nextStep, onDestinationChange }) => {
         onChange={handleInputChange}
       />
       {/* Hiển thị dropdown chỉ khi có kết quả và không phải là Đà Nẵng hoặc Da Nang */}
-      {searchInput.length > 0 &&
-        filteredDestinations.map((result, index) => (
-          <div
-            key={index}
-            className="cursor-pointer px-4 py-2 hover:bg-gray-100"
-            onClick={() => handleSelectDestination(result)}
-          >
-            {result}
-          </div>
-        ))}
+      {searchInput.length > 0 && (
+        <div className="absolute z-10 mt-[5rem] w-[30%] rounded-[15px] border bg-white py-[1rem] shadow-lg">
+          {filteredDestinations.map((result, index) => (
+            <div
+              key={index}
+              className="cursor-pointer px-4 py-2 hover:bg-gray-100"
+              onClick={() => handleSelectDestination(result)}
+            >
+              {result}
+            </div>
+          ))}
+        </div>
+      )}
 
       <div className="w-full px-[28%]">
         <p className="mt-[96px] text-[24px] font-[600]">Popular destinations</p>

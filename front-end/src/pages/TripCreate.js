@@ -53,12 +53,16 @@ const TripCreate = () => {
     if (data) {
       const token = localStorage.getItem("accessToken");
       try {
-        const response = await axios.post(`${tripCreateAPI}tripcreate/`, data, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
+        const response = await axios.post(
+          `${tripCreateAPI}trip/create/`,
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
           },
-        });
+        );
 
         const dataRes = response.data;
 
@@ -103,7 +107,7 @@ const TripCreate = () => {
   //   Map
 
   return (
-    <div className="mx-8 flex">
+    <div className="flex px-[166px]">
       {isActive && <TripCreateModel active={handleActive} />}
       {cancelIsActive && <TripCancel active={handleCancelActive} />}
       <div className="mx-8 w-2/3">
@@ -124,20 +128,20 @@ const TripCreate = () => {
         </div>
         <div className="mb-10 flex items-center border-t border-t-slate-900 py-5">
           <button
-            onClick={handleTripCreate}
-            className="mt-5 rounded-lg border border-slate-700 px-6 py-2 text-base font-bold text-slate-800 hover:bg-slate-900 hover:text-white"
-          >
-            Complete
-          </button>
-          <button
             onClick={handleCancelActive}
-            className="ml-12 mt-5 rounded-lg border border-slate-700 px-6 py-2 text-base font-bold text-slate-800 hover:bg-slate-900 hover:text-white"
+            className="mt-5 rounded-lg border border-slate-700 px-6 py-2 text-base font-bold text-slate-800 hover:bg-slate-900 hover:text-white"
           >
             Cancel
           </button>
+          <button
+            onClick={handleTripCreate}
+            className="ml-12 mt-5 rounded-lg border border-slate-700 px-6 py-2 text-base font-bold text-slate-800 hover:bg-slate-900 hover:text-white"
+          >
+            Complete
+          </button>
         </div>
       </div>
-      <div className="sticky top-4 mx-8 mb-8 h-full w-1/3 overflow-hidden rounded-lg ">
+      <div className="sticky top-4 mx-8 mb-8 mt-[34px] h-full w-1/2 overflow-hidden rounded-lg">
         <Map />
       </div>
     </div>

@@ -45,7 +45,7 @@ export const tripSlice = createSlice({
             state.day = action.payload
             console.log(state.day)
         },
-        setLocationItem: (state, action) => {
+        setLocationItem: (state, action) => { // Tripcreate
             const location = action.payload
             const day = location.day
             const findDay = state.items.find((item) => item.day === day);
