@@ -9,7 +9,7 @@ const initialState = {
     avatar: "",
     address: "",
     phone: "",
-    isAdmin: ""
+    is_superuser: ""
 }
 
 export const userSlice = createSlice({
@@ -25,7 +25,7 @@ export const userSlice = createSlice({
             state.last_name = action.payload.user.last_name
             state.avatar = action.payload.user.avatar
             // state.isAdmin = action.payload.user.role === "ADMIN" ? "ADMIN" : "USER"
-            state.isAdmin = action.payload.user.role === "" ? "ADMIN" : "ADMIN"
+            state.is_superuser = action.payload.user.is_superuser === true ? "ADMIN" : "USER"
         },
         logoutRedux: (state, action) => {
             state.email = ""

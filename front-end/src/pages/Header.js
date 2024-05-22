@@ -95,8 +95,8 @@ const Header = () => {
               <FaPlane className="mr-[10px] text-[19px]" /> Build Trip AI
             </NavLink>
 
-
-            {userData.isAdmin === "ADMIN" && (
+            {/* Check isAdmin */}
+            {userData.is_superuser === "ADMIN" && (
               <NavLink
                 className={`mr-[32px] flex bg-transparent font-bold text-black ${activeLink === "/adminDB" ? "active-link" : ""} flex items-center leading-[84px]`}
                 to="/admin-dashboard"
