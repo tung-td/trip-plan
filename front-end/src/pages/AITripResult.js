@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Map from "../components/Trip_Create_Component/TripCreateCard/Map";
 import Typist from "react-typist";
@@ -11,10 +11,20 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { RxPencil2 } from "react-icons/rx";
 
+import { useDispatch, useSelector } from "react-redux";
+import { setTripDatabyAI, getLocationArray } from "../redux/tripSlice";
+
+import toast from "react-hot-toast";
+import axios from "axios";
+
+
 const AITripResult = () => {
+  const initialData = useSelector((state) => state.tripCreate);
+  const tripCreateAPI = process.env.REACT_APP_SERVER_DOMAIN;
+
+
+  const dispatch = useDispatch()
   const location = useLocation();
-  console.log("sadasdas");
-  console.log(location);
   const navigate = useNavigate();
   const tripData = location?.state;
 
@@ -31,11 +41,72 @@ const AITripResult = () => {
   const [showContentAfterTyping, setShowContentAfterTyping] = useState(false);
   const [showDes, setShowDes] = useState({});
 
+
+  //dispatch
+
+
+  useEffect(() => {
+    dispatch(setTripDatabyAI(tripPlan))
+    console.log("INIITIAL DATA: ", initialData);
+  },[])
+
   const toggleDescription = (index) => {
     setShowDes((prevState) => ({
       ...prevState,
       [index]: !prevState[index],
     }));
+  };
+
+  const handleGetLocationArray = (day) => {
+    dispatch(getLocationArray(day))
+  }
+
+  const handleTripCreate = async (e) => {
+    e.preventDefault();
+    const data = {
+      name: initialData.name,
+      days: initialData.items.length,
+      user: initialData.user,
+      create_by: 1,
+      items: initialData.items.map((item) => {
+        return {
+          ...item,
+          day: item.day,
+          locations: item.locations.map((location) => location.locationID),
+        };
+      }),
+    };
+
+    console.log("DATA: ", data);
+
+    if (data) {
+      const token = localStorage.getItem("accessToken");
+      try {
+        const response = await axios.post(
+          `${tripCreateAPI}trip/create/`,
+          data,
+          {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
+
+        const dataRes = response.data;
+
+        if (dataRes.message) {
+          toast.success(dataRes.message);
+          navigate("/");
+        } else if (dataRes.error) {
+          toast.error(dataRes.error);
+        }
+      } catch (error) {
+        // Handle errors here
+        console.error(error);
+        toast.error("Login again!");
+      }
+    }
   };
 
   return (
@@ -89,7 +160,7 @@ const AITripResult = () => {
                 <div className="order-b mb-[24px] pb-[24px]">
                   {tripPlan.map((dayPlan, index) => (
                     <div key={index}>
-                      <h3>{dayPlan.day}</h3>
+                      <h3 onClick={() => handleGetLocationArray(dayPlan.day)}>{dayPlan.day}</h3>
                       <p>{dayPlan.description}</p>
                       <ul className="mb-0 p-0">
                         {dayPlan.locations.map((location, index) => (
@@ -145,6 +216,7 @@ const AITripResult = () => {
           </div>
         </div>
       </div>
+      <button className="border border-slate-900 px-4 py-2 bg-blue-600 text-white" onClick={handleTripCreate}>CREATE</button>
     </div>
   );
 };

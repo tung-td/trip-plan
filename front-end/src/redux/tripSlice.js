@@ -33,6 +33,12 @@ export const tripSlice = createSlice({
     name: "trip",
     initialState,
     reducers:{
+        setTripDatabyAI: (state, action) => {
+            console.log(action.payload);
+            state.items = [...action.payload]
+            state.markerList = []
+            console.log("STATE: ", state.items);
+        },
         setTripData: (state, action) => {
             state.name = action.payload.name
             state.days = action.payload.days
@@ -120,6 +126,7 @@ export const tripSlice = createSlice({
             {
               console.log(action.payload)
               state.markerList = [...findDay.locations]
+              console.log("MARKER LIST: ", state.markerList);
             }
           },
           storeTempLocations : (state, action) => {
@@ -131,7 +138,7 @@ export const tripSlice = createSlice({
     }
 })
 
-export const {setTripData, setLocationItem, setDay, deleteLocationItem, updatedLocationOrder, activeButton, setIndex, getLocationArray, storeTempLocations} = tripSlice.actions
+export const {setTripData, setLocationItem, setDay, deleteLocationItem, updatedLocationOrder, activeButton, setIndex, getLocationArray, storeTempLocations, setTripDatabyAI} = tripSlice.actions
 
 export default tripSlice.reducer
 

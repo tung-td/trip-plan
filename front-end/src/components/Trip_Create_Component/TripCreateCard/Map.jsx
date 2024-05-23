@@ -62,28 +62,27 @@ const Map = () => {
     locationList.forEach((item, index) => {
       const marker = document.createElement("div");
       marker.className = "custom-marker";
-      if (item.category === "Hotel") {
+      if ((item.category ? item.category : item.locationCategory) === "Hotel") {
         marker.style.backgroundImage = `url(${hotel})`;
-      } else if (item.category === "Restaurant") {
+      } else if ((item.category ? item.category : item.locationCategory) === "Restaurant") {
         marker.style.backgroundImage = `url(${restaurant})`;
-      } else if (item.category === "Sight Seeing") {
+      } else if ((item.category ? item.category : item.locationCategory) === "Sight Seeing") {
         marker.style.backgroundImage = `url(${sight})`;
       }
       marker.style.backgroundSize = "40px 40px";
       marker.style.width = "40px";
       marker.style.height = "40px";
       marker.innerHTML = `<h1 class = 'text-base font-semibold z-[99] py-[1px] px-[8px] rounded-full bg-red-400 text-white text-center absolute -top-5 left-0'>${index + 1}</h1>`;
-
       markers.push(
         new mapboxgl.Marker(marker)
-          .setLngLat([item.longitude, item.latitude])
+          .setLngLat([item.longitude ? item.longitude : parseFloat(item.locationLongitude), item.latitude ? item.latitude : parseFloat(item.locationLatitude)])
           .addTo(map.current),
       );
 
       // Add popups
       const popup = new mapboxgl.Popup().setLngLat([
-        item.longitude,
-        item.latitude,
+        item.longitude ? item.longitude : parseFloat(item.locationLongitude),
+        item.latitude ? item.latitude : parseFloat(item.locationLatitude),
       ]).setHTML(`
       <div class=' rounded-xl flex items-center border border-slate-900 w-full'>
         <div class = 'w-1/3 mx-2 my-2 border border-slate-900'>
@@ -117,7 +116,7 @@ const Map = () => {
     zoom: 8, // initial zoom level
   });
 
-  const waypoints = locationList.map((item) => [item.longitude, item.latitude]);
+  const waypoints = locationList.map((item) => [item.longitude ? item.longitude : parseFloat(item.locationLongitude), item.latitude ? item.latitude : parseFloat(item.locationLatitude)]);
   const waypointsString = waypoints.map((point) => point.join(",")).join(";");
 
   //remove layer direction

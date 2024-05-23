@@ -41,6 +41,7 @@ const TripCreate = () => {
       name: initialData.name,
       days: initialData.days,
       user: initialData.user,
+      create_by: 0,
       items: initialData.items.map((item) => {
         return {
           ...item,
