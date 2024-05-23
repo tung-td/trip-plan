@@ -20,6 +20,7 @@ import axios from "axios";
 
 const AITripResult = () => {
   const initialData = useSelector((state) => state.tripCreate);
+  const locationData = useSelector((state) => state.location)
   const tripCreateAPI = process.env.REACT_APP_SERVER_DOMAIN;
 
 
@@ -46,8 +47,15 @@ const AITripResult = () => {
 
 
   useEffect(() => {
-    dispatch(setTripDatabyAI(tripPlan))
-    console.log("INIITIAL DATA: ", initialData);
+    const dataDispatch = tripPlan.map(item => {
+      const locations = item.locations.map(location => parseInt(location.locationID))
+      return {
+        day: item.day, 
+        locations : locationData.locationList.filter((location) => locations.includes(location.id))
+      }
+    })
+    dispatch(setTripDatabyAI(dataDispatch))
+    console.log("DISPATCH DATA: ", dataDispatch);
   },[])
 
   const toggleDescription = (index) => {
