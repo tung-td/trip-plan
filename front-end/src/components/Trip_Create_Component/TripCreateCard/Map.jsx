@@ -62,11 +62,11 @@ const Map = () => {
     locationList.forEach((item, index) => {
       const marker = document.createElement("div");
       marker.className = "custom-marker";
-      if ((item.category ? item.category : item.locationCategory) === "Hotel") {
+      if ((item.category.name ? item.category.name : item.locationCategory) === "Hotel") {
         marker.style.backgroundImage = `url(${hotel})`;
-      } else if ((item.category ? item.category : item.locationCategory) === "Restaurant") {
+      } else if ((item.category.name ? item.category.name : item.locationCategory) === "Restaurant") {
         marker.style.backgroundImage = `url(${restaurant})`;
-      } else if ((item.category ? item.category : item.locationCategory) === "Sight Seeing") {
+      } else if ((item.category.name ? item.category.name : item.locationCategory) === "Sight Seeing") {
         marker.style.backgroundImage = `url(${sight})`;
       }
       marker.style.backgroundSize = "40px 40px";
