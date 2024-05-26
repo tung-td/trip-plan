@@ -13,7 +13,7 @@ const HomeCarousel = () => {
       carouselState: { currentSlide },
     } = rest;
     return (
-      <div className="custom-button-group absolute right-[1rem] top-[7.5rem] md:right-[166px] md:top-[40px]">
+      <div className="custom-button-group absolute right-[1rem] top-[11px] md:right-[166px] md:top-[40px]">
         <button
           className="mr-[10px] rounded-[12px] bg-[#172432] p-[1rem] text-white md:p-[20px]"
           onClick={() => previous()}
@@ -70,22 +70,27 @@ const HomeCarousel = () => {
 
   return (
     <div className="relative mt-[70px] px-[1rem] md:px-[8rem]">
-      <h1 className="flex flex-col items-start justify-end text-[2rem] text-black md:text-[40px]">
+      <h1 className="flex flex-col items-start justify-end text-[29px] text-black md:text-[40px]">
         Popular Destinations
         <div className="mt-[10px] h-[3px] w-[250px] bg-[#FF7757]"></div>
       </h1>
 
-      <p className="mb-[60px] mt-[20px] text-[#767E86] md:mb-[40px]">
+      <p className="mb-[40px] mt-[20px] max-w-[70%] text-[#767E86] sm:w-auto md:mb-[40px]">
         Most popular destinations around the world, from historical places to
         natural wonders.
       </p>
 
       <Carousel
         responsive={responsive}
-        className="container mx-auto mt-8 pb-6"
+        className="container mx-auto mt-8 overflow-hidden bg-white pb-6"
         style={style}
         arrows={false}
         renderButtonGroupOutside={true}
+        autoPlay={true}
+        autoPlaySpeed={2000}
+        swipeable={true}
+        draggable={true}
+        infinite={true}
         customButtonGroup={<CustomButtonGroup />}
       >
         {tripCards}

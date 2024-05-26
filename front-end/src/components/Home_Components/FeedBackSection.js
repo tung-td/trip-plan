@@ -21,15 +21,15 @@ const FeedBackSection = () => {
       carouselState: { currentSlide },
     } = rest;
     return (
-      <div className="custom-button-group absolute right-[166px] top-[40px]">
+      <div className="custom-button-group absolute right-[1rem] top-[11px] sm:right-[166px] sm:top-[40px]">
         <button
-          className="mr-[10px] rounded-[12px] bg-[#172432] md:p-[20px] p-[1rem] text-white"
+          className="mr-[10px] rounded-[12px] bg-[#172432] p-[1rem] text-white md:p-[20px]"
           onClick={() => previous()}
         >
           <FaArrowLeft />
         </button>
         <button
-          className="ml-[10px] rounded-[12px] bg-[#FF7757] p-[20px] text-white"
+          className="ml-[10px] rounded-[12px] bg-[#FF7757] p-[1rem] text-white md:p-[20px]"
           onClick={() => next()}
         >
           <FaArrowRight />
@@ -59,10 +59,10 @@ const FeedBackSection = () => {
   };
 
   return (
-    <div className="relative mb-[95px] mt-[70px] pl-[166px] pr-[166px]">
-      <h1 className="flex flex-col text-[40px] text-black">
-        Traveler’s Experiences
-        <div className="mt-[10px] h-[3px] w-[250px] bg-[#FF7757]"></div>
+    <div className="relative mb-[95px] mt-[70px] px-[1rem] md:px-[8rem]">
+      <h1 className="flex flex-col text-[29px] text-black sm:text-[40px]">
+        Traveler’s Sharing
+        <div className="mt-[10px] h-[3px] w-[10rem] bg-[#FF7757] sm:w-[250px]"></div>
       </h1>
 
       <p className="mb-[100px] mt-[20px] flex text-[#767E86]">

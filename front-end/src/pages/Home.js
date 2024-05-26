@@ -75,7 +75,7 @@ export const Home = () => {
       </section>
 
       {/* FeedBack */}
-      <section className="feedback-container">
+      <section className="feedback-container overflow-hidden">
         <FeedBackSection />
       </section>
 

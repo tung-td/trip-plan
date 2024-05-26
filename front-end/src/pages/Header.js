@@ -71,34 +71,34 @@ const Header = () => {
 
   return (
     <header className="shadow-sm">
-      <nav className="h-[87px] w-full bg-white px-4 md:px-16">
+      <nav className="sm-h-[87px] h-[52px] w-full bg-white px-[1rem] sm:px-[5.5rem]">
         <div
-          className="mx-auto flex h-[87px] w-full items-center justify-between"
+          className="sm-h-[87px] mx-auto flex h-[52px] w-full items-center justify-between"
           ref={ref}
         >
-          <div className="flex h-full items-center font-semibold">
+          <div className="hidden h-full items-center font-semibold sm:flex">
             <NavLink
               to="/"
               className={`mr-4 flex h-full items-center border-b-[3px] border-transparent md:mr-8 ${activeLink === "/" ? "border-black" : ""}`}
               onClick={() => handleNavLinkClick("/")}
             >
-              <FaBed className="mr-2 text-xl" />{" "}
+              <FaBed className="text-xl sm:mr-2" />{" "}
               <span className="hidden md:inline">Finds Stays</span>
             </NavLink>
             <NavLink
               to="/tripcreate"
-              className={`mr-4 flex h-full items-center border-b-[3px] border-transparent md:mr-8 ${activeLink === "/mytrip" ? "border-black" : ""}`}
+              className={`mr-4 hidden h-full items-center border-b-[3px] border-transparent sm:flex md:mr-8 ${activeLink === "/tripcreate" ? "border-black" : ""}`}
               onClick={() => handleNavLinkClick("/tripcreate")}
             >
-              <FaStar className="mr-2 text-xl" />{" "}
+              <FaStar className="text-xl sm:mr-2" />{" "}
               <span className="hidden md:inline">My Trip</span>
             </NavLink>
             <NavLink
               to="/tripcreateAI"
-              className={`mr-4 flex h-full items-center border-b-[3px] border-transparent md:mr-8 ${activeLink === "/tripcreateAI" ? "border-black" : ""}`}
+              className={`mr-4 hidden h-full items-center border-b-[3px] border-transparent sm:flex md:mr-8 ${activeLink === "/tripcreateAI" ? "border-black" : ""}`}
               onClick={() => handleNavLinkClick("/tripcreateAI")}
             >
-              <FaPlane className="mr-2 text-xl" />{" "}
+              <FaPlane className="text-xl sm:mr-2" />{" "}
               <span className="hidden md:inline">Build Trip AI</span>
             </NavLink>
           </div>
@@ -151,7 +151,6 @@ const Header = () => {
                       </div>
 
                       <div className="my-6 h-0.5 w-full bg-gray-300"></div>
-
                       <NavLink
                         className="flex justify-between"
                         to="userprofile"
@@ -210,7 +209,31 @@ const Header = () => {
 
           {/* Mobile Menu */}
           {isMobileMenuOpen && (
-            <div className="absolute right-[24px] top-[7%] z-10 flex w-[40%] flex-col space-y-2 rounded-md bg-white p-4 shadow-lg">
+            <div className="absolute right-[4%] top-[6%] z-10 flex w-[50%] flex-col space-y-2 rounded-md bg-white p-4 shadow-lg">
+              <NavLink
+                to="/"
+                className={`mr-4 flex h-full items-center border-b-[3px] border-transparent md:mr-8`}
+                onClick={() => handleNavLinkClick("/")}
+              >
+                <FaBed className="mr-2 text-xl" />{" "}
+                <span className="inline">Finds Stays</span>
+              </NavLink>
+              <NavLink
+                to="/tripcreate"
+                className={`mr-4 flex h-full items-center border-b-[3px] border-transparent md:mr-8`}
+                onClick={() => handleNavLinkClick("/tripcreate")}
+              >
+                <FaStar className="mr-2 text-xl" />{" "}
+                <span className="inline">My Trip</span>
+              </NavLink>
+              <NavLink
+                to="/tripcreateAI"
+                className={`mr-4 flex h-full items-center border-b-[3px] border-transparent md:mr-8`}
+                onClick={() => handleNavLinkClick("/tripcreateAI")}
+              >
+                <FaPlane className="mr-2 text-xl" />{" "}
+                <span className="inline">Build Trip AI</span>
+              </NavLink>
               <NavLink to="userprofile" className="flex items-center">
                 <FaUser className="mr-2 h-4 w-4" /> My account
               </NavLink>

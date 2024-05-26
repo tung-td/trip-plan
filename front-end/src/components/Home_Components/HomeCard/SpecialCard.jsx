@@ -14,15 +14,14 @@ const SpecialCard = (props) => {
     <div
       key={props.id}
       onClick={hide}
-      className="relative mr-[100px] flex h-[270px] w-[800px] rounded-[26px] bg-white p-[24px] shadow-lg"
+      className="relative mr-[100px] flex w-[100%] flex-row rounded-[26px] bg-white p-[0px] sm:h-[270px] sm:w-[800px] sm:p-[24px] sm:shadow-lg"
       style={{
         display: "flex",
-        flexDirection: "row",
         alignItems: "center",
         gap: "16px",
       }}
     >
-      <div style={{ flex: "1" }}>
+      <div className="w-[16rem] sm:w-auto" style={{ flex: "1" }}>
         <img
           src={props.url}
           alt={props.name}

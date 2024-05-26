@@ -14,7 +14,7 @@ const SpecialOffer = () => {
       carouselState: { currentSlide },
     } = rest;
     return (
-      <div className="custom-button-group absolute left-[166px] top-[40px]">
+      <div className="custom-button-group absolute left-[27px] top-[11px] sm:left-[166px] sm:top-[40px]">
         <button
           className="mr-[10px] rounded-[12px] bg-[#172432] p-[1rem] text-white md:p-[20px]"
           onClick={() => previous()}
@@ -65,10 +65,10 @@ const SpecialOffer = () => {
   ));
 
   return (
-    <div className="relative mt-[10px] px-[1rem] md:px-[8rem]">
-      <h1 className="flex flex-col items-end justify-end text-[40px] text-black">
+    <div className="relative mt-[60px] px-[1rem] sm:mt-[10px] md:px-[8rem]">
+      <h1 className="flex flex-col items-end justify-end text-[29px] text-black sm:text-[40px]">
         Special Offer
-        <div className="mt-[10px] h-[3px] w-[250px] bg-[#FF7757]"></div>
+        <div className="mt-[10px] h-[3px] w-[10rem] bg-[#FF7757] sm:w-[250px]"></div>
       </h1>
 
       <p className="mb-[40px] mt-[20px] flex justify-end text-[#767E86]">
@@ -76,9 +76,14 @@ const SpecialOffer = () => {
       </p>
       <Carousel
         responsive={responsive}
-        className="container mx-auto mt-8 pb-6"
+        className="w-100% container mx-auto mt-8 overflow-hidden bg-white pb-6"
         arrows={false}
         renderButtonGroupOutside={true}
+        autoPlay={true}
+        autoPlaySpeed={2000}
+        swipeable={true}
+        draggable={true}
+        infinite={true}
         customButtonGroup={<CustomButtonGroup />}
       >
         {specialCards}

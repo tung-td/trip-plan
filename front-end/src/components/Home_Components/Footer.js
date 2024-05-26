@@ -9,10 +9,10 @@ import {
 
 const Footer = () => {
   return (
-    <div className="bg-[#172432] px-[8rem] pb-[30px] pt-[135px] text-white">
-      <div className="flex items-center justify-around pb-20">
+    <div className="bg-[#172432] pb-[10px] text-white sm:px-[8rem] sm:pb-[30px] sm:pt-[135px]">
+      <div className="flex flex-col items-center justify-around sm:flex-row sm:pb-20">
         {/* Item 1 */}
-        <div className="ml-20 flex flex-col">
+        <div className="mt-[30px] flex flex-col sm:ml-20 sm:mt-auto">
           <div className="flex">
             <img src={earth} alt="earth" className=" h-[50px] w-[50px]" />
             <h1 className=" flex items-center text-2xl font-semibold">
@@ -26,15 +26,15 @@ const Footer = () => {
           </div>
         </div>
         {/* Item 2 */}
-        <div className="mr-20 flex flex-1 justify-around">
-          <div className="flex flex-col">
+        <div className="flex flex-1 flex-wrap p-[1rem] sm:mr-20 sm:justify-around sm:p-[auto]">
+          <div className="flex w-[50%] flex-col sm:w-auto">
             <h2 className="mb-[15px] text-2xl font-semibold">Company</h2>
             <span className=" text-lg font-normal text-slate-500">Home</span>
             <span className=" text-lg font-normal text-slate-500">Explore</span>
             <span className=" text-lg font-normal text-slate-500">Travel</span>
             <span className=" text-lg font-normal text-slate-500">Blog</span>
           </div>
-          <div className="flex flex-col">
+          <div className="flex w-[50%] flex-col sm:w-auto">
             <h2 className="mb-[15px] text-2xl font-semibold">Information</h2>
             <span className=" text-lg font-normal text-slate-500">
               Destinations
@@ -47,7 +47,7 @@ const Footer = () => {
             </span>
             <span className=" text-lg font-normal text-slate-500">Privacy</span>
           </div>
-          <div className="flex flex-col">
+          <div className="flex w-[50%] flex-col sm:w-auto">
             <h2 className="mb-[15px] text-2xl font-semibold">Contact Info</h2>
             <span className=" text-lg font-normal text-slate-500">
               +123 456 789
@@ -62,7 +62,7 @@ const Footer = () => {
               About us
             </span>
           </div>
-          <div className="flex flex-col">
+          <div className="flex w-[50%] flex-col sm:w-auto">
             <h2 className=" text-2xl font-semibold">Follow us on</h2>
             <span className="mt-[15px] flex text-lg font-normal">
               <FaFacebook className="mr-[15px] text-[25px]" />

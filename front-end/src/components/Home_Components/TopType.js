@@ -13,10 +13,10 @@ const TopType = () => {
   ];
 
   return (
-    <div className="px-[1rem] md:px-[8rem]">
-      <h1 className="flex flex-col items-end justify-end text-[2rem] text-black md:text-[40px]">
-        Top Accommodation Types
-        <div className="mt-[10px] h-[3px] w-[18rem] bg-[#FF7757] md:w-[365px]"></div>
+    <div className="mt-[30px] px-[1rem] sm:px-[8rem]">
+      <h1 className="mt-[20px] flex flex-col items-end justify-end text-[29px] text-black md:text-[40px]">
+        Top Accommodations
+        <div className="mt-[10px] h-[3px] w-[12rem] bg-[#FF7757] sm:w-[18rem] md:w-[365px]"></div>
       </h1>
 
       <div className="mt-8 flex w-full flex-wrap justify-center md:justify-between">
@@ -28,7 +28,7 @@ const TopType = () => {
             <img
               src={type.image}
               alt={type.name}
-              className="14inch:w-[370px] h-[15rem] rounded-[9px] object-cover sm:h-[10rem] sm:w-[100%]"
+              className="h-[15rem] rounded-[9px] object-cover sm:h-[10rem] sm:w-[100%] 14inch:w-[370px]"
             />
             <h2 className="absolute bottom-[20px] left-[20px] text-xl font-[900] text-white">
               {type.name}

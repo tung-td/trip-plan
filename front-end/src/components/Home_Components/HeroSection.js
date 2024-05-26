@@ -17,7 +17,7 @@ const HeroSection = (props) => {
   };
 
   return (
-    <section className="flex h-[835px] flex-col items-center justify-center text-center">
+    <section className="flex h-[100%] flex-col items-center justify-center text-center sm:h-[835px]">
       <div className="mb-[16px] text-center font-poppins text-[3rem] font-semibold leading-10 text-white md:text-[80px]">
         Travel with us
       </div>
