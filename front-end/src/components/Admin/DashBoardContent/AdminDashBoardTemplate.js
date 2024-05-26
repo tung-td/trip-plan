@@ -1,5 +1,6 @@
 import classNames from 'classnames'
-
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
 import {
     CAvatar,
     CButton,
@@ -41,7 +42,7 @@ import {
     cilUser,
     cilUserFemale,
 } from '@coreui/icons'
-
+import { useSelector } from 'react-redux'
 import avatar1 from '../../../assets/img/avt.jpg'
 import avatar2 from '../../../assets/img/avt.jpg'
 import avatar3 from '../../../assets/img/avt.jpg'
@@ -58,7 +59,26 @@ import { IoBagHandle, IoPieChart, IoPeople, IoCart } from 'react-icons/io5'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { Link } from 'react-router-dom'
 import { getOrderStatus } from './helpers/adminHelpers.jsx'
+import { useMemo } from 'react'
 const AdminDashBoardTemplate = () => {
+    const [usersData, setUsersData] = useState([])
+    const [commentsData, setCommentsData] = useState([])
+    const [tripsData, setTripsData] = useState([])
+    const locationData = useSelector(state => state.location.locationList)
+    console.log("Location Data la: ", locationData)
+    console.log("Users Data la: ", usersData)
+    console.log("Comments Data la: ", commentsData)
+    console.log("Trips Data la: ", tripsData)
+
+    // DÙNG CHO BIỂU ĐỒ HÌNH TRÒN
+    const totalPositive = locationData.reduce((total, location) => total + location.positive, 0);
+    const totalNegative = locationData.reduce((total, location) => total + location.negative, 0);
+    const totalNeutral = locationData.reduce((total, location) => total + location.neutral, 0);
+    console.log("Tong Positive la: ", totalPositive)
+    console.log("Tong Negative la: ", totalNegative)
+    console.log("Tong Neutrural la: ", totalNeutral)
+
+    // DƯỚI NI LÀ FAKE DATA
     const progressExample = [
         { title: 'Visits', value: '29.703 Users', percent: 40, color: 'success' },
         { title: 'Unique', value: '24.093 Users', percent: 20, color: 'info' },
@@ -240,7 +260,7 @@ const AdminDashBoardTemplate = () => {
         }
     ]
 
-    // PIE CHART DATA
+    // PIE CHART DATA BIỂU ĐỒ HÌNH TRÒN
     const dataPie = [
         { name: 'Positve', value: 540 },
         { name: 'Negative', value: 620 },
@@ -372,7 +392,46 @@ const AdminDashBoardTemplate = () => {
         }
     ]
 
-
+    useEffect(() => {
+        try {
+            const token = localStorage.getItem("accessToken");
+            const getUsers = async () => {
+                const response = await axios.get(`https://admin.traveladvisor.io.vn/backend/users/`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        // Authorization: `Bearer ${token}`,
+                    },
+                })
+                const responseComemnts = await axios.get(`https://admin.traveladvisor.io.vn/backend/comment/`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        // Authorization: `Bearer ${token}`,
+                    },
+                })
+                const responseTrips = await axios.get(`https://admin.traveladvisor.io.vn/backend/trips/`, {
+                    headers: {
+                        "Content-Type": "application/json",
+                        // Authorization: `Bearer ${token}`,
+                    },
+                })
+                const dataRes = response.data
+                const dataComments = responseComemnts.data
+                const dataTrips = responseTrips.data
+                if (Array.isArray(dataRes.results) && Array.isArray(dataComments.results) && Array.isArray(dataTrips.results)) {
+                    const filterSuperAdmin = dataRes.results.filter(user => { return user.is_superuser != true })
+                    setUsersData(filterSuperAdmin);
+                    setCommentsData(dataComments)
+                    setTripsData(dataTrips)
+                } else {
+                    console.error("Data is not an array:", dataRes);
+                }
+            }
+            getUsers()
+        }
+        catch (error) {
+            console.error(error)
+        }
+    }, [])
 
     return (
         <>
@@ -661,6 +720,7 @@ const AdminDashBoardTemplate = () => {
                     <div className="pl-4">
                         <span className="text-sm text-gray-500 font-light">Total Users</span>
                         <div className="flex items-center">
+                            {/* Trả về tổng số lượng người dùng */}
                             <strong className="text-xl text-gray-700 font-semibold">9999</strong>
                             <span className="text-sm text-green-500 pl-2">+343</span>
                         </div>
@@ -673,6 +733,7 @@ const AdminDashBoardTemplate = () => {
                     <div className="pl-4">
                         <span className="text-sm text-gray-500 font-light">Total Locations</span>
                         <div className="flex items-center">
+                            {/* Trả về tổng số lượng location*/}
                             <strong className="text-xl text-gray-700 font-semibold">299</strong>
                             <span className="text-sm text-green-500 pl-2">-343</span>
                         </div>

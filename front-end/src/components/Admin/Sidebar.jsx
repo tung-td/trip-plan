@@ -64,8 +64,8 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
                             icon={<FaUser />}
                         // suffix={<span className="badge red">new</span>}
                         >
-                            Manage categories
-                            <Link to="/admin-dashboard/manage-category" />
+                            Manage trips
+                            <Link to="/admin-dashboard/manage-trips" />
                         </MenuItem>
                     </Menu>
 
@@ -97,14 +97,6 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
                             Manage Comments
                             <Link to="#" />
                         </MenuItem>
-                    </Menu>
-                    <Menu iconShape="circle">
-                        <SubMenu
-                            icon={<FaGem />}
-                            title="Manage Section"
-                        >
-
-                        </SubMenu>
                     </Menu>
                 </SidebarContent>
 
