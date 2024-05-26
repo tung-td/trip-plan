@@ -34,7 +34,7 @@ export const Home = () => {
     <div>
       {/* Banner */}
       <div
-        className="h-[916px] w-full"
+        className="relative h-[71vh] w-full md:h-screen"
         style={{
           backgroundImage: `url(${homeBanner})`,
           backgroundSize: "cover",
@@ -46,12 +46,13 @@ export const Home = () => {
           activeTripInitial={activeTripInitial}
           activeLoginRequired={activeLoginRequired}
         />
+
+        {/* TripCreate Initial */}
+        {isActive && (
+          <TripInitalModel active={activeTripInitial} user_id={user_id} />
+        )}
+        {loginRequiredActive && <LoginRequired active={activeLoginRequired} />}
       </div>
-      {/* TripCreate Initial */}
-      {isActive && (
-        <TripInitalModel active={activeTripInitial} user_id={user_id} />
-      )}
-      {loginRequiredActive && <LoginRequired active={activeLoginRequired} />}
 
       {/* Top Types */}
       <section className="card-type">

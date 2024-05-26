@@ -16,13 +16,13 @@ const SpecialOffer = () => {
     return (
       <div className="custom-button-group absolute left-[166px] top-[40px]">
         <button
-          className="mr-[10px] rounded-[12px] bg-[#172432] p-[20px] text-white"
+          className="mr-[10px] rounded-[12px] bg-[#172432] p-[1rem] text-white md:p-[20px]"
           onClick={() => previous()}
         >
           <FaArrowLeft />
         </button>
         <button
-          className="ml-[10px] rounded-[12px] bg-[#FF7757] p-[20px] text-white"
+          className="ml-[10px] rounded-[12px] bg-[#FF7757] p-[1rem] text-white md:p-[20px]"
           onClick={() => next()}
         >
           <FaArrowRight />
@@ -65,7 +65,7 @@ const SpecialOffer = () => {
   ));
 
   return (
-    <div className="relative mt-[70px] pl-[166px] pr-[166px]">
+    <div className="relative mt-[10px] px-[1rem] md:px-[8rem]">
       <h1 className="flex flex-col items-end justify-end text-[40px] text-black">
         Special Offer
         <div className="mt-[10px] h-[3px] w-[250px] bg-[#FF7757]"></div>

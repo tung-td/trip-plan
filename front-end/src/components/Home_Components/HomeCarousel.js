@@ -8,21 +8,20 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
 const HomeCarousel = () => {
   const locationData = useSelector((state) => state.location.locationList);
-  console.log("DATA LOACATION: ", locationData)
   const CustomButtonGroup = ({ next, previous, goToSlide, ...rest }) => {
     const {
       carouselState: { currentSlide },
     } = rest;
     return (
-      <div className="custom-button-group absolute right-[166px] top-[40px]">
+      <div className="custom-button-group absolute right-[1rem] top-[7.5rem] md:right-[166px] md:top-[40px]">
         <button
-          className="mr-[10px] rounded-[12px] bg-[#172432] p-[20px] text-white"
+          className="mr-[10px] rounded-[12px] bg-[#172432] p-[1rem] text-white md:p-[20px]"
           onClick={() => previous()}
         >
           <FaArrowLeft />
         </button>
         <button
-          className="ml-[10px] rounded-[12px] bg-[#FF7757] p-[20px] text-white"
+          className="ml-[10px] rounded-[12px] bg-[#FF7757] p-[1rem] text-white md:p-[20px]"
           onClick={() => next()}
         >
           <FaArrowRight />
@@ -70,13 +69,13 @@ const HomeCarousel = () => {
   ));
 
   return (
-    <div className="relative mt-[70px] pl-[166px] pr-[166px]">
-      <h1 className="flex flex-col items-start justify-end text-[40px] text-black">
+    <div className="relative mt-[70px] px-[1rem] md:px-[8rem]">
+      <h1 className="flex flex-col items-start justify-end text-[2rem] text-black md:text-[40px]">
         Popular Destinations
         <div className="mt-[10px] h-[3px] w-[250px] bg-[#FF7757]"></div>
       </h1>
 
-      <p className="mb-[40px] mt-[20px] text-[#767E86]">
+      <p className="mb-[60px] mt-[20px] text-[#767E86] md:mb-[40px]">
         Most popular destinations around the world, from historical places to
         natural wonders.
       </p>

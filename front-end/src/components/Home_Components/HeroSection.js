@@ -18,10 +18,10 @@ const HeroSection = (props) => {
 
   return (
     <section className="flex h-[835px] flex-col items-center justify-center text-center">
-      <div className="font-poppins mb-[16px] text-center text-[80px] font-semibold leading-10 text-white">
+      <div className="mb-[16px] text-center font-poppins text-[3rem] font-semibold leading-10 text-white md:text-[80px]">
         Travel with us
       </div>
-      <div className="font-poppins mb-[64px] w-[693px] text-[30px] font-light text-white">
+      <div className="mb-[64px] font-poppins text-[1rem] font-light text-white md:w-[693px] md:text-[30px]">
         Get a personalized itinerary just for you, guided by traveler tips and
         reviews.
       </div>
@@ -29,20 +29,20 @@ const HeroSection = (props) => {
       {isLoggedIn() ? (
         <button
           onClick={() => active()}
-          className="font-poppins flex w-[353px] items-center justify-center rounded-[40px] bg-black p-[14.5px] text-center text-lg font-medium text-white"
+          className="flex w-[353px] items-center justify-center rounded-[40px] bg-black p-[14.5px] text-center font-poppins text-lg font-medium text-white"
         >
           Start your trip now
         </button>
       ) : (
         <button
           onClick={() => navigate("login")}
-          className="font-poppins flex w-[353px] items-center justify-center rounded-[40px] bg-black p-[14.5px] text-center text-lg font-medium text-white"
+          className="flex w-[353px] items-center justify-center rounded-[40px] bg-black p-[14.5px] text-center font-poppins text-lg font-medium text-white"
         >
           Sign up
         </button>
       )}
 
-      <div className="absolute bottom-[20px]">
+      <div className="absolute bottom-[6rem] hidden md:block">
         <img src={`${icons_banner}`} />
       </div>
     </section>

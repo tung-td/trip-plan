@@ -9,12 +9,14 @@ import ReactLoading from "react-loading";
 import { IoCloseOutline } from "react-icons/io5";
 
 const AiTripCreate = () => {
+  const API = process.env.REACT_APP_SERVER_DOMAIN_AI;
+
   const [step, setStep] = useState(1);
   const [destination, setDestination] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [dayLength, setDayLength] = useState("");
-  const [travelers, setTravelers] = useState("Solo");
+  const [travelers, setTravelers] = useState("1 people");
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -58,10 +60,11 @@ const AiTripCreate = () => {
     return `${year}-${month}-${day}`;
   }
 
-  const promptText = `Lập kế hoạch du lịch ${destination} ${dayLength} ngày từ ${startDate} đến ${endDate} cho ${travelers} người, ${activities.join(", ")}. Yêu cầu: *  ${dayLength} ngày * ${travelers} người * Chủ đề: ${activities.join(", ")} * Địa điểm: ${destination}`;
+  const promptText = `Plan a ${dayLength}-day trip to ${destination} from ${startDate} to ${endDate} for ${travelers}, including ${activities.join(", ")}. Requirements: * ${dayLength} days * ${travelers} people * Theme: ${activities.join(", ")} * Location: ${destination}`;
+
   const handleSubmit = () => {
     setLoading(true);
-    fetch("http://localhost:4000/googleAi/generateGemini", {
+    fetch(`${API}generateGemini`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -78,7 +81,6 @@ const AiTripCreate = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log("hsajdjksjdas", data);
         if (data.statusCode == 500) {
           alert("Please submit again");
         } else {

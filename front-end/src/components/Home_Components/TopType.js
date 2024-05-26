@@ -13,22 +13,22 @@ const TopType = () => {
   ];
 
   return (
-    <div className="mt-[70px] pl-[166px] pr-[166px]">
-      <h1 className="flex flex-col items-end justify-end text-[40px] text-black">
+    <div className="px-[1rem] md:px-[8rem]">
+      <h1 className="flex flex-col items-end justify-end text-[2rem] text-black md:text-[40px]">
         Top Accommodation Types
-        <div className="mt-[10px] h-[3px] w-[365px] bg-[#FF7757]"></div>
+        <div className="mt-[10px] h-[3px] w-[18rem] bg-[#FF7757] md:w-[365px]"></div>
       </h1>
 
-      <div className="mt-8 flex flex-wrap justify-between">
+      <div className="mt-8 flex w-full flex-wrap justify-center md:justify-between">
         {accommodationTypes.map((type) => (
           <div
             key={type.id}
-            className="relative mb-[20px] flex flex-col items-center shadow-lg"
+            className="relative mb-[20px] flex flex-col items-center"
           >
             <img
               src={type.image}
               alt={type.name}
-              className="h-[200px] w-[370px] rounded-[9px] object-cover"
+              className="14inch:w-[370px] h-[15rem] rounded-[9px] object-cover sm:h-[10rem] sm:w-[100%]"
             />
             <h2 className="absolute bottom-[20px] left-[20px] text-xl font-[900] text-white">
               {type.name}

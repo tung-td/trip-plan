@@ -25,7 +25,6 @@ const TripCreateModel = (props) => {
 
   const handleChange = (event) => {
     setSelectedValue(parseInt(event.target.value, 10));
-    console.log(selectedValue);
   };
 
   const [minVal, setMinVal] = useState(1);

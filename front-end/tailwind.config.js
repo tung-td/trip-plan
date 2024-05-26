@@ -14,6 +14,10 @@ module.exports = {
         poppins: ["Poppins", "sans-serif"],
         Montserrat: ["Montserrat", "sans-serif"],
       },
+      screens: {
+        "13inch": "1000px",
+        "14inch": "1500px",
+      },
     },
   },
   plugins: [],

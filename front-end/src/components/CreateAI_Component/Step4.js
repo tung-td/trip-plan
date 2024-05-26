@@ -49,11 +49,6 @@ const Step4 = ({ activities, onActivitiesChange }) => {
     handleActivitiesChangeRef.current(combinedOptions);
   }, [selectedOptions, otherOption]);
 
-  useEffect(() => {
-    console.log("selectedOptions:", selectedOptions);
-    console.log("otherOption:", otherOption);
-  }, [selectedOptions, otherOption]);
-
   return (
     <div className="flex w-full flex-col items-center justify-center">
       <div className="flex w-full flex-col justify-start px-[600px] pt-[70px]">

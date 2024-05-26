@@ -27,7 +27,6 @@ export const SignUp = () => {
         [name]: value,
       };
     });
-    console.log(data);
   };
 
   const handleSubmit = async (e) => {
@@ -35,7 +34,7 @@ export const SignUp = () => {
     const { first_name, last_name, email, password, confirmPassword } = data;
     if (first_name && last_name && email && password && confirmPassword) {
       if (password === confirmPassword) {
-        const fetchData = await fetch(`${API}/user/signup/`, {
+        const fetchData = await fetch(`${API}user/signup/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -46,7 +45,6 @@ export const SignUp = () => {
         if (dataRes.message) toast.success(dataRes.message);
         else if (dataRes.username) toast.error(dataRes.username[0]);
         else toast.error(dataRes.error);
-        console.log(dataRes);
         if (dataRes.status) {
           navigate("/login");
         }

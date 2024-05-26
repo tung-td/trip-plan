@@ -18,36 +18,36 @@ const Step3 = ({ onTravelersChange }) => {
         <div className="flex items-center justify-between">
           <div
             className={`h-[100px] w-[170px] cursor-pointer rounded-md border-2 p-4 ${
-              selectedOption === "Solo" && "border-black"
+              selectedOption === "1 people" && "border-black"
             }`}
-            onClick={() => handleOptionChange("Solo")}
+            onClick={() => handleOptionChange("1 people")}
           >
             Solo
           </div>
 
           <div
             className={`h-[100px] w-[170px] cursor-pointer rounded-md border-2 p-4 ${
-              selectedOption === "Partner" && "border-black"
+              selectedOption === "2 peoples" && "border-black"
             }`}
-            onClick={() => handleOptionChange("Partner")}
+            onClick={() => handleOptionChange("2 peoples")}
           >
             Partner
           </div>
 
           <div
             className={`h-[100px] w-[170px] cursor-pointer rounded-md border-2 p-4 ${
-              selectedOption === "Friends" && "border-black"
+              selectedOption === "3 -> 8 peoples" && "border-black"
             }`}
-            onClick={() => handleOptionChange("Friends")}
+            onClick={() => handleOptionChange("3 -> 8 peoples")}
           >
             Friends
           </div>
 
           <div
             className={`h-[100px] w-[170px] cursor-pointer rounded-md border-2 p-4 ${
-              selectedOption === "Family" && "border-black"
+              selectedOption === "3 -> 10 peoples" && "border-black"
             }`}
-            onClick={() => handleOptionChange("Family")}
+            onClick={() => handleOptionChange("3 -> 10 peoples")}
           >
             Family
           </div>

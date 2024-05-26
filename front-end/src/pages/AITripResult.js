@@ -7,7 +7,7 @@ import {
   MdOutlineKeyboardArrowDown,
 } from "react-icons/md";
 import { IoCloseOutline } from "react-icons/io5";
-import { FaLocationDot } from "react-icons/fa6";
+import { FaLocationDot, FaRegStar, FaStar } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { RxPencil2 } from "react-icons/rx";
 
@@ -16,11 +16,13 @@ import { setTripDatabyAI, getLocationArray } from "../redux/tripSlice";
 
 import toast from "react-hot-toast";
 import axios from "axios";
+import { IoRestaurantSharp } from "react-icons/io5";
+import { TiLocationArrow } from "react-icons/ti";
 
 const AITripResult = () => {
   const initialData = useSelector((state) => state.tripCreate);
-  console.log("INTIAL DATA: ", initialData);
-  const locationData = useSelector((state) => state.location)
+
+  const locationData = useSelector((state) => state.location);
   const tripCreateAPI = process.env.REACT_APP_SERVER_DOMAIN;
 
   const dispatch = useDispatch();
@@ -40,31 +42,32 @@ const AITripResult = () => {
 
   const [showContentAfterTyping, setShowContentAfterTyping] = useState(false);
   const [showDes, setShowDes] = useState({});
-
   //dispatch
 
   useEffect(() => {
-    const dataDispatch = tripPlan.map(item => {
+    const dataDispatch = tripPlan.map((item) => {
       const locationDescriptionMap = item.locations.reduce((map, location) => {
         map[location.locationID] = location.locationDescription;
         return map;
       }, {});
 
       const filteredAndUpdatedLocationList = locationData.locationList
-        .filter(location => locationDescriptionMap[location.id])
-        .map(location => ({
+        .filter((location) => locationDescriptionMap[location.id])
+        .map((location) => ({
           ...location,
-          locationDescription: locationDescriptionMap[location.id]
-        }));
+          locationDescription: locationDescriptionMap[location.id],
+        }))
+        .reverse();
+
       return {
-        day: item.day, 
+        day: item.day,
         description: item.description,
-        locations : filteredAndUpdatedLocationList
-      }
-    })
-    dispatch(setTripDatabyAI(dataDispatch))
-    console.log("DISPATCH DATA: ", dataDispatch);
-  },[])
+        locations: filteredAndUpdatedLocationList,
+      };
+    });
+
+    dispatch(setTripDatabyAI(dataDispatch));
+  }, [tripPlan, locationData]);
 
   const toggleDescription = (index) => {
     setShowDes((prevState) => ({
@@ -74,7 +77,6 @@ const AITripResult = () => {
   };
 
   const handleGetLocationArray = (day) => {
-    console.log("day click", day);
     dispatch(getLocationArray(day));
   };
 
@@ -89,12 +91,10 @@ const AITripResult = () => {
         return {
           ...item,
           day: item.day,
-          locations: item.locations.map((location) => location.locationID),
+          locations: item.locations.map((location) => location.id),
         };
       }),
     };
-
-    console.log("DATA: ", data);
 
     if (data) {
       const token = localStorage.getItem("accessToken");
@@ -123,6 +123,24 @@ const AITripResult = () => {
         console.error(error);
         toast.error("Login again!");
       }
+    }
+  };
+
+  const stars = (rating) => {
+    const star = [];
+
+    if (!rating || rating <= 0) {
+      for (let i = 0; i < 5; i++) {
+        star.push(<FaRegStar className="mr-[2px] text-[#FF7757]" key={i} />);
+      }
+      return star;
+    } else {
+      const fullStars = Math.floor(rating);
+      for (let i = 0; i < fullStars; i++) {
+        star.push(<FaStar className="mr-[2px] text-[#FF7757]" key={i} />);
+      }
+
+      return star;
     }
   };
 
@@ -161,7 +179,7 @@ const AITripResult = () => {
                   setShowContentAfterTyping(true);
                 }}
               >
-                <p>{fullResData.introduction}</p>
+                <p className="text-[20px]">{fullResData.introduction}</p>
               </Typist>
             </div>
             {showContentAfterTyping && (
@@ -175,12 +193,13 @@ const AITripResult = () => {
                   <h2 className="font-[400] opacity-[70%]">loading........</h2>
                 </div>
                 <div className="order-b mb-[24px] pb-[24px]">
-                  {tripPlan.map((dayPlan, index) => (
-                    <div key={index}>
-                      <h3 onClick={() => handleGetLocationArray(dayPlan.day)}>
-                        {dayPlan.day}
-                      </h3>
-                      <p>{dayPlan.description}</p>
+                  {initialData.items.map((dayPlan, index) => (
+                    <div
+                      key={index}
+                      onMouseOver={() => handleGetLocationArray(dayPlan.day)}
+                    >
+                      <h3>{dayPlan.day}</h3>
+                      <p className="text-[20px]">{dayPlan.description}</p>
                       <ul className="mb-0 p-0">
                         {dayPlan.locations.map((location, index) => (
                           <li key={index} className="relative flex">
@@ -189,21 +208,62 @@ const AITripResult = () => {
                             </div>
                             <div className="mb-[40px] mt-[6px] w-full border-b pb-[10px]">
                               <h4
-                                className="mb-[12px] flex items-center text-[18px] font-[640] hover:cursor-pointer hover:underline"
+                                className="mb-[12px] flex items-center text-[23px] font-[640] hover:cursor-pointer hover:underline"
                                 onClick={() => toggleDescription(index)}
                               >
                                 <div className="mr-[7px]">
                                   <RxPencil2 />
                                 </div>
-                                {location.locationName}
+                                {location.name}
                               </h4>
                               {showDes[index] && (
-                                <p>{location.locationDescription}</p>
+                                <div className="mb-[16px]">
+                                  <img
+                                    className="mb-[12px] h-[230px] w-[100%] rounded-[12px]"
+                                    src={location.image}
+                                  ></img>
+                                  <p className="mb-[4px] flex items-center text-[23px] font-[640] hover:cursor-pointer hover:underline">
+                                    {location.name}
+                                  </p>
+                                  <div className="mb-[15px] flex items-center text-[18px] font-[600]">
+                                    <div className="mr-[5px] flex">
+                                      {stars(5)}
+                                    </div>{" "}
+                                    230 reviews
+                                  </div>
+                                  <div className="flex">
+                                    {location.category.name == "Restaurant" && (
+                                      <div className="flex">
+                                        <IoRestaurantSharp className="mr-[4px] text-[20px]" />
+                                        {location.category.name} • Diner •
+                                        Central Asian • $
+                                      </div>
+                                    )}
+                                    {location.category.name ==
+                                      "Sight Seeing" && (
+                                      <div className="flex">
+                                        <TiLocationArrow className="text-[23px]" />
+                                        {location.category.name} • Visit •
+                                        Points of Interest • $$$
+                                      </div>
+                                    )}
+                                  </div>
+                                </div>
+                              )}
+                              {showDes[index] && (
+                                <div>
+                                  <p className="mb-[2px] border-t-[1px] border-[#ccc] pt-[16px] text-[20px]">
+                                    {location.locationDescription}
+                                  </p>
+                                  <p className=" font-[650] underline">
+                                    Read more
+                                  </p>
+                                </div>
                               )}
                             </div>
                             {index !== dayPlan.locations.length - 1 && (
                               <div
-                                className={`absolute left-[16px] top-[44px] -translate-x-1/2 transform ${showDes[index] ? "h-[60%]" : "h-[35px]"}`}
+                                className={`absolute left-[16px] top-[45px] -translate-x-1/2 transform ${showDes[index] ? "h-[88%]" : "h-[35px]"}`}
                                 style={{
                                   backgroundColor: "black",
                                   width: "0.1px",
@@ -226,21 +286,21 @@ const AITripResult = () => {
                     </div>
                   ))}
                 </div>
-                <p>{fullResData.conclusion}</p>
+                <p className="text-[20px]">{fullResData.conclusion}</p>
               </>
             )}
+            <button
+              className="mt-[10px] border border-slate-900 bg-black px-4 py-2 text-white hover:opacity-80"
+              onClick={handleTripCreate}
+            >
+              CREATE
+            </button>
           </div>
           <div className="sticky top-0 h-[78vh] w-[50%] py-[30px]">
             <Map />
           </div>
         </div>
       </div>
-      <button
-        className="border border-slate-900 bg-blue-600 px-4 py-2 text-white"
-        onClick={handleTripCreate}
-      >
-        CREATE
-      </button>
     </div>
   );
 };

@@ -5,8 +5,6 @@ const ReviewForm = ({ onSubmit, onClose, userID, day, locationID }) => {
   const [text, setText] = useState("");
   const [date, setDate] = useState(day);
 
-  console.log({ userID, locationID, ratingRV, text, date });
-
   const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit({ userID, locationID, ratingRV, text, date });

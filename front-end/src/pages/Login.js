@@ -33,7 +33,7 @@ export const Login = () => {
     e.preventDefault();
     const { username, password } = data;
     if (username && password) {
-      const fetchData = await fetch(`${API}/user/login/`, {
+      const fetchData = await fetch(`${API}user/login/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

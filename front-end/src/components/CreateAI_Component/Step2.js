@@ -9,21 +9,18 @@ const Step2 = ({
   onEndDateChange,
   onDayLengthChange,
 }) => {
-  // Hàm xử lý khi ngày bắt đầu thay đổi
   const handleStartDateChange = (date) => {
     onStartDateChange(date);
     const dayLength = calculateDayLength(date, endDate);
     onDayLengthChange(dayLength);
   };
 
-  // Hàm xử lý khi ngày kết thúc thay đổi
   const handleEndDateChange = (date) => {
     onEndDateChange(date);
     const dayLength = calculateDayLength(startDate, date);
     onDayLengthChange(dayLength);
   };
 
-  // Hàm tính toán độ dài của khoảng thời gian
   const calculateDayLength = (start, end) => {
     if (!start || !end) return 0;
     const dayLengthInMs = Math.abs(end - start);

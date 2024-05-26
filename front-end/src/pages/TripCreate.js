@@ -5,12 +5,13 @@ import TripCreateModel from "../components/Trip_Create_Component/TripCreateModel
 import TripCancel from "../components/Trip_Create_Component/TripCancel";
 import Map from "../components/Trip_Create_Component/TripCreateCard/Map";
 
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
+import { getLocationArray } from "../redux/tripSlice";
 
 const TripCreate = () => {
   const navigate = useNavigate();
@@ -108,7 +109,7 @@ const TripCreate = () => {
   //   Map
 
   return (
-    <div className="flex px-[166px]">
+    <div className="flex px-[5rem]">
       {isActive && <TripCreateModel active={handleActive} />}
       {cancelIsActive && <TripCancel active={handleCancelActive} />}
       <div className="mx-8 w-2/3">

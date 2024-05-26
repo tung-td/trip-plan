@@ -80,7 +80,6 @@ const TripInitalModel = (props) => {
         };
       });
       getDates().map((date) => {
-        // console.log(formatDate(date))
         setData((prev) => {
           return {
             ...prev,
@@ -94,7 +93,6 @@ const TripInitalModel = (props) => {
           };
         });
       });
-      // console.log(getDates().length)
       setData((prev) => {
         return {
           ...prev,
@@ -151,7 +149,7 @@ const TripInitalModel = (props) => {
       <div class="absolute inset-0 bg-black opacity-40"></div>
       {/* Main contain */}
       <div className="relative h-full w-full">
-        <div className="absolute left-1/2 top-1/2 w-1/3 -translate-x-1/2 -translate-y-1/2 transform rounded-xl bg-white">
+        <div className="absolute left-[12.5%] top-[26rem] w-[23.333333%]  -translate-x-1/2 -translate-y-1/2 transform rounded-xl bg-white md:left-1/2 md:top-1/2 md:w-1/3">
           {/* Close */}
           <div
             className="absolute right-5 top-5 cursor-pointer rounded-full px-2 py-2 hover:bg-slate-100"

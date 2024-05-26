@@ -9,7 +9,6 @@ import { HiOutlineCalendar } from "react-icons/hi2";
 import { FaArrowRight } from "react-icons/fa6";
 
 const TripInfo = (props) => {
-  console.log("props", props);
   const imgList = [
     hoian,
     bana,

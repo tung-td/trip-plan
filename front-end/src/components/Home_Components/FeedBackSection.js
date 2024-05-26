@@ -23,7 +23,7 @@ const FeedBackSection = () => {
     return (
       <div className="custom-button-group absolute right-[166px] top-[40px]">
         <button
-          className="mr-[10px] rounded-[12px] bg-[#172432] p-[20px] text-white"
+          className="mr-[10px] rounded-[12px] bg-[#172432] md:p-[20px] p-[1rem] text-white"
           onClick={() => previous()}
         >
           <FaArrowLeft />

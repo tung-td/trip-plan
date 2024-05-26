@@ -16,7 +16,7 @@ const TripCard = (props) => {
     <div
       key={props.id}
       onClick={hide}
-      className="relative mr-[40px] flex h-[510px] w-[420px] flex-col items-start justify-end rounded-[26px] p-[24px] shadow-lg"
+      className="relative mr-[40px] flex h-[510px] w-[20rem] flex-col items-start justify-end rounded-[26px] p-[24px] shadow-lg"
       style={{
         backgroundImage: `url(${props.url})`,
         backgroundSize: "cover",

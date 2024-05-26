@@ -17,14 +17,14 @@ const TripItem = (props) => {
   const data = props.data;
   const [getList, setGetList] = useState([]);
 
-  // const dayList= data.items.map(item => item.day)
-  // useEffect(() => {
-  //     dispatch(setDayList(dayList))
-  // },[])
-
-  const handleGetList = (props) => {
-    const findDay = data.items.find((item) => item.day === props);
-    setGetList(findDay.locations);
+  const handleGetList = (day) => {
+    const findDay = data.items.find((item) => item.day === day);
+    if (findDay) {
+      setGetList(findDay.locations);
+    } else {
+      console.error("No locations found for day:", day);
+      setGetList([]);
+    }
   };
 
   const formatDateTripList = (input) => {
@@ -40,11 +40,11 @@ const TripItem = (props) => {
 
   const handleOnDragEnd = (result) => {
     try {
+      if (!result.destination) return; // Kiểm tra xem có destination không
       const items = Array.from(getList);
-      const [reorderdItem] = items.splice(result.source.index, 1);
-      items.splice(result.destination.index, 0, reorderdItem);
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
 
-      console.log(items);
       dispatch(updatedLocationOrder(items));
       dispatch(getLocationArray(items[0].day));
     } catch (err) {
@@ -61,6 +61,11 @@ const TripItem = (props) => {
     }
   }, [indexRedux]);
 
+  // Click Map
+  const handleGetLocationArray = (day) => {
+    dispatch(getLocationArray(day));
+  };
+
   return (
     <div className="my-8">
       {data.items.map((item, index) => {
@@ -69,7 +74,10 @@ const TripItem = (props) => {
           <div key={index} ref={index === indexRedux ? ref : null}>
             {item.locations.length === 0 ? (
               // Empty items
-              <div className="mt-8 border-b border-b-slate-400 pb-8">
+              <div
+                className="mt-8 border-b border-b-slate-400 pb-8"
+                onMouseOver={() => handleGetLocationArray(item.day)}
+              >
                 <div>
                   <h1 className="text-3xl font-bold">
                     {formatDateTripList(item.day)}
@@ -90,47 +98,45 @@ const TripItem = (props) => {
             ) : (
               // Trip items
               <DragDropContext onDragEnd={handleOnDragEnd}>
-                <Droppable droppableId={item.day}>
+                <Droppable droppableId={String(item.day)}>
                   {(provided) => (
-                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                    <div
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                      onMouseOver={() => handleGetLocationArray(item.day)}
+                    >
                       <div>
                         <h1 className="mt-5 text-3xl font-bold">
                           {formatDateTripList(item.day)}
                         </h1>
                       </div>
                       <div className="mt-5 flex flex-col">
-                        {item.locations.map((location, index) => {
-                          return (
-                            location.id && (
-                              <Draggable
-                                key={location.id}
-                                draggableId={`${location.id}-${index}`}
-                                index={index}
+                        {item.locations.map((location, index) => (
+                          <Draggable
+                            key={location.id}
+                            draggableId={`${location.id}-${index}`}
+                            index={index}
+                          >
+                            {(provided) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                                onMouseDown={() => handleGetList(location.day)}
                               >
-                                {(provided) => (
-                                  <div
-                                    ref={provided.innerRef}
-                                    {...provided.draggableProps}
-                                    {...provided.dragHandleProps}
-                                    onMouseDown={() =>
-                                      handleGetList(location.day)
-                                    }
-                                  >
-                                    <LocationItem
-                                      id={location.id}
-                                      url={location.url}
-                                      name={location.name}
-                                      address={location.address}
-                                      day={location.day}
-                                      index={index}
-                                      description={location.description}
-                                    />
-                                  </div>
-                                )}
-                              </Draggable>
-                            )
-                          );
-                        })}
+                                <LocationItem
+                                  id={location.id}
+                                  url={location.url}
+                                  name={location.name}
+                                  address={location.address}
+                                  day={location.day}
+                                  index={index}
+                                  description={location.description}
+                                />
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
                       </div>
                       {provided.placeholder}
                     </div>

@@ -42,7 +42,6 @@ const Map = () => {
   useEffect(() => {
     // Initialize map only once
     if (!map.current) {
-      console.log("map reload");
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: "mapbox://styles/mapbox/streets-v12",
@@ -62,11 +61,20 @@ const Map = () => {
     locationList.forEach((item, index) => {
       const marker = document.createElement("div");
       marker.className = "custom-marker";
-      if ((item.category.name ? item.category.name : item.locationCategory) === "Hotel") {
+      if (
+        (item.category.name ? item.category.name : item.locationCategory) ===
+        "Hotel"
+      ) {
         marker.style.backgroundImage = `url(${hotel})`;
-      } else if ((item.category.name ? item.category.name : item.locationCategory) === "Restaurant") {
+      } else if (
+        (item.category.name ? item.category.name : item.locationCategory) ===
+        "Restaurant"
+      ) {
         marker.style.backgroundImage = `url(${restaurant})`;
-      } else if ((item.category.name ? item.category.name : item.locationCategory) === "Sight Seeing") {
+      } else if (
+        (item.category.name ? item.category.name : item.locationCategory) ===
+        "Sight Seeing"
+      ) {
         marker.style.backgroundImage = `url(${sight})`;
       }
       marker.style.backgroundSize = "40px 40px";
@@ -75,7 +83,12 @@ const Map = () => {
       marker.innerHTML = `<h1 class = 'text-base font-semibold z-[99] py-[1px] px-[8px] rounded-full bg-red-400 text-white text-center absolute -top-5 left-0'>${index + 1}</h1>`;
       markers.push(
         new mapboxgl.Marker(marker)
-          .setLngLat([item.longitude ? item.longitude : parseFloat(item.locationLongitude), item.latitude ? item.latitude : parseFloat(item.locationLatitude)])
+          .setLngLat([
+            item.longitude
+              ? item.longitude
+              : parseFloat(item.locationLongitude),
+            item.latitude ? item.latitude : parseFloat(item.locationLatitude),
+          ])
           .addTo(map.current),
       );
 
@@ -116,25 +129,25 @@ const Map = () => {
     zoom: 8, // initial zoom level
   });
 
-  const waypoints = locationList.map((item) => [item.longitude ? item.longitude : parseFloat(item.locationLongitude), item.latitude ? item.latitude : parseFloat(item.locationLatitude)]);
+  const waypoints = locationList.map((item) => [
+    item.longitude ? item.longitude : parseFloat(item.locationLongitude),
+    item.latitude ? item.latitude : parseFloat(item.locationLatitude),
+  ]);
   const waypointsString = waypoints.map((point) => point.join(",")).join(";");
 
   //remove layer direction
   useEffect(() => {
     if (map.current.getLayer("route")) {
       map.current.removeLayer("route");
-      console.log("remove");
     }
     if (map.current.getSource("route")) {
       map.current.removeSource("route");
-      console.log("remove source");
     }
     setRouteInfo(false);
   }, [itemIndex, locationList.length]);
 
   useEffect(() => {
     setShowCalculateDistance(true);
-    console.log("change");
   }, [locationList]);
 
   //Get direction
@@ -147,7 +160,6 @@ const Map = () => {
 
       const data = response.data.routes[0];
       const route = data.geometry.coordinates;
-      console.log(data);
       setDistance(data.distance);
       const geojson = {
         type: "Feature",
@@ -201,8 +213,6 @@ const Map = () => {
         `https://api.mapbox.com/directions-matrix/v1/mapbox/driving/${waypointsString}?access_token=${matrixToken}`,
       );
       const durations = response.data.durations;
-      console.log("data", response.data);
-      console.log(durations);
       //get distance
       class Graph {
         constructor() {
@@ -301,8 +311,6 @@ const Map = () => {
       const graph = new Graph();
 
       graph.createGraphFromDurations(durations);
-      console.log("Vertices:", graph.vertices);
-      console.log("Edges:", graph.edges);
 
       const { path, totalDistance } = graph.runGeneticAlgorithm(10000);
 
@@ -319,7 +327,6 @@ const Map = () => {
       const waypointsArray = waypointsString.split(";");
       //sap xep lai
       const reorderArray = path.map((index) => waypointsArray[index - 1]);
-      console.log("array", reorderArray);
 
       //tao chuoi request string moi
       const waypointsStringOptimizing = reorderArray.join(";");

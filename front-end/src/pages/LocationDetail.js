@@ -25,6 +25,7 @@ import Footer from "../components/Home_Components/Footer";
 import ReviewForm from "../components/Location_Detail_Component/ReviewForm";
 
 const LocationDetail = () => {
+  const API = process.env.REACT_APP_SERVER_DOMAIN;
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -42,10 +43,9 @@ const LocationDetail = () => {
   )[0];
 
   useEffect(() => {
-    fetch(`http://localhost:8000/comment/location/${parseInt(filterby)}`)
+    fetch(`${API}comment/location/${parseInt(filterby)}`)
       .then((response) => response.json())
       .then((result) => {
-        console.log("comment", result);
         setAllReview(result.data);
       })
       .catch((error) => console.error(error));
@@ -60,7 +60,7 @@ const LocationDetail = () => {
       date: review.date,
     });
 
-    fetch("http://localhost:8000/comment/createcomment/", {
+    fetch(`${API}comment/createcomment/`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -72,7 +72,6 @@ const LocationDetail = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         // Cập nhật danh sách review nếu cần thiết
         setAllReview((prevReviews) => [...prevReviews, result.data]);
       })

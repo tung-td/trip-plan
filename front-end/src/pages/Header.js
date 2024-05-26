@@ -20,6 +20,7 @@ import { IoLogOut } from "react-icons/io5";
 import { SlNote } from "react-icons/sl";
 import { FaBook } from "react-icons/fa";
 import { IoBookmarksSharp } from "react-icons/io5";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const Header = () => {
   const location = useLocation();
@@ -27,10 +28,12 @@ const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState(location.pathname);
   const [showMenu, setShowMenu] = useState(false);
+  const [showMenuMobile, setShowMenuMobile] = useState(false);
   const ref = useRef(null);
 
   const handleNavLinkClick = (path) => {
     setActiveLink(path);
+    setIsMobileMenuOpen(false); // Close the mobile menu when a link is clicked
   };
 
   const toggleMobileMenu = () => {
@@ -39,6 +42,10 @@ const Header = () => {
 
   const handleShowMenu = () => {
     setShowMenu((prev) => !prev);
+  };
+
+  const handleShowMenuMobile = () => {
+    setShowMenuMobile((prev) => !prev);
   };
 
   const handleLogout = () => {
@@ -64,130 +71,114 @@ const Header = () => {
 
   return (
     <header className="shadow-sm">
-      <nav className="h-[87px] w-full bg-white px-[166px]">
+      <nav className="h-[87px] w-full bg-white px-4 md:px-16">
         <div
           className="mx-auto flex h-[87px] w-full items-center justify-between"
           ref={ref}
         >
-          <div className="flex w-1/3 items-center font-semibold">
+          <div className="flex h-full items-center font-semibold">
             <NavLink
               to="/"
-              className={`mr-[32px] flex border-b-[5px] border-[transparent] bg-transparent font-bold text-black ${activeLink === "/" ? "active-link" : ""} flex items-center leading-[84px]`}
+              className={`mr-4 flex h-full items-center border-b-[3px] border-transparent md:mr-8 ${activeLink === "/" ? "border-black" : ""}`}
               onClick={() => handleNavLinkClick("/")}
             >
-              <FaBed className="mr-[10px] text-[19px]" /> Finds Stays
+              <FaBed className="mr-2 text-xl" />{" "}
+              <span className="hidden md:inline">Finds Stays</span>
             </NavLink>
             <NavLink
               to="/tripcreate"
-              className={`mr-[32px] flex border-b-[5px] border-[transparent] bg-transparent font-bold text-black ${activeLink === "/mytrip" ? "active-link" : ""} flex items-center leading-[84px]`}
-              onClick={() => handleNavLinkClick("/mytrip")}
+              className={`mr-4 flex h-full items-center border-b-[3px] border-transparent md:mr-8 ${activeLink === "/mytrip" ? "border-black" : ""}`}
+              onClick={() => handleNavLinkClick("/tripcreate")}
             >
-              <FaStar className="mr-[10px] text-[19px]" /> My Trips
+              <FaStar className="mr-2 text-xl" />{" "}
+              <span className="hidden md:inline">My Trip</span>
             </NavLink>
             <NavLink
               to="/tripcreateAI"
-              className={`mr-[32px] flex border-b-[5px] border-[transparent] bg-transparent font-bold text-black ${activeLink === "/tripcreateAI" ? "active-link" : ""} flex items-center leading-[84px]`}
+              className={`mr-4 flex h-full items-center border-b-[3px] border-transparent md:mr-8 ${activeLink === "/tripcreateAI" ? "border-black" : ""}`}
               onClick={() => handleNavLinkClick("/tripcreateAI")}
             >
-              <FaPlane className="mr-[10px] text-[19px]" /> Build Trip AI
+              <FaPlane className="mr-2 text-xl" />{" "}
+              <span className="hidden md:inline">Build Trip AI</span>
             </NavLink>
           </div>
 
-          <NavLink to="/" className="flex w-1/3 justify-center">
-            {/* Ảnh Logo Trip Advisor */}
-            <div className="flex items-center">
-              <img
-                src={logo}
-                alt="Trip Advisor Logo"
-                className="h-5 h-8 w-5 w-8 text-[20px]"
-              />
-              {/* <SiTripadvisor className="text-5xl" /> */}
-              <span className="text-2xl text-xl font-bold">Travel Advisor</span>
-            </div>
+          <NavLink to="/" className="flex items-center justify-center">
+            <img
+              src={logo}
+              alt="Trip Advisor Logo"
+              className="h-8 w-8 md:h-10 md:w-10"
+            />
+            <span className="ml-2 text-xl font-bold md:text-2xl">
+              Travel Advisor
+            </span>
           </NavLink>
 
-          <div className="flex w-1/3 items-center justify-end">
-            <div className="flex items-center text-[16px] font-bold">
-              <FaHeart className="mr-[5px]" /> Favourites
+          <div className="hidden w-1/3 items-center justify-end md:flex">
+            <div className="flex items-center text-lg font-bold">
+              <FaHeart className="mr-2" /> Favourites
             </div>
-            <div className="ml-[16px] mr-[30px] text-[16px] font-bold">|</div>
+            <div className="mx-4 text-lg font-bold">|</div>
             {userData.email ? (
               <div
                 className="relative flex cursor-pointer items-center"
                 onClick={handleShowMenu}
               >
-                <img
-                  src={avt}
-                  alt="avt"
-                  className="h-[45px] w-[45px] rounded-full"
-                />
-                <span className="ml-[5px] text-[16px] font-bold capitalize">
+                <img src={avt} alt="avt" className="h-11 w-11 rounded-full" />
+                <span className="ml-2 text-lg font-bold capitalize">
                   {userData.user}
                 </span>
                 {showMenu && (
-                  <div className="absolute right-[30px] top-[50px] z-50 flex w-[329px] flex-col rounded-[8px] bg-white p-[32px] shadow-lg">
-                    <ul className="w-full p-[0px] text-base font-normal">
+                  <div className="absolute right-0 top-12 z-50 flex w-80 flex-col rounded-md bg-white p-8 shadow-lg">
+                    <ul className="w-full p-0 text-base font-normal">
                       <div className="relative flex cursor-pointer items-center">
                         <img
                           src={avt}
                           alt="avt"
-                          className="mr-[16px] h-[64px] w-[64px] rounded-full"
+                          className="mr-4 h-16 w-16 rounded-full"
                         />
                         <div className="flex flex-col">
-                          <p className="mb-[5px] ml-[5px] text-[16px] font-bold capitalize">
+                          <p className="mb-1 text-lg font-bold capitalize">
                             {userData.user}
                           </p>
-                          <div className="ml-[7px] flex items-center">
-                            <div className="h-[10px] w-[10px] rounded-full bg-green-500">
+                          <div className="flex items-center">
+                            <div className="h-2 w-2 rounded-full bg-green-500">
                               .
                             </div>
-                            <p className="mb-[4px] ml-[5px] text-[16px] capitalize">
-                              Online
-                            </p>
+                            <p className="ml-2 text-lg capitalize">Online</p>
                           </div>
                         </div>
                       </div>
 
-                      <div className="my-[24px] h-[0.5px] w-full bg-[#666] opacity-25"></div>
+                      <div className="my-6 h-0.5 w-full bg-gray-300"></div>
 
                       <NavLink
                         className="flex justify-between"
                         to="userprofile"
                       >
-                        <li className="mb-[16px] flex items-center">
-                          <FaUser className="mr-[8px] h-[18px] w-[18px]" /> My
-                          account
+                        <li className="mb-4 flex items-center">
+                          <FaUser className="mr-2 h-4 w-4" /> My account
                         </li>
-                        <FaChevronRight className="mt-[5px]" />
+                        <FaChevronRight className="mt-1" />
                       </NavLink>
                       <NavLink className="flex justify-between" to="/">
-                        <li className="mb-[16px] flex items-center">
-                          <FaWallet className="mr-[8px] h-[18px] w-[18px]" />{" "}
-                          Payment
+                        <li className="mb-4 flex items-center">
+                          <FaWallet className="mr-2 h-4 w-4" /> Payment
                         </li>
-                        <FaChevronRight className="mt-[5px]" />
+                        <FaChevronRight className="mt-1" />
                       </NavLink>
                       <NavLink className="flex justify-between" to="/">
-                        <li className="mb-[16px] flex items-center">
-                          <FaGear className="mr-[8px] h-[18px] w-[18px]" />{" "}
-                          Settings
+                        <li className="mb-4 flex items-center">
+                          <FaGear className="mr-2 h-4 w-4" /> Settings
                         </li>
-                        <FaChevronRight className="mt-[5px]" />
+                        <FaChevronRight className="mt-1" />
                       </NavLink>
-
-                      {/* Các tiêu đề SeePost Discover About us */}
-                      {/* <div className="hidden md:flex space-x-2 items-center font-semibold">
-                        <NavLink to='/' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">Home</NavLink>
-                        <NavLink to='/aboutus' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">About us</NavLink>
-                        <NavLink to='/mytrip' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">My Trips</NavLink>
-                        <NavLink to='/contactus' className="no-underline transition duration-200 ease-in-out bg-transparent hover:bg-slate-100 text-black py-2 px-3 rounded-full hover:shadow-md">Contact Us</NavLink>
-                      </div> */}
 
                       <li
-                        className="flex items-center hover:text-red-600"
+                        className="flex cursor-pointer items-center hover:text-red-600"
                         onClick={handleLogout}
                       >
-                        <IoLogOut className="mr-[8px] h-[23px] w-[23px]" />
+                        <IoLogOut className="mr-2 h-5 w-5" />
                         Log out
                       </li>
                     </ul>
@@ -197,12 +188,12 @@ const Header = () => {
             ) : (
               <div className="flex items-center">
                 <NavLink to="login">
-                  <button className="mr-[10px] flex items-center rounded-[8px] border border-solid border-[#000] px-[23px] py-[6px] text-lg hover:opacity-70">
+                  <button className="mr-2 flex items-center rounded-md border border-black px-4 py-2 text-lg hover:opacity-70">
                     Log in
                   </button>
                 </NavLink>
                 <NavLink to="signup">
-                  <button className="mr-[10px] flex items-center rounded-[8px] border border-solid border-[#000] bg-black px-[23px] py-[6px] text-lg text-white hover:opacity-70">
+                  <button className="mr-2 flex items-center rounded-md border border-black bg-black px-4 py-2 text-lg text-white hover:opacity-70">
                     Sign up
                   </button>
                 </NavLink>
@@ -210,45 +201,38 @@ const Header = () => {
             )}
           </div>
 
-          {/* ##### GIAO DIỆN MOBILE Ở ĐÂY ##### */}
-          {/* <div className="flex items-center ">
+          {/* Mobile menu button */}
+          <div className="flex items-center md:hidden">
             <button onClick={toggleMobileMenu}>
               <GiHamburgerMenu className="text-2xl" />
             </button>
-          </div> */}
-        </div>
-
-        {/* Mobile Menu */}
-        {/* {isMobileMenuOpen && (
-          <div className="mt-3 flex flex-col space-y-2 ">
-            <button className="rounded-md border-l-4 border-slate-200 p-2 text-left font-semibold duration-100 ease-in-out hover:bg-slate-200 hover:shadow-md hover:transition">
-              <NavLink to="login">Login</NavLink>
-            </button>
-            <button className="rounded-md border-l-4 border-slate-200 p-2 text-left font-semibold duration-100 ease-in-out hover:bg-slate-200 hover:shadow-md hover:transition">
-              <NavLink to="signup">Sign Up</NavLink>
-            </button>
           </div>
-        )} */}
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="absolute right-[24px] top-[7%] z-10 flex w-[40%] flex-col space-y-2 rounded-md bg-white p-4 shadow-lg">
+              <NavLink to="userprofile" className="flex items-center">
+                <FaUser className="mr-2 h-4 w-4" /> My account
+              </NavLink>
+              <NavLink to="/" className="flex items-center">
+                <FaWallet className="mr-2 h-4 w-4" /> Payment
+              </NavLink>
+              <NavLink to="/" className="flex items-center">
+                <FaGear className="mr-2 h-4 w-4" /> Settings
+              </NavLink>
+              <div
+                className="flex cursor-pointer items-center hover:text-red-600"
+                onClick={handleLogout}
+              >
+                <IoLogOut className="mr-2 h-5 w-5" />
+                Log out
+              </div>
+            </div>
+          )}
+        </div>
       </nav>
     </header>
   );
 };
 
 export default Header;
-// {/* Mobile Menu */ }
-// {
-//   isMobileMenuOpen &&
-//     <div className="md:hidden flex flex-col mt-3 space-y-2 ">
-//       <button className="p-2 text-left font-semibold hover:bg-slate-200 rounded-md border-l-4 border-slate-200 hover:shadow-md hover:transition duration-100 ease-in-out">
-//         <NavLink to='login'>Login</NavLink>
-//       </button>
-//       <button className="p-2 text-left font-semibold hover:bg-slate-200 rounded-md border-l-4 border-slate-200 hover:shadow-md hover:transition duration-100 ease-in-out">
-//         <NavLink to='signup'>Sign Up</NavLink>
-//       </button>
-//     </div>
-// }
-
-//             </nav >
-//         </header >
-//     )
-// }
