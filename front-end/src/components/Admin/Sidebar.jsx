@@ -64,8 +64,8 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
                             icon={<FaUser />}
                         // suffix={<span className="badge red">new</span>}
                         >
-                            Manage Users
-                            <Link to="#" />
+                            Manage categories
+                            <Link to="/admin-dashboard/manage-category" />
                         </MenuItem>
                     </Menu>
 
@@ -74,8 +74,8 @@ const Sidebar = ({ image, collapsed, rtl, toggled, handleToggleSidebar }) => {
                             icon={<FaPlaneDeparture />}
                         // suffix={<span className="badge red">new</span>}
                         >
-                            Manage Trips
-                            <Link to="#" />
+                            Manage Users
+                            <Link to="/admin-dashboard/manage-users" />
                         </MenuItem>
                     </Menu>
 

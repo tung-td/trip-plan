@@ -27,6 +27,8 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import AiTripCreate from "./pages/AiTripCreate";
 import AITripResult from "./pages/AITripResult";
 import SubscriptionPlan from "./pages/SubscriptionPlan";
+import AdminCategoryManage from "./components/Admin/DashBoardContent/AdminManageCategory/AdminCategoryManage";
+import AdminManageUsers from "./components/Admin/DashBoardContent/AdminManageUsers/AdminManageUsers";
 
 /*App là nơi chứa cách hoạt động của các Router 
 nơi điều khiển các component sẽ render khi gặp tên đường link tương ứng
@@ -51,6 +53,8 @@ const router = createBrowserRouter(
         <Route index path="admin-DB" element={<AdminDashBoardTemplate />} />
         <Route index path="manage-locations" element={<AdminManageLocations />} />
         <Route index path="manage-location/:filterby" element={<AdminManageLocationDetail />} />
+        <Route index path="manage-category" element={<AdminCategoryManage />} />
+        <Route index path="manage-users" element={<AdminManageUsers />} />
       </Route>
       <Route path="tripcreateAI" element={< AiTripCreate />}></ Route>
       <Route path="tripresultAI" element={<AITripResult />}></Route>

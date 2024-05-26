@@ -51,7 +51,6 @@ const AdminManageLocations = () => {
     const totalNegative = locationData.reduce((total, location) => total + location.negative, 0);
     const totalNeutral = locationData.reduce((total, location) => total + location.neutral, 0);
 
-
     return (
         <>
             {/* Label */}
