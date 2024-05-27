@@ -13,7 +13,7 @@ const ReviewForm = ({ onSubmit, onClose, userID, day, locationID }) => {
   };
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
-      <div className="w-[50%] rounded-lg bg-white p-8 shadow-lg">
+      <div className="md:w-[50%] w-[100%] rounded-lg bg-white p-8 shadow-lg">
         <h2 className="mb-4 text-2xl">Give your review</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
@@ -40,7 +40,7 @@ const ReviewForm = ({ onSubmit, onClose, userID, day, locationID }) => {
               required
             />
           </div>
-          <div className="mb-4">
+          {/* <div className="mb-4">
             <label className="mb-2 block">Date:</label>
             <input
               type="date"
@@ -49,7 +49,7 @@ const ReviewForm = ({ onSubmit, onClose, userID, day, locationID }) => {
               className="w-full rounded border p-2"
               required
             />
-          </div>
+          </div> */}
           <div className="flex justify-end">
             <button
               type="button"
