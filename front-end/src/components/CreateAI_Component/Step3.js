@@ -10,7 +10,7 @@ const Step3 = ({ onTravelersChange }) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
-      <div className="flex w-full flex-col justify-start px-[1rem] pt-[70px] sm:px-[50rem]">
+      <div className="flex w-full flex-col justify-start px-[1rem] pt-[70px] sm:px-[30rem]">
         <p className="text-[28px] font-bold">Who are you traveling with?</p>
         <p className="text-[16px] font-[400] text-[#757575]">Choose one.</p>
 

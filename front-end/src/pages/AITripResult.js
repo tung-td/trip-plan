@@ -158,7 +158,7 @@ const AITripResult = () => {
             <IoCloseOutline />
           </div>
         </div>
-        <div className="m-auto flex w-auto flex-col justify-center sm:w-[1300px] sm:flex-row">
+        <div className="m-auto flex w-auto flex-col justify-center sm:w-[1300px] sm:flex-row sm:px-[15rem]">
           <div className="px-[1.5rem] sm:max-w-[52%] sm:pl-[20px] sm:pr-[60px]">
             <div className="mb-[24px] border-b pb-[24px]">
               <p className="flex items-center text-[12px] font-[400] opacity-[70%]">

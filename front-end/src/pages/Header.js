@@ -71,15 +71,15 @@ const Header = () => {
 
   return (
     <header className="shadow-sm">
-      <nav className="sm-h-[87px] h-[52px] w-full bg-white px-[1rem] sm:px-[5.5rem]">
+      <nav className="sm-h-[87px] h-[80px] w-full bg-white px-[1rem] sm:px-[5.5rem]">
         <div
-          className="sm-h-[87px] mx-auto flex h-[52px] w-full items-center justify-between"
+          className="sm-h-[87px] mx-auto flex h-[80px] w-full items-center justify-between"
           ref={ref}
         >
           <div className="hidden h-full items-center font-semibold sm:flex">
             <NavLink
               to="/"
-              className={`mr-4 flex h-full items-center border-b-[3px] border-transparent md:mr-8 ${activeLink === "/" ? "border-black" : ""}`}
+              className={`mr-4 flex h-full items-center border-b-[3px] border-transparent sm:text-[20px] md:mr-8 ${activeLink === "/" ? "border-black" : ""}`}
               onClick={() => handleNavLinkClick("/")}
             >
               <FaBed className="text-xl sm:mr-2" />{" "}
@@ -87,7 +87,7 @@ const Header = () => {
             </NavLink>
             <NavLink
               to="/tripcreate"
-              className={`mr-4 hidden h-full items-center border-b-[3px] border-transparent sm:flex md:mr-8 ${activeLink === "/tripcreate" ? "border-black" : ""}`}
+              className={`mr-4 hidden h-full items-center border-b-[3px] border-transparent sm:flex sm:text-[20px] md:mr-8 ${activeLink === "/tripcreate" ? "border-black" : ""}`}
               onClick={() => handleNavLinkClick("/tripcreate")}
             >
               <FaStar className="text-xl sm:mr-2" />{" "}
@@ -95,7 +95,7 @@ const Header = () => {
             </NavLink>
             <NavLink
               to="/tripcreateAI"
-              className={`mr-4 hidden h-full items-center border-b-[3px] border-transparent sm:flex md:mr-8 ${activeLink === "/tripcreateAI" ? "border-black" : ""}`}
+              className={`mr-4 hidden h-full items-center border-b-[3px] border-transparent sm:flex sm:text-[20px] md:mr-8 ${activeLink === "/tripcreateAI" ? "border-black" : ""}`}
               onClick={() => handleNavLinkClick("/tripcreateAI")}
             >
               <FaPlane className="text-xl sm:mr-2" />{" "}

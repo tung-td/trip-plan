@@ -79,7 +79,7 @@ const TripCreateModel = (props) => {
       <div class="absolute inset-0 bg-black opacity-40"></div>
       {/* Main Contain */}
       <div className="h-full w-full">
-        <div className="custom-scrollbar-style absolute left-1/2 top-1/2 h-3/4 w-3/4 -translate-x-1/2 -translate-y-1/2 transform overflow-y-scroll rounded-xl bg-white px-10 py-4 pt-0">
+        <div className="custom-scrollbar-style absolute left-1/2 top-1/2 h-3/4 w-full -translate-x-1/2 -translate-y-1/2 transform overflow-y-scroll rounded-xl bg-white px-10 px-[1rem] pt-0 sm:w-3/4 sm:py-4">
           <div className=" sticky top-3 z-50 mt-[20px] bg-white p-[12px] py-4 shadow-lg">
             <div
               onClick={props.active}

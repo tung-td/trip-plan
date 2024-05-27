@@ -51,10 +51,10 @@ const LocationCard = (props) => {
   return (
     <div
       key={props.id}
-      className="my-5 flex h-60 w-full items-center rounded-xl border border-slate-400"
+      className="my-5 flex h-full w-full flex-col items-center rounded-xl border border-slate-400 sm:h-60 sm:flex-row"
     >
       {/* Image */}
-      <div className="mx-5 h-5/6 w-1/4 overflow-hidden rounded-xl">
+      <div className="mx-5 h-full w-full overflow-hidden rounded-xl sm:h-5/6 sm:w-1/4">
         <img
           src={props.url}
           alt="hoian"
@@ -62,7 +62,7 @@ const LocationCard = (props) => {
         />
       </div>
       {/* Content */}
-      <div className="flex h-5/6 w-2/4 flex-col justify-between">
+      <div className="flex h-full w-full flex-col justify-between p-[1rem] sm:h-5/6 sm:w-2/4">
         {/* Name */}
         <NavLink
           to={`/detail/${props.id}`}
@@ -133,7 +133,7 @@ const LocationCard = (props) => {
         </div>
       </div>
       {/* Add */}
-      <div className="flex h-full w-1/4 items-center justify-center">
+      <div className="flex h-full w-full items-center justify-center p-[1rem] sm:w-1/4">
         <button
           onClick={HandelAddData}
           className="group relative flex h-full w-full items-center justify-center overflow-hidden rounded-xl text-xl font-semibold text-slate-900"

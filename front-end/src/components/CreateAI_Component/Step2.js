@@ -45,7 +45,7 @@ const Step2 = ({
         <div className="mt-[30px] flex w-full flex-col justify-between sm:flex-row">
           {/* Pick start date */}
           <div className="mb-4">
-            <label htmlFor="start-date" className="mr-[10px] w-[72px]">
+            <label htmlFor="start-date" className="mr-[10px] w-[75px]">
               Start Date
             </label>
             <DatePicker
@@ -58,7 +58,7 @@ const Step2 = ({
 
           {/* Pick end date */}
           <div className="mb-4">
-            <label htmlFor="end-date" className="mr-[10px] w-[72px]">
+            <label htmlFor="end-date" className="mr-[10px] w-[75px]">
               End Date
             </label>
             <DatePicker

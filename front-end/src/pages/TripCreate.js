@@ -143,7 +143,7 @@ const TripCreate = () => {
           </button>
         </div>
       </div>
-      <div className="sticky top-4 mt-[34px] h-full w-full overflow-hidden rounded-lg sm:mx-8 sm:mb-8 sm:w-1/2">
+      <div className="sticky top-4 my-[20px] h-full w-full overflow-hidden rounded-lg sm:mx-8 sm:mb-8 sm:w-1/2">
         <Map />
       </div>
     </div>
