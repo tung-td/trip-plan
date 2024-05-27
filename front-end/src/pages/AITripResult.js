@@ -158,8 +158,8 @@ const AITripResult = () => {
             <IoCloseOutline />
           </div>
         </div>
-        <div className="m-auto flex w-[1300px] justify-center">
-          <div className="max-w-[52%] pl-[20px] pr-[60px]">
+        <div className="m-auto flex w-auto flex-col justify-center sm:w-[1300px] sm:flex-row">
+          <div className="px-[1.5rem] sm:max-w-[52%] sm:pl-[20px] sm:pr-[60px]">
             <div className="mb-[24px] border-b pb-[24px]">
               <p className="flex items-center text-[12px] font-[400] opacity-[70%]">
                 <div className="mr-[7px] rounded-full bg-[#4A92DE] p-[6px] text-[13px] text-white opacity-100">
@@ -208,7 +208,7 @@ const AITripResult = () => {
                             </div>
                             <div className="mb-[40px] mt-[6px] w-full border-b pb-[10px]">
                               <h4
-                                className="mb-[12px] flex items-center text-[23px] font-[640] hover:cursor-pointer hover:underline"
+                                className="mb-[12px] flex items-center text-[1rem] font-[640] hover:cursor-pointer hover:underline sm:text-[23px]"
                                 onClick={() => toggleDescription(index)}
                               >
                                 <div className="mr-[7px]">
@@ -290,13 +290,13 @@ const AITripResult = () => {
               </>
             )}
             <button
-              className="mt-[10px] border border-slate-900 bg-black px-4 py-2 text-white hover:opacity-80"
+              className="mt-[10px] w-[100%] border border-slate-900 bg-black px-4 py-2 text-white hover:opacity-80 sm:w-[auto]"
               onClick={handleTripCreate}
             >
               CREATE
             </button>
           </div>
-          <div className="sticky top-0 h-[78vh] w-[50%] py-[30px]">
+          <div className="sticky top-0 h-[47vh] w-[100%] py-[30px] sm:h-[78vh] sm:w-[50%]">
             <Map />
           </div>
         </div>

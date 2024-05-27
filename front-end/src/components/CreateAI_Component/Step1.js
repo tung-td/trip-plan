@@ -27,14 +27,14 @@ const Step1 = ({ nextStep, onDestinationChange }) => {
         Where do you want to go?
       </div>
       <input
-        className="h-[56px] w-[30%] rounded-[30px] border px-[40px] py-[10px]"
+        className="h-[56px] w-[80%] rounded-[30px] border px-[40px] py-[10px] sm:w-[30%]"
         placeholder="Search by city"
         value={searchInput}
         onChange={handleInputChange}
       />
       {/* Hiển thị dropdown chỉ khi có kết quả và không phải là Đà Nẵng hoặc Da Nang */}
       {searchInput.length > 0 && (
-        <div className="absolute z-10 mt-[5rem] w-[30%] rounded-[15px] border bg-white py-[1rem] shadow-lg">
+        <div className="absolute z-10 mt-[5rem]  w-[80%] rounded-[15px] border bg-white py-[1rem] shadow-lg sm:w-[30%]">
           {filteredDestinations.map((result, index) => (
             <div
               key={index}
@@ -47,7 +47,7 @@ const Step1 = ({ nextStep, onDestinationChange }) => {
         </div>
       )}
 
-      <div className="w-full px-[28%]">
+      <div className="w-full px-[5rem] sm:px-[28%]">
         <p className="mt-[96px] text-[24px] font-[600]">Popular destinations</p>
         <div>List here...</div>
       </div>

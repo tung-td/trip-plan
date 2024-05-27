@@ -51,7 +51,7 @@ const Step4 = ({ activities, onActivitiesChange }) => {
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
-      <div className="flex w-full flex-col justify-start px-[600px] pt-[70px]">
+      <div className="flex w-full flex-col justify-start px-[1rem] pt-[70px] sm:px-[50rem]">
         <p className="text-[28px] font-bold">
           What activities are you interested in?
         </p>

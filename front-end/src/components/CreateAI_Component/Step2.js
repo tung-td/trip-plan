@@ -34,7 +34,7 @@ const Step2 = ({
 
   return (
     <div className="flex w-full flex-col items-center justify-center">
-      <div className="flex w-full flex-col justify-start px-[600px] pt-[70px]">
+      <div className="flex w-full flex-col justify-start px-[1rem] pt-[70px] sm:px-[40rem]">
         <p className="text-[28px] font-bold">When do you want to go?</p>
         <p className="text-[16px] font-[400] text-[#757575]">
           Choose a date range or length of stay, up to 7 days.
@@ -42,10 +42,10 @@ const Step2 = ({
         <div className="mt-[25px] w-full rounded-[50px] border px-[25px] py-[12px]">
           {calculateDayLength(startDate, endDate)} days
         </div>
-        <div className="mt-[30px] flex w-full justify-between">
+        <div className="mt-[30px] flex w-full flex-col justify-between sm:flex-row">
           {/* Pick start date */}
           <div className="mb-4">
-            <label htmlFor="start-date" className="mr-[10px]">
+            <label htmlFor="start-date" className="mr-[10px] w-[72px]">
               Start Date
             </label>
             <DatePicker
@@ -58,7 +58,7 @@ const Step2 = ({
 
           {/* Pick end date */}
           <div className="mb-4">
-            <label htmlFor="end-date" className="mr-[10px]">
+            <label htmlFor="end-date" className="mr-[10px] w-[72px]">
               End Date
             </label>
             <DatePicker
