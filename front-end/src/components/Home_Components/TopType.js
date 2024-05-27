@@ -28,7 +28,7 @@ const TopType = () => {
             <img
               src={type.image}
               alt={type.name}
-              className="h-[15rem] rounded-[9px] object-cover sm:h-[10rem] sm:w-[100%] 14inch:w-[370px]"
+              className="h-[15rem] w-[100%] rounded-[9px] object-cover sm:h-[10rem] sm:w-[370px]"
             />
             <h2 className="absolute bottom-[20px] left-[20px] text-xl font-[900] text-white">
               {type.name}
