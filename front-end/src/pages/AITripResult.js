@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Map from "../components/Trip_Create_Component/TripCreateCard/Map";
 import Typist from "react-typist";
@@ -23,6 +23,31 @@ const AITripResult = () => {
   const initialData = useSelector((state) => state.tripCreate);
 
   const locationData = useSelector((state) => state.location);
+  const hotelRecommend = useMemo(() => 
+    locationData.locationList.filter((location) => {
+    return location.category.name == "Hotel";
+  }), [locationData])
+
+
+  // Get random hotel
+  function getRandomElements(arr, count) {
+    const result = [];
+    const usedIndices = new Set();
+  
+    while (result.length < count && result.length < arr.length) {
+      const randomIndex = Math.floor(Math.random() * arr.length);
+  
+      if (!usedIndices.has(randomIndex)) {
+        result.push(arr[randomIndex]);
+        usedIndices.add(randomIndex);
+      }
+    }
+  
+    return result;
+  }
+
+  const recommendedHotel = getRandomElements(hotelRecommend, 3)
+  console.log("HOTEL RECOMMENED: ", recommendedHotel);
   const tripCreateAPI = process.env.REACT_APP_SERVER_DOMAIN;
 
   const dispatch = useDispatch();
@@ -190,7 +215,17 @@ const AITripResult = () => {
                     We've also recommended some places to stay during your trip
                     with <span className="lowercase">{travelers}</span>.
                   </p>
-                  <h2 className="font-[400] opacity-[70%]">loading........</h2>
+                  <div className="flex">
+                    {
+                      recommendedHotel.map((hotel, index) => {
+                        return (
+                          <div>
+                            <p>{hotel.name}</p>
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
                 </div>
                 <div className="order-b mb-[24px] pb-[24px]">
                   {initialData.items.map((dayPlan, index) => (
