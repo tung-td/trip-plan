@@ -68,55 +68,57 @@ export const SignUp = () => {
   };
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center">
-      <div className="ml-10 mr-10 flex w-full flex-1">
+    <div className="flex h-screen w-full items-center justify-center">
+      <div className="flex w-full flex-col md:flex-row">
         <img
           src={banner1}
           alt="Hoi An"
-          className="h-screen w-1/2 object-cover"
+          className="w-1/2 hidden object-fit md:block"
         />
-        <div className="relative ml-10 flex h-screen w-1/2 flex-1 flex-col items-center px-[140px] pt-[25px]">
+        <div className="flex flex-col items-center justify-center w-full p-20 pt-28 md:w-1/2 lg:p-20 sm:mb-0 mb-12 md:mb-12">
           <div
             onClick={backToHome}
-            className="absolute left-0 h-[50px] w-[50px] cursor-pointer text-[35px] hover:opacity-70"
+            className="absolute top-4 left-4 md:left-1/2 md:transform md:-translate-x-[calc(50%-40px)] h-[50px] w-[50px] cursor-pointer text-[35px] hover:opacity-70"
           >
             <FaLongArrowAltLeft />
           </div>
           <div className="flex w-full flex-col">
-            <h1 className="font-poppins text-[74px] font-bold text-black">
+            <h1 className="font-poppins text-3xl md:text-4xl lg:text-5xl font-bold text-black">
               Travel with us
             </h1>
-            <p className="mt-[-23px] text-[36px] font-light text-black">
+            <p className="mt-[-12px] text-lg md:text-xl lg:text-2xl font-light text-black">
               Join us today
             </p>
           </div>
           <form className="flex w-full flex-col py-3" onSubmit={handleSubmit}>
-            <div className="flex">
-              <div className=" flex-1">
-                <label className=" font-medium text-slate-700">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  id="first_name"
-                  name="first_name"
-                  placeholder="Name"
-                  value={data.first_name}
-                  onChange={handleOnchange}
-                  className="mb-[1.5rem] mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
-                />
+            <div className="flex flex-col md:flex-row">
+              <div className="w-full md:w-1/2 md:pr-2">
+                <div className="flex flex-col">
+                  <label className="font-medium text-slate-700">First Name</label>
+                  <input
+                    type="text"
+                    id="first_name"
+                    name="first_name"
+                    placeholder="Name"
+                    value={data.first_name}
+                    onChange={handleOnchange}
+                    className="mb-4 mt-1 h-12 w-full rounded-[48px] border border-slate-300 px-4 focus:outline-blue-300"
+                  />
+                </div>
               </div>
-              <div className="ml-5 flex-1">
-                <label className=" font-medium text-slate-700">Last Name</label>
-                <input
-                  type="text"
-                  id="last_name"
-                  name="last_name"
-                  placeholder="Name"
-                  value={data.last_name}
-                  onChange={handleOnchange}
-                  className="mb-[1.5rem] mt-1 h-[59px] w-full rounded-[48px] border border-slate-300 px-[36px] py-[18px] focus-within:outline-blue-300"
-                />
+              <div className="w-full md:w-1/2 md:pl-2">
+                <div className="flex flex-col">
+                  <label className="font-medium text-slate-700">Last Name</label>
+                  <input
+                    type="text"
+                    id="last_name"
+                    name="last_name"
+                    placeholder="Name"
+                    value={data.last_name}
+                    onChange={handleOnchange}
+                    className="mb-4 mt-1 h-12 w-full rounded-[48px] border border-slate-300 px-4 focus:outline-blue-300"
+                  />
+                </div>
               </div>
             </div>
             {/* User name */}
@@ -185,7 +187,7 @@ export const SignUp = () => {
 
             <button
               type="submit"
-              className="mt-[20px] h-[59px] w-full cursor-pointer rounded-[48px] bg-black text-center text-[24px] font-[700] text-white hover:opacity-[70%]"
+              className="mt-4 md:mt-5 h-12 md:h-14 w-full md:w-auto cursor-pointer rounded-full md:rounded-[48px] bg-black text-center text-lg md:text-xl font-bold text-white hover:opacity-70"
             >
               Sign Up
             </button>
@@ -205,18 +207,18 @@ export const SignUp = () => {
           </p>
         </div>
       </div>
-      <div className="absolute bottom-0 flex w-full justify-around bg-white py-[12px] text-[#666]">
-        <p className="mx-[20px]">About</p>
-        <p className="mx-[20px]">Help Center</p>
-        <p className="mx-[20px]">Terms of Service</p>
-        <p className="mx-[20px]">Privacy Policy</p>
-        <p className="mx-[20px]">Cookie Policy</p>
-        <p className="mx-[20px]">Accessibility</p>
-        <p className="mx-[20px]">Careers</p>
-        <p className="mx-[20px]">Marketing</p>
-        <p className="mx-[20px]">Developers</p>
-        <p className="mx-[20px]">Settings</p>
-        <p className="mx-[20px]">@Capstone2</p>
+      <div className="fixed bottom-0 left-0 flex w-full justify-around bg-white py-4 text-gray-600 flex-wrap">
+        <p className="mx-2 text-xs md:text-sm lg:text-base">About</p>
+        <p className="mx-2 text-xs md:text-sm lg:text-base">Help Center</p>
+        <p className="mx-2 text-xs md:text-sm lg:text-base">Terms of Service</p>
+        <p className="mx-2 text-xs md:text-sm lg:text-base">Privacy Policy</p>
+        <p className="mx-2 text-xs md:text-sm lg:text-base">Cookie Policy</p>
+        <p className="mx-2 text-xs md:text-sm lg:text-base">Accessibility</p>
+        <p className="mx-2 text-xs md:text-sm lg:text-base">Careers</p>
+        <p className="mx-2 text-xs md:text-sm lg:text-base">Marketing</p>
+        <p className="mx-2 text-xs md:text-sm lg:text-base">Developers</p>
+        <p className="mx-2 text-xs md:text-sm lg:text-base">Settings</p>
+        <p className="mx-2 text-xs md:text-sm lg:text-base">@Capstone2</p>
       </div>
     </div>
   );
