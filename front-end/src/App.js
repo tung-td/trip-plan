@@ -15,33 +15,31 @@ import FavoriteLocations from "./pages/FavoriteLocations/FavoriteLocations";
 import MyTrip from "./pages/MyTrip";
 import SingleMytrip from "./components/My_Trip_Component/My_Trip_Detail/SingleMytrip";
 import AboutUs from "./pages/AboutUs";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import ContactUs from "./pages/ContactUs";
 import MessengerCustomerChat from "react-messenger-customer-chat";
 import AiTripCreate from "./pages/AiTripCreate";
 import AITripResult from "./pages/AITripResult";
-/*App là nơi chứa cách hoạt động của các Router 
-nơi điều khiển các component sẽ render khi gặp tên đường link tương ứng
-*/
 
-// 1. Tạo một biến const router để cấu hình customize router linh hoạt hơn
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route index element={<Home />}></Route>
-      <Route path="signup" element={<SignUp />}></Route>
-      <Route path="login" element={<Login />}></Route>
-      <Route path="userprofile" element={<UserProfile />}></Route>
-      <Route path="tripcreate" element={<TripCreate />}></Route>
-      <Route path="detail/:filterby" element={<LocationDetail />}></Route>
-      <Route path="favorite" element={<FavoriteLocations />}></Route>
-      <Route path="mytrip" element={<MyTrip />}></Route>
-      <Route path="mytripdetail/:filterby" element={<SingleMytrip />}></Route>
-      <Route path="aboutus" element={<AboutUs />}></Route>
-      <Route path="contactus" element={<ContactUs />}></Route>
-      <Route path="tripcreateAI" element={<AiTripCreate />}></Route>
-      <Route path="tripresultAI" element={<AITripResult />}></Route>
+      <Route index element={<Home />} />
+      <Route path="signup" element={<SignUp />} />
+      <Route path="login" element={<Login />} />
+      <Route path="aboutus" element={<AboutUs />} />
+      <Route path="contactus" element={<ContactUs />} />
+      <Route path="detail/:filterby" element={<LocationDetail />} />
+      <Route path="/" element={<ProtectedRoute />}>
+        <Route path="userprofile" element={<UserProfile />} />
+        <Route path="tripcreate" element={<TripCreate />} />
+        <Route path="favorite" element={<FavoriteLocations />} />
+        <Route path="mytrip" element={<MyTrip />} />
+        <Route path="mytripdetail/:filterby" element={<SingleMytrip />} />
+        <Route path="tripcreateAI" element={<AiTripCreate />} />
+        <Route path="tripresultAI" element={<AITripResult />} />
+      </Route>
     </Route>,
   ),
 );
