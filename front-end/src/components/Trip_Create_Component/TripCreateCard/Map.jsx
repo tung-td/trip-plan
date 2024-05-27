@@ -420,8 +420,8 @@ const Map = () => {
     setShowDistance(false);
   };
   return (
-    <div className="relative h-[94vh]">
-      <div ref={mapContainer} className="h-[94vh] w-full">
+    <div className="relative h-[47vh] sm:h-[94vh]">
+      <div ref={mapContainer} className="h-[47vh] w-full sm:h-[94vh]">
         {routeInfo && (
           <>
             {showDistance && (

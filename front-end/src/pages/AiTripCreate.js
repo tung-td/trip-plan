@@ -167,11 +167,11 @@ const AiTripCreate = () => {
 
       {renderStep()}
 
-      <div className="fixed bottom-0 flex w-full justify-between border-t p-[23px] shadow-lg">
+      <div className="fixed bottom-0 flex w-full justify-between border-t p-[0.5rem] shadow-lg sm:p-[23px]">
         {step !== 1 && (
           <button
             onClick={prevStep}
-            className="rounded-[24px] bg-black px-[84px] py-[12px] text-[16px] font-bold text-white"
+            className="rounded-[24px] bg-black px-[50px] py-[12px] text-[16px] font-bold text-white sm:px-[84px]"
           >
             Back
           </button>
@@ -179,14 +179,14 @@ const AiTripCreate = () => {
         {step !== 4 ? (
           <button
             onClick={nextStep}
-            className="rounded-[24px] bg-black px-[84px] py-[12px] text-[16px] font-bold text-white"
+            className="rounded-[24px] bg-black px-[50px] py-[12px] text-[16px] font-bold text-white sm:px-[84px]"
           >
             Next
           </button>
         ) : (
           <button
             onClick={handleSubmit}
-            className="rounded-[24px] bg-black px-[84px] py-[12px] text-[16px] font-bold text-white"
+            className="rounded-[24px] bg-black px-[50px] py-[12px] text-[16px] font-bold text-white sm:px-[84px]"
           >
             Submit
           </button>

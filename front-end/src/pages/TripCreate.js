@@ -109,10 +109,10 @@ const TripCreate = () => {
   //   Map
 
   return (
-    <div className="flex px-[5rem]">
+    <div className="flex flex-col px-[1rem] sm:flex-row sm:px-[5rem]">
       {isActive && <TripCreateModel active={handleActive} />}
       {cancelIsActive && <TripCancel active={handleCancelActive} />}
-      <div className="mx-8 w-2/3">
+      <div className="w-full sm:mx-8 sm:w-2/3">
         <div className="w-full">
           <TripInfo
             name={initialData.name}
@@ -128,7 +128,7 @@ const TripCreate = () => {
             active={handleActive}
           />
         </div>
-        <div className="mb-10 flex items-center border-t border-t-slate-900 py-5">
+        <div className="mb-10 flex items-center justify-between border-t border-t-slate-900 py-5">
           <button
             onClick={handleCancelActive}
             className="mt-5 rounded-lg border border-slate-700 px-6 py-2 text-base font-bold text-slate-800 hover:bg-slate-900 hover:text-white"
@@ -143,7 +143,7 @@ const TripCreate = () => {
           </button>
         </div>
       </div>
-      <div className="sticky top-4 mx-8 mb-8 mt-[34px] h-full w-1/2 overflow-hidden rounded-lg">
+      <div className="sticky top-4 mt-[34px] h-full w-full overflow-hidden rounded-lg sm:mx-8 sm:mb-8 sm:w-1/2">
         <Map />
       </div>
     </div>

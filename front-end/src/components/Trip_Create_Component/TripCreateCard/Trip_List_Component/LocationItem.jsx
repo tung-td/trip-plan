@@ -76,8 +76,8 @@ const LocationItem = (props) => {
           <div className="h-full w-0 border-l-2 border-dotted border-gray-400"></div>
         </div>
         {/* Item info */}
-        <div className="ml-[80px] flex w-[726px] flex-col rounded-[8px] border-[1.5px]">
-          <div className="relative flex h-[191px] w-[726px]">
+        <div className="ml-[1rem] flex w-[100%] flex-col rounded-[8px] border-[1.5px] sm:ml-[80px] sm:w-[726px]">
+          <div className="relative flex h-auto w-[full] flex-col sm:h-[191px] sm:w-[726px] sm:flex-row">
             {props.url ? (
               <div className="h-full w-[206px] overflow-hidden rounded-t-[8px]">
                 <img
@@ -87,7 +87,7 @@ const LocationItem = (props) => {
                 />
               </div>
             ) : (
-              <div className="h-full w-[206px] overflow-hidden rounded-[8px]">
+              <div className="h-full w-full overflow-hidden rounded-[8px] sm:w-[206px]">
                 <img
                   src={img}
                   alt="Trip Image"
@@ -96,7 +96,7 @@ const LocationItem = (props) => {
               </div>
             )}
 
-            <div className="ml-5 flex w-3/4 flex-col gap-[12px] p-[15px]">
+            <div className="flex w-full flex-col gap-[12px] p-[15px] sm:ml-5 sm:w-3/4">
               <h1 className="text-[16px] font-[700]">{props.name}</h1>
               <div className="flex items-center border-b border-[#ccc] pb-[10px]">
                 <GrLocation />
@@ -118,7 +118,7 @@ const LocationItem = (props) => {
           </div>
 
           {showComments && (
-            <div className="pl-[230px] pr-[15px]">
+            <div className="px-[1rem] sm:pl-[230px] sm:pr-[15px]">
               <div className="my-[24px] h-[1px] bg-[#ccc]"></div>
               {comments.length > 0 ? (
                 comments.map((comment) => (
