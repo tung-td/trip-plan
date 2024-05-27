@@ -13,40 +13,55 @@ import { RxPencil2 } from "react-icons/rx";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setTripDatabyAI, getLocationArray } from "../redux/tripSlice";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import toast from "react-hot-toast";
 import axios from "axios";
 import { IoRestaurantSharp } from "react-icons/io5";
 import { TiLocationArrow } from "react-icons/ti";
+import { BiSolidHotel } from "react-icons/bi";
+import { CiAirportSign1 } from "react-icons/ci";
 
 const AITripResult = () => {
   const initialData = useSelector((state) => state.tripCreate);
 
   const locationData = useSelector((state) => state.location);
-  const hotelRecommend = useMemo(() => 
-    locationData.locationList.filter((location) => {
-    return location.category.name == "Hotel";
-  }), [locationData])
+  const hotelRecommend = useMemo(
+    () =>
+      locationData.locationList.filter((location) => {
+        return location.category.name == "Hotel";
+      }),
+    [locationData],
+  );
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   // Get random hotel
   function getRandomElements(arr, count) {
     const result = [];
     const usedIndices = new Set();
-  
+
     while (result.length < count && result.length < arr.length) {
       const randomIndex = Math.floor(Math.random() * arr.length);
-  
+
       if (!usedIndices.has(randomIndex)) {
         result.push(arr[randomIndex]);
         usedIndices.add(randomIndex);
       }
     }
-  
+
     return result;
   }
 
-  const recommendedHotel = getRandomElements(hotelRecommend, 3)
+  const recommendedHotel = getRandomElements(hotelRecommend, 3);
   console.log("HOTEL RECOMMENED: ", recommendedHotel);
   const tripCreateAPI = process.env.REACT_APP_SERVER_DOMAIN;
 
@@ -151,6 +166,51 @@ const AITripResult = () => {
     }
   };
 
+  const RecommendedHotelSlider = ({ hotels }) => {
+    return (
+      <div className="mb-[24px] min-h-[480px] border-b pb-[24px]">
+        <h2>Places to stay</h2>
+        <p className="opacity-[70%]">
+          We've also recommended some places to stay during your trip.
+        </p>
+        <Slider {...settings} className="mt-6">
+          {hotels.map((hotel, index) => (
+            <div
+              key={index}
+              style={{ display: "flex" }}
+              className="mr-[10px] rounded-[12px] border-[1px] border-[#ccc] p-4"
+            >
+              <div className="flex gap-[15px]">
+                <img
+                  src={hotel.image}
+                  alt={hotel.name}
+                  className="hotel-image h-[200px] w-[200px] rounded-lg shadow-md"
+                />
+                <div className="flex flex-col gap-[5px]">
+                  <p className="mb-2 font-semibold sm:text-[25px]">
+                    {hotel.name}
+                  </p>
+                  <p>{hotel.address}</p>
+                  <div className="mb-[15px] flex items-center text-[18px] font-[600]">
+                    <div className="mr-[5px] flex">{stars(5)}</div> 230 reviews
+                  </div>
+                  <div className="flex">
+                    <BiSolidHotel className="mr-[4px] text-[20px]" />
+                    {hotel.category.name} • $$$
+                  </div>
+                  <div className="flex">
+                    <CiAirportSign1 className="mr-[4px] text-[20px]" />
+                    {hotel.airport_distance} km from the airport
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </Slider>
+      </div>
+    );
+  };
+
   const stars = (rating) => {
     const star = [];
 
@@ -183,7 +243,7 @@ const AITripResult = () => {
             <IoCloseOutline />
           </div>
         </div>
-        <div className="m-auto flex w-auto flex-col justify-center sm:w-[1300px] sm:flex-row">
+        <div className="m-auto flex w-auto flex-col justify-center sm:w-[1300px] sm:flex-row sm:px-[17rem]">
           <div className="px-[1.5rem] sm:max-w-[52%] sm:pl-[20px] sm:pr-[60px]">
             <div className="mb-[24px] border-b pb-[24px]">
               <p className="flex items-center text-[12px] font-[400] opacity-[70%]">
@@ -209,24 +269,7 @@ const AITripResult = () => {
             </div>
             {showContentAfterTyping && (
               <>
-                <div className="mb-[24px] min-h-[480px] border-b pb-[24px]">
-                  <h2>Places to stay</h2>
-                  <p className="opacity-[70%]">
-                    We've also recommended some places to stay during your trip
-                    with <span className="lowercase">{travelers}</span>.
-                  </p>
-                  <div className="flex">
-                    {
-                      recommendedHotel.map((hotel, index) => {
-                        return (
-                          <div>
-                            <p>{hotel.name}</p>
-                          </div>
-                        )
-                      })
-                    }
-                  </div>
-                </div>
+                <RecommendedHotelSlider hotels={recommendedHotel} />
                 <div className="order-b mb-[24px] pb-[24px]">
                   {initialData.items.map((dayPlan, index) => (
                     <div
