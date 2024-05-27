@@ -121,41 +121,49 @@ const LocationDetail = () => {
 
   return (
     <div className="">
-      <div className="mx-8 mt-8 px-[130px]">
+      <div className="sm:px-2 sm:mx-5 md:px-3 md:mx-4 lg:mx-8 lg:px-8 mt-8 px-4">
         {/* Title */}
-        <div className="flex justify-between">
+        <div className="md:flex lg:flex justify-between">
+          {/* Title : Left Conent */}
           <div className="">
-            <div className="flex items-center">
-              <h1 className="mr-[20px] text-[24px] font-[640]">
+            <div className="sm:flex items-center grid">
+              <h1 className="mr-[20px] sm:text-3xl md:text-4xl font-semibold text-5xl">
                 {locationDisplay.name}
               </h1>
-              <span className="flex items-center text-[12px]">
+              <span className="flex items-center sm:text-[12px]">
                 <FaStar className="text-[#FF7757]" />
                 <FaStar className="text-[#FF7757]" />
                 <FaStar className="text-[#FF7757]" />
                 <FaStar className="text-[#FF7757]" />
                 <FaStar className="text-[#FF7757]" />
-                <span className="ml-[5px]">5 Star Hotel</span>
+                <span className="ml-2">5 Star Hotel</span>
               </span>
             </div>
-            <div className="mt-[15px] flex items-center text-[14px]">
+
+            <div className="mt-[15px] flex items-center sm:text-[14px]">
               <span className="mr-[5px]">
                 <FaLocationDot />
               </span>
               {locationDisplay.address}
             </div>
-            <div className="mt-[10px] flex items-center text-[14px]">
+
+            <div className="mt-[10px] flex items-center sm:text-[14px] sm:mb-0 mb-3">
               <div className="rounded border p-[5px] px-[10px]">4.2</div>
               <p className="mb-0 ml-[10px]">
-                <span className="font-bold">Very Good</span> 371 reviews
+                <span className="font-bold mr-3">Very Good</span> 371 reviews
               </p>
             </div>
+
           </div>
-          <div className="flex flex-col justify-between">
+          {/* Title : Left Conent */}
+
+
+          {/* Title : Right Conent */}
+          <div className="flex sm:flex-row md:flex-col justify-between flex-wrap">
             <div className="text-right text-[32px] font-bold text-[#FF7757]">
               $240<span className="text-[16px]">/night</span>
             </div>
-            <div className="flex">
+            <div className="flex mt-4 sm:mt-0">
               <div className="border-1 flex cursor-pointer items-center rounded border-[#FF7757] px-[16px] py-[8px] hover:opacity-70">
                 <IoMdShare />
               </div>
@@ -167,43 +175,47 @@ const LocationDetail = () => {
               </button>
             </div>
           </div>
+          {/* Title : Right Conent */}
         </div>
 
+
+
         {/* IMG */}
-        <div className="relative mt-[33px] flex h-[550px] justify-between">
-          <div className="mr-[4px] w-[50%] cursor-pointer" dir="ltr">
+        <div className="grid grid-cols-1 gap-2 mt-8 lg:grid-cols-2 lg:gap-4 h-auto">
+          <div className="cursor-pointer" dir="ltr">
             <img
-              className="h-[550px] w-[100%] rounded-s-lg"
+              className="h-full w-full rounded-lg object-cover"
               src={locationDisplay.image}
               alt={locationDisplay.image}
-            ></img>
+            />
           </div>
-          <div className="ml-[4px] flex h-[100%] w-[50%] cursor-pointer flex-wrap justify-around">
+          <div className="grid grid-cols-2 gap-2 h-full cursor-pointer">
             <img
-              className="mb-[8px] mr-[8px] w-[49%]"
+              className="h-56 w-full rounded-lg object-cover lg:h-auto"
               src={locationDisplay.image}
               alt={locationDisplay.image}
-            ></img>
+            />
             <img
-              className="mb-[8px] w-[49%] rounded-tr-lg"
+              className="h-56 w-full rounded-lg object-cover lg:h-auto"
               src={locationDisplay.image}
               alt={locationDisplay.image}
-            ></img>
+            />
             <img
-              className="mr-[8px] w-[49%]"
+              className="h-56 w-full rounded-lg object-cover lg:h-auto hidden sm:block"
               src={locationDisplay.image}
               alt={locationDisplay.image}
-            ></img>
+            />
             <img
-              className="w-[49%] rounded-br-lg"
+              className="h-56 w-full rounded-lg object-cover lg:h-auto hidden sm:block"
               src={locationDisplay.image}
               alt={locationDisplay.image}
-            ></img>
+            />
           </div>
-          <button className="absolute bottom-[16px] right-[16px] rounded bg-[#FF7757] px-[16px] py-[8px] text-white hover:opacity-70">
+          <button className="col-span-1 lg:col-span-2 mt-4 rounded bg-[#FF7757] px-4 py-2 text-white hover:opacity-70">
             View all photos
           </button>
         </div>
+
 
         <div className="my-[64px] h-[1px] w-full bg-[#ccc]"></div>
 
@@ -218,32 +230,32 @@ const LocationDetail = () => {
         </div>
 
         {/* Rate */}
-        <div className="mt-[32px] flex w-full">
-          <div className="mr-[16px] flex h-[145px] w-[166px] flex-col justify-between rounded bg-[#FF7757] p-[16px] pr-[64px] font-[500]">
+        <div className="mt-[32px] flex w-full flex-wrap gap-y-3 flex-1">
+          <div className="mr-[16px] flex h-[145px] w-full sm:w-[166px] flex-col justify-between rounded bg-[#FF7757] p-[16px] pr-[64px] font-[500]">
             <div className="text-[32px] font-bold">4.2</div>
             <div>
               Very good <p>371 reviews</p>
             </div>
           </div>
-          <div className="border-1 mr-[16px] flex h-[145px] w-[166px] flex-col justify-between rounded border-[#FF7757] p-[16px] pr-[64px] font-[500]">
+          <div className="border-1 mr-[16px] flex h-[145px] w-full sm:w-[166px] flex-col justify-between rounded border-[#FF7757] p-[16px] pr-[64px] font-[500]">
             <div>
               <CiAirportSign1 className="text-[32px] font-bold" />
             </div>
             <div>{locationDisplay.airport_distance} km to airport</div>
           </div>
-          <div className="border-1 mr-[16px] flex h-[145px] w-[166px] flex-col justify-between rounded border-[#FF7757] p-[16px] pr-[64px] font-[500]">
+          <div className="border-1 mr-[16px] flex h-[145px] w-full sm:w-[166px] flex-col justify-between rounded border-[#FF7757] p-[16px] pr-[64px] font-[500]">
             <div>
               <IoHappyOutline className="text-[32px] font-bold" />
             </div>
             <div>{locationDisplay.positive} positive</div>
           </div>
-          <div className="border-1 mr-[16px] flex h-[145px] w-[166px] flex-col justify-between rounded border-[#FF7757] p-[16px] pr-[64px] font-[500]">
+          <div className="border-1 mr-[16px] flex h-[145px] w-full sm:w-[166px] flex-col justify-between rounded border-[#FF7757] p-[16px] pr-[64px] font-[500]">
             <div>
               <RiCustomerService2Line className="text-[32px] font-bold" />
             </div>
             <div>{locationDisplay.convenient} convenient</div>
           </div>
-          <div className="border-1 mr-[16px] flex h-[145px] w-[166px] flex-col justify-between rounded border-[#FF7757] p-[16px] pr-[64px] font-[500]">
+          <div className="border-1 mr-[16px] flex h-[145px] w-full sm:w-[166px] flex-col justify-between rounded border-[#FF7757] p-[16px] pr-[64px] font-[500]">
             <div>
               <RiServiceLine className="text-[32px] font-bold" />
             </div>
@@ -254,69 +266,79 @@ const LocationDetail = () => {
         <div className="my-[64px] h-[1px] w-full bg-[#ccc]"></div>
         {/* Amenities */}
         <div className="mb-[32px] text-[20px] font-[640]">Amenities</div>
-        <div className="flex w-1/2 justify-between">
+
+        <div className=" flex-row sm:flex w-full sm:full md:w-1/2  justify-between">
           <div className="flex flex-col">
             <div className="flex font-[500]">
-              <FaLeaf className="mb-[24px] mr-[5px] text-[20px]" />
+              <FaLeaf className="mb-[24px] mr-[5px] sm:text-[20px] text-3xl" />
               Spa and wellness center
             </div>
             <div className="flex font-[500]">
-              <IoIosFitness className="mb-[24px] mr-[5px] text-[20px]" />
+              <IoIosFitness className="mb-[24px] mr-[5px] sm:text-[20px] text-3xl" />
               Fitness center
             </div>
             <div className="flex font-[500]">
-              <RiCupFill className="mb-[24px] mr-[5px] text-[20px]" />
+              <RiCupFill className="mb-[24px] mr-[5px] sm:text-[20px] text-3xl" />
               Tea/coffee machine
             </div>
             <div className="flex font-[500]">
-              <IoWine className="mb-[24px] mr-[5px] text-[20px]" />
+              <IoWine className="mb-[24px] mr-[5px] sm:text-[20px] text-3xl" />
               Bar/Lounge
             </div>
           </div>
           <div className="flex flex-col">
             <div className="flex font-[500]">
-              <MdOutlineRoomService className="mb-[24px] mr-[5px] text-[20px]" />
+              <MdOutlineRoomService className="mb-[24px] mr-[5px] sm:text-[20px] text-3xl" />
               Room service
             </div>
             <div className="flex font-[500]">
-              <MdOutlinePool className="mb-[24px] mr-[5px] text-[20px]" />
+              <MdOutlinePool className="mb-[24px] mr-[5px] sm:text-[20px] text-3xl" />
               Outdoor pool
             </div>
             <div className="flex font-[500]">
-              <MdOutlineRestaurant className="mb-[24px] mr-[5px] text-[20px]" />
+              <MdOutlineRestaurant className="mb-[24px] mr-[5px] sm:text-[20px] text-3xl" />
               Restaurant
             </div>
             <div className="flex font-[500] text-[#FF7757]">+24 more</div>
           </div>
         </div>
 
-        <div className="my-[64px] h-[1px] w-full bg-[#ccc]"></div>
+        <div className="my-[46px] h-[1px] w-full bg-[#ccc]"></div>
+
+
         {/* map */}
         <div>
-          <div className="mb-[32px] flex justify-between">
-            <div className="flex text-[20px] font-[640]">
-              <div>Location/Map</div>
-              <div className="ml-[15px] flex items-center text-[16px]">
-                <span className="mr-[5px]">
+          <div className="mb-[32px] flex justify-between flex-wrap">
+
+            <div className="flex text-[20px] font-[640] flex-wrap">
+              <div className="self-center w-full sm:block">Location/Map</div>
+              <div className="mt-0sm:ml-[15px] flex items-center text-[16px]">
+                <span className="sm:mr-[5px] mr-3">
                   <FaLocationDot />
                 </span>
                 {locationDisplay.address}
               </div>
             </div>
-            <a
-              className="rounded bg-[#FF7757] px-[16px] py-[8px] text-white hover:opacity-70"
-              href="https://www.google.com/maps"
-              target="_blank"
-            >
-              View on google maps
-            </a>
+
+            <div className="my-3 sm:my-0">
+              <a
+                className="rounded bg-[#FF7757] px-[16px] py-[8px] text-white hover:opacity-70"
+                href="https://www.google.com/maps"
+                target="_blank"
+              >
+                View on google maps
+              </a>
+            </div>
           </div>
+
           <div className="mb-[168px]">
             <Map />
           </div>
         </div>
 
         <div className="mb-[64px] mt-[-100px] h-[1px] w-full bg-[#ccc]"></div>
+
+
         {/* review */}
         <div className="mb-[32px] flex justify-between">
           <div className="flex text-[20px] font-[640]">
@@ -363,6 +385,8 @@ const LocationDetail = () => {
             <IoFlag className="absolute right-0 top-[50%] cursor-pointer hover:opacity-70" />
           </div>
         ))}
+
+
         <div className="my-[24px] mb-[60px] h-[1px] w-full bg-[#ccc]"></div>
 
         {/* Show form submit review */}
